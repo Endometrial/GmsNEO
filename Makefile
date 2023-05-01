@@ -1,4 +1,4 @@
-# Game Maker Studio NEO
+# GmsNEO
 
 # Version
 VERSION = 0.0
@@ -17,7 +17,7 @@ LDFLAGS = ${LIBS}
 # Compiler
 CC = gcc-12
 
-SRC = default.c $(engine/*.c)
+SRC = default.c $(engine/*.c) $(objects/*/*.c) $(scripts/*.c)
 OBJ = ${SRC:.c=.o}
 
 all: options build

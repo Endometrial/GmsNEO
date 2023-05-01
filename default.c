@@ -3,9 +3,7 @@
 
 int main() {
 	
-	if (!glfwInit()) {
-		printf("GLFW failed to initialize :(")
-	}
+	printf("%s\n","Hello World!");	
 
 	
 }

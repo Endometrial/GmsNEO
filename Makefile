@@ -15,10 +15,10 @@ CFLAGS = ${INCS}
 LDFLAGS = ${LIBS}
 
 # Compiler
-CC = gcc
+CC = gcc-12
 
-SRC = default.c
-OBJ = ${SRC:.c=.o} default.h
+SRC = default.c $(engine/*.c)
+OBJ = ${SRC:.c=.o}
 
 all: options build
 
@@ -29,7 +29,7 @@ options:
 	@echo "CC	= ${CC}"
 
 .c.o:
-	${CC} -c ${CFLAGS} $<
+	${CC} -c ${CFLAGS} ${SRC}
 
 build: ${OBJ}
 	${CC} -o ${NAME} ${OBJ} ${LDFLAGS}

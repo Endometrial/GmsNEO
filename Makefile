@@ -4,21 +4,22 @@
 VERSION = 0.0
 
 # Project Name
-NAME = default
+NAME = executable
 
 # Includes and Libs
-INCS = 
-LIBS = 
+INCS = -Iinclude 
+LIBS = -lglfw -lGL
 
 # Flags
 CFLAGS = ${INCS}
 LDFLAGS = ${LIBS}
 
 # Compiler
-CC = gcc-12
+CC = gcc
 
-SRC = default.c $(engine/*.c) $(objects/*/*.c) $(scripts/*.c)
-OBJ = ${SRC:.c=.o}
+SRC = default.c engine/glad.c 
+OBJ = default.o glad.o
+#OBJ = ${SRC:.c=.o}
 
 all: options build
 

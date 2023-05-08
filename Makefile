@@ -8,7 +8,7 @@ NAME = executable
 
 # Includes and Libs
 INCS = -Iinclude 
-LIBS = -lglfw -lGL
+LIBS = -lglfw -lGL -lm
 
 # Flags
 CFLAGS = ${INCS}
@@ -17,8 +17,8 @@ LDFLAGS = ${LIBS}
 # Compiler
 CC = gcc
 
-SRC = default.c engine/glad.c 
-OBJ = default.o glad.o
+SRC = main.c engine/glad.c engine/media.c engine/mesh.c engine/draw.c engine/shaders.c
+OBJ = main.o glad.o media.o shaders.o mesh.o draw.o
 #OBJ = ${SRC:.c=.o}
 
 all: options build

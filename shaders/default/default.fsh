@@ -1,12 +1,11 @@
 #version 330 core
 out vec4 fragColor;
 
-// in type variable_name
-// out type variable_name
-// uniform type uniform_name
+in vec2 texCoord;
 
-uniform vec4 fshColor;
+uniform sampler2D textureColor;
 
 void main() {
-	fragColor = fshColor;
+	fragColor = texture(textureColor, texCoord);
+	//fragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }

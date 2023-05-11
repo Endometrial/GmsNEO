@@ -4,8 +4,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#include <engine/math.h>
 
-//unsigned int mesh_generate(GLenum mode, float vertices[], size_t vertsizeof, unsigned int indices[], size_t indisizeof);
+#define VERTEX_ATTRUBUTES 5;
 
 typedef struct Mesh {
 	unsigned int vao;

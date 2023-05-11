@@ -2,7 +2,7 @@
 
 unsigned int shader_build(char* filepath, int type) {
 	unsigned int shader;
-	char* shaderSource;
+	GLchar* shaderSource;
 	int success;
 	char infoLog[512];
 

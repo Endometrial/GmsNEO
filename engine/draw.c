@@ -20,3 +20,7 @@ void draw_mesh(Mesh mesh) {
 	glBindVertexArray(mesh.vao);
 	glDrawArrays(GL_TRIANGLES, 0, mesh.elements);
 }
+
+void draw_set_texture(GLuint texture) {
+	glBindTexture(GL_TEXTURE_2D, texture);
+}

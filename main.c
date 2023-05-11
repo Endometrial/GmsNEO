@@ -3,20 +3,20 @@
 // Bulky no EBO method
 float vertices2[] = {
 	// tri one
-	0.5f, 0.5f, 0.0f,
-	0.5f, -.5f, 0.0f,
-	-.5f, 0.5f, 0.0f,
+	0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+	0.5f, -.5f, 0.0f, 1.0f, 0.0f,
+	-.5f, 0.5f, 0.0f, 0.0f, 1.0f,
 	// tri two
-	0.5f, -.5f, 0.0f,
-	-.5f, -.5f, 0.0f,
-	-.5f, 0.5f, 0.0f
+	0.5f, -.5f, 0.0f, 1.0f, 0.0f,
+	-.5f, -.5f, 0.0f, 0.0f, 0.0f,
+	-.5f, 0.5f, 0.0f, 0.0f, 1.0f
 };
 
 float vertices[] = {
-	0.5f, 0.5f, 0.0f,	// top right
-	0.5f, -.5f, 0.0f,	// bottom right
-	-.5f, -.5f, 0.0f,	// bottom left
-	-.5f, 0.5f, 0.0f	// top left
+	0.5f, 0.5f, 0.0f, 1.0f, 1.0f,	// top right
+	0.5f, -.5f, 0.0f, 1.0f, 0.0f,	// bottom right
+	-.5f, -.5f, 0.0f, 0.0f, 0.0f,	// bottom left
+	-.5f, 0.5f, 0.0f, 0.0f, 1.0f	// top left
 };
 
 unsigned int indices[] = {
@@ -43,19 +43,42 @@ int main() {
 	mesh = mesh_add_vertices(mesh ,GL_STATIC_DRAW, vertices2, sizeof(vertices2));
 	mesh_build();
 
-	//mesh2 = mesh_initialize();
-	//mesh2 = mesh_add_vertices(mesh, GL_STATIC_DRAW, vertices2, sizeof(vertices2));
-	//mesh_build();
 
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	//float borderColor[] = {1.0f, 1.0f, 0.0f, 1.0f};
+	//glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); // for scaling down
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // for scaling up
+
+	GLuint texture;
+	char* filepath = "assets/images/pineapple.png";
+	image_load_texture(filepath, GL_REPEAT, GL_NEAREST_MIPMAP_NEAREST);
+
+/*
+	int width, height, channels;
+	Image picture;
+	char* filepath = "assets/images/pineapple.png";
+	
+	picture = image_load_data(filepath);
+
+	printf(":%u - %u:\n",picture.color_type, GL_RGBA);
+
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, picture.width, picture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, picture.data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+*/
 	glViewport(0,0,800,600);
 
-	//int width, height, channels;
-	//unsigned char* data = stbi_load();
 
 	while (!glfwWindowShouldClose(window)) {
 	
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
+			glfwSetWindowShouldClose(window, true);
 		}
 
 		draw_clear(0.2f, 0.3f, 0.8f, 1.0f);
@@ -64,10 +87,10 @@ int main() {
 		float time = glfwGetTime();
 		float green = (sin(time) / 2.0f) + 0.5f;
 
+		draw_set_texture(texture);
+
 		shader_program_apply(shaderProgram);
-		shader_set_uniform_vec4(shaderProgram, "fshColor", 0.0f, green, 0.0f, 1.0f);
-
-
+		shader_set_uniform_int(shaderProgram, "textureColor", 0);
 
 		draw_mesh(mesh);
 		

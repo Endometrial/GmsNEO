@@ -8,7 +8,7 @@ NAME = executable
 
 # Includes and Libs
 INCS = -Iinclude 
-LIBS = -lglfw -lGL -lm
+LIBS = -lglfw -lGL -lm -lpng
 
 # Flags
 CFLAGS = ${INCS}

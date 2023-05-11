@@ -4,13 +4,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-
 #include <engine/media.h>
 #include <engine/shader.h>
 #include <engine/mesh.h>
 #include <engine/draw.h>
+#include <engine/math.h>
 
 #define true 1
 #define false 0

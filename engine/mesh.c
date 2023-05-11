@@ -1,53 +1,5 @@
 #include <engine/mesh.h>
 
-/*
-// vbo = data
-// ebo = pointers to the above
-// vao = array of the above
-unsigned int mesh_generate(unsigned int mode, float** vertices, size_t* vertsizeof, float** indices, size_t* indisizeof) {
-	unsigned int vao, vertnum, indinum;
-	unsigned int* vbo, ebo;
-
-	numverts = vertsizeof/sizeof(void*);
-	numindis = indisizeof/sizeof(void*);
-
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(numverts, vbo);
-	glGenBuffers(numindis, ebo);
-
-	glBindVertexArray(vao);
-	for (int i=0; i<numverts; i++) {
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[i]), vertices[i], mode);}
-	for (int i=0; i<numindis; i++) {
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[i]), indices[i], mode);}
-
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), NULL);
-	//glEnableVertexAttribArray(0);
-
-	return vao;
-}*/
-
-//mesh_add_vertices(unsigned int vao);
-/*
-unsigned int mesh_initialize() {
-	unsigned int vao, vertsize, indisize;
-	unsigned int vbo, ebo;
-
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vbo);
-	glGenBuffers(1, &ebo);
-
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ARRAY_BUFFER, vertsizeof, vertices, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indisizeof, indices, GL_STATIC_DRAW);
-
-	return vao;
-}*/
-
 Mesh mesh_initialize() {
 	Mesh mesh;
 
@@ -71,6 +23,57 @@ Mesh mesh_add_vertices(Mesh mesh, GLenum mode, float* vertices, size_t size) {
 
 	return mesh;
 }
+/*
+Mesh mesh_add_vertices(Mesh mesh, GLenum mode, float* vertices, size_t size) {
+	Mesh output_mesh;
+	int num_verts, num_inds;
+	size_t size_verts, size_inds;
+	float* inds, verts; 
+
+	num_verts = (size / VERTEX_ATTRUBUTES / sizeof(float));
+
+	float** vertex;
+	for (int j=0;j<VERTEX_ATTRUBUTES;j++) {
+		vertex[j] = malloc(sizeof(float));
+	}
+
+	size_verts = num_verts * sizeof(float) * VERTEX_ATTRUBUTES;
+	size_inds = num_verts * sizeof(int);
+
+	verts = malloc(size_verts);
+	inds = malloc(size_inds);
+
+
+	// Convert a list of verts to some indicies and verticies
+	num_inds = 0;
+	for (int i=0;i<num_verts;i++) {
+		for (int k=0;k<VERTEX_ATTRUBUTES;k++) {
+			vertex[k] = vertices[i+k]
+		}
+		
+		int is_repeat = 0;
+		for (int m=0;m<num_inds;m++) {
+			for (int g=0;g<VERTEX_ATTRUBUTES;g++) {
+				if (vertex[g] != verts[g + m*VERTEX_ATTRUBUTES]) {
+					is_repeat = 1;
+				}
+			}
+		}
+		if (!is_repeat) {
+			for (int h=0;h<VERTEX_ATTRUBUTES;h++) {
+				verts[h + inds*VERTEX_ATTRUBUTES] = vertex[h];
+			}
+			num_inds++;
+		}
+		inds[i] = num_inds;
+	}
+
+	free(vertex);
+
+	output_mesh = mesh_add_indexed_vertices(mesh, mode, verts, size_verts, inds, size_inds);
+
+	return output_mesh;
+}*/
 
 Mesh mesh_add_indexed_vertices(Mesh mesh, GLenum mode, float* vertices, size_t sizev, unsigned int* indices, size_t sizei) {
 	unsigned int vbo, ebo;
@@ -89,26 +92,8 @@ Mesh mesh_add_indexed_vertices(Mesh mesh, GLenum mode, float* vertices, size_t s
 }
 
 void mesh_build() {
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), NULL);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 }
-
-		/*
-	unsigned int VBO, VAO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// NOTE: &VAO, etc... can be substituted with a list of pointers
-
-	glBindVertexArray(VAO); // This is first
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-	// Stream = static used a few times
-	// Static = static used many times
-	// Dynamic = mutable and used many times
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);*/

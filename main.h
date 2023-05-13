@@ -9,6 +9,7 @@
 #include <engine/mesh.h>
 #include <engine/draw.h>
 #include <engine/math.h>
+#include <engine/input.h>
 
 #define true 1
 #define false 0

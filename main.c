@@ -39,19 +39,10 @@ int main() {
 	shaderProgram = shader_program_create(vertexShader, fragmentShader);
 
 	mesh = mesh_initialize();
-	//mesh = mesh_add_vertices(mesh ,GL_STATIC_DRAW, vertices, sizeof(vertices), indices, sizeof(vertices));
+	//mesh = mesh_add_vertices(mesh ,GL_STATIC_DRAW, vertices, sizeof(vertices), indices, sizeof(indices));
 	mesh = mesh_add_vertices(mesh ,GL_STATIC_DRAW, vertices2, sizeof(vertices2));
 	mesh_build();
 
-
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//float borderColor[] = {1.0f, 1.0f, 0.0f, 1.0f};
-	//glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); // for scaling down
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // for scaling up
 
 	GLuint texture;
 	char* filepath = "assets/images/pineapple.png";
@@ -77,7 +68,8 @@ int main() {
 
 	while (!glfwWindowShouldClose(window)) {
 	
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		//printf("%i",ord("W"));
+		if (key_press(window, ord('w'))) {
 			glfwSetWindowShouldClose(window, true);
 		}
 

@@ -17,8 +17,8 @@ LDFLAGS = ${LIBS}
 # Compiler
 CC = gcc
 
-SRC = main.c engine/glad.c engine/media.c engine/input.c engine/mesh.c engine/draw.c engine/shaders.c
-OBJ = main.o glad.o media.o shaders.o mesh.o draw.o input.o
+SRC = main.c engine/glad.c engine/media.c engine/input.c engine/mesh.c engine/graphics.c engine/draw.c engine/shaders.c
+OBJ = main.o glad.o media.o shaders.o mesh.o draw.o input.o graphics.o
 #OBJ = ${SRC:.c=.o}
 
 all: options build

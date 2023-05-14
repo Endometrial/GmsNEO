@@ -10,6 +10,7 @@
 #include <engine/draw.h>
 #include <engine/math.h>
 #include <engine/input.h>
+#include <engine/graphics.h>
 
 #define true 1
 #define false 0

@@ -8,5 +8,7 @@ libpng
 cglm
 
 Issues:
-Redo mesh.c
+Improve styling & predicatability of function names 
 Populate remaining .c files
+Integrate a coordinate system
+Figure out how to load fn ptrs from mutiple 'objects' (libjit?)

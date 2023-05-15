@@ -89,7 +89,7 @@ void shader_set_uniform_int(unsigned int program, char* name, int val) {
 	glUniform1i(location, val);
 }
 
-void shader_set_uniform_mat4(unsigned int program, char* name, float* matrix) {
+void shader_set_uniform_mat4(unsigned int program, char* name, mat4 matrix) {
 	int location;
 	location = glGetUniformLocation(program, name);
 	glUniformMatrix4fv(location, 1, GL_FALSE, matrix);

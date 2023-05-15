@@ -8,7 +8,6 @@
 #include <engine/shader.h>
 #include <engine/mesh.h>
 #include <engine/draw.h>
-#include <engine/math.h>
 #include <engine/input.h>
 #include <engine/object.h>
 #include <engine/graphics.h>

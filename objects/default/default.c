@@ -14,12 +14,7 @@ static int indicies[] = {
 	3, 0, 1,
 	1, 2, 3
 };
-static float transformation_matrix[] = {
-	2.0f, 0.0f, 0.0f, 0.0f,
-	0.0f, 2.0f, 0.0f, 0.0f,
-	0.0f, 0.0f, 1.0f, 0.0f,
-	0.0f, 0.0f, 0.0f, 1.0f
-};
+mat4 matrix = GLM_MAT4_IDENTITY;
 static char* vsh_filepath = "shaders/engine/transform.vsh";
 static char* fsh_filepath = "shaders/engine/texture.fsh";
 static char* tex_filepath = "assets/images/nature-images.png";
@@ -49,16 +44,20 @@ void default_create() {
 
 // Step event for actions every frame
 void default_step(double deltatime) {
-
+	double x = tan(glfwGetTime()*3.14) * 0.5;
+	double y = sin(glfwGetTime()*3.14) * 0.5;
+	matrix[3][1] = x;
+	matrix[3][0] = y;
 }
 
 // Draw event for drawing stuff :3
 void default_draw(double deltatime) {
+
 	draw_set_mode(GL_TRIANGLES);
 	draw_clear(0.5f, 0.5f, 0.5f, 1.0f);
 
 	shader_program_apply(shader_program);
-	shader_set_uniform_mat4(shader_program, "transform", transformation_matrix);
+	shader_set_uniform_mat4(shader_program, "transform", matrix);
 	draw_set_texture(texture);
 	draw_indexed_mesh(mesh);
 }

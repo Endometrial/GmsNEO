@@ -1,9 +1,11 @@
 #include <engine/draw.h>
 #include <engine/input.h>
-#include <engine/math.h>
 #include <engine/media.h>
 #include <engine/mesh.h>
 #include <engine/shader.h>
+#include <cglm/call.h>
+#include <cglm/cglm.h>
+#include <cglm/mat4.h>
 
 void default_create();
 void default_step(double deltatime);

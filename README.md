@@ -5,6 +5,7 @@ Depends:
 GLFW
 glad
 libpng
+cglm
 
 Issues:
 Redo mesh.c

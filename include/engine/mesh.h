@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
-#include <engine/math.h>
 
 #define VERTEX_ATTRUBUTES 5;
 

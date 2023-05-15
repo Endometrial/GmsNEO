@@ -2,16 +2,11 @@
 #define MATH_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 
-typedef struct vec3 {
-	float x;
-	float y;
-	float z;
-} vec3;
-
-typedef struct vec2 {
-	float x;
-	float y;
-} vec2;
+float* math_fvector_create(int length, float val, ...);
+float* math_fmatrix_create(int columns, int rows, float val, ...);
+void math_free(float* vector);
 
 #endif

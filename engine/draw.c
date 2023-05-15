@@ -24,3 +24,7 @@ void draw_mesh(Mesh mesh) {
 void draw_set_texture(GLuint texture) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
+
+draw_sprite() {
+	
+}

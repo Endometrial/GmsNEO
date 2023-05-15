@@ -1,3 +1,4 @@
+
 #include <engine/shader.h>
 
 unsigned int shader_build(char* filepath, int type) {
@@ -86,4 +87,10 @@ void shader_set_uniform_int(unsigned int program, char* name, int val) {
 	int location;
 	location = glGetUniformLocation(program, name);
 	glUniform1i(location, val);
+}
+
+void shader_set_uniform_mat4(unsigned int program, char* name, float* matrix) {
+	int location;
+	location = glGetUniformLocation(program, name);
+	glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 }

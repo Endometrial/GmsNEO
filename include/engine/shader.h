@@ -12,5 +12,6 @@ void shader_program_apply(unsigned int program);
 void shader_set_uniform_vec4(unsigned int program, char* name, float x, float y, float z, float w);
 void shader_set_uniform_float(unsigned int program, char* name, float val);
 void shader_set_uniform_int(unsigned int program, char* name, int val);
+void shader_set_uniform_mat4(unsigned int program, char* name, float* matrix);
 
 #endif

@@ -9,7 +9,8 @@ cglm
 portaudio
 
 Issues:
-Improve styling & predicatability of function names 
-Populate remaining .c files
-Integrate a coordinate system
-Figure out how to load fn ptrs from mutiple 'objects' (libjit?)
+* Improve styling & predicatability of function names 
+* Populate room.c
+* Add support for loading .wav somehow
+* Integrate a coordinate system
+* Figure out how to load fn ptrs from mutiple 'objects' (libjit?)

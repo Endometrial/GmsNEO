@@ -1,7 +1,39 @@
 
 #include <engine/shader.h>
 
-unsigned int shader_build(char* filepath, int type) {
+Shader shader_create(char* vsh_filepath, char* fsh_filepath) {
+	char infoLog[512];
+	int success;
+	Shader shader;
+
+	shader.shader = malloc(sizeof(unsigned int) * SHADER_NUM);
+
+	shader.shader[VERTEX_SHADER] = (!vsh_filepath) ? -1 : shader_build_type(vsh_filepath, GL_VERTEX_SHADER);
+	shader.shader[FRAGMENT_SHADER] = (!fsh_filepath) ? -1 : shader_build_type(fsh_filepath, GL_FRAGMENT_SHADER);
+
+	shader.program = glCreateProgram();
+
+	for (int i=0; i<SHADER_NUM; i++) {
+		(!shader.shader[i]) ? 1 : glAttachShader(shader.program, shader.shader[i]);
+	}
+
+	glLinkProgram(shader.program);
+
+	glGetProgramiv(shader.program, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(shader.program, 512, NULL, infoLog);
+		printf("FAILED TO LINK : %s\n", infoLog);
+	}
+
+	for (int i=0; i<SHADER_NUM; i++) {
+		(!shader.shader[i]) ? 1 : glDeleteShader(shader.shader[i]);
+	}
+
+	return shader;
+}
+
+
+unsigned int shader_build_type(char* filepath, int type) {
 	unsigned int shader;
 	GLchar* shaderSource;
 	int success;
@@ -27,48 +59,6 @@ unsigned int shader_build(char* filepath, int type) {
 	}
 
 	return shader;
-}
-
-unsigned int shader_program_create(unsigned int shader, ...) {
-	unsigned int program;
-	va_list shaderArgs;
-	int success;
-	char infoLog[512];
-
-	// Create the program
-	program = glCreateProgram();
-
-
-	// Attach shaders to the program
-	va_start(shaderArgs, shader);
-	for (unsigned int i = shader; i > 0; i = va_arg(shaderArgs, int)) {
-		glAttachShader(program, i);
-	}
-	va_end(shaderArgs);
-
-	// Link the program
-	glLinkProgram(program);
-
-	// Check if the process worked
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
-		printf("FAILED TO LINK : %s\n", infoLog);
-		return -1;
-	}
-
-	// Cleanupe
-	va_start(shaderArgs, shader);
-	for (unsigned int i = shader; i > 0; i = va_arg(shaderArgs, int)) {
-		glDeleteShader(i);
-	}
-	va_end(shaderArgs);
-
-	return program;
-}
-
-void shader_program_apply(unsigned int program) {
-	glUseProgram(program);
 }
 
 void shader_set_uniform_vec4(unsigned int program, char* name, float x, float y, float z, float w) {

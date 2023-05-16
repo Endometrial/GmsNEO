@@ -3,9 +3,13 @@
 int main() {
 	GLFWwindow* window;
 
+
+	audio_initialize();
 	window = window_initialize(800,600,"Tile");
+	//shader = shader_create(vsh_filepath, fsh_filepath);
 
 	default_create();
+
 
 	double program_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
@@ -23,6 +27,7 @@ int main() {
 	}
 
 	glfwTerminate();
+	audio_terminate();
 
 	return 0;
 }

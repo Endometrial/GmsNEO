@@ -11,11 +11,14 @@
 #include <engine/input.h>
 #include <engine/object.h>
 #include <engine/graphics.h>
+#include <engine/asset.h>
 
-#define true 1
-#define false 0
+#define DEFAULT_FRAGMENT_SHADER "";
+#define DEFAULT_VERTEX_SHADER "";
 
 #define GLFW_VERSION_MAJOR 3
 #define GLFW_VERSION_MINOR 3
 #define GLFW_PROFILE GLFW_OPENGL_CORE_PROFILE
+
+
 

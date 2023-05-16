@@ -4,6 +4,8 @@
 #include <engine/mesh.h>
 #include <engine/shader.h>
 #include <engine/audio.h>
+#include <engine/draw.h>
+#include <engine/asset.h>
 #include <cglm/call.h>
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>

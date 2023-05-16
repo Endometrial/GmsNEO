@@ -97,3 +97,19 @@ void mesh_build() {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 }
+
+Mesh mesh_generate_rect(float width, float height) {
+	Mesh mesh;
+	float vertices[20] = {
+		-width/2, height/2, 0.0f, 0.0f, 1.0f,
+		width/2, height/2, 0.0f, 1.0f, 1.0f,
+		width/2, -height/2, 0.0f, 1.0f, 0.0f,
+		-width/2, -height/2, 0.0f, 0.0f, 0.0f};
+	int indices[6] = {
+		3, 0, 1,
+		1, 2, 3};
+	mesh = mesh_initialize();
+	mesh = mesh_add_indexed_vertices(mesh, GL_STATIC_DRAW, vertices, sizeof(float) * 20, indices, sizeof(int) * 6);
+	mesh_build();
+	return mesh;
+}

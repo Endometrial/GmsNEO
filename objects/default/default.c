@@ -22,6 +22,7 @@ static char* tex_filepath = "assets/images/nature-images.png";
 
 Mesh mesh;
 unsigned int texture, vsh, fsh, shader_program;
+PaStream* stream;
 //float* transformation_matrix;
 
 // Create event for the initialization phaze
@@ -35,23 +36,30 @@ void default_create() {
 	fsh = shader_build(fsh_filepath, GL_FRAGMENT_SHADER);
 	shader_program = shader_program_create(vsh, fsh);
 
+	audio_initialize();
+	//stream = audio_open_stream(0,2,44100,&audio_callback);
 	/*transformation_matrix = math_fmatrix_create(4,4,
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 1.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);*/
+	Sound audio = audio_play_callback_async(1l);
 }
 
 // Step event for actions every frame
-void default_step(double deltatime) {
-	double x = tan(glfwGetTime()*3.14) * 0.5;
-	double y = sin(glfwGetTime()*3.14) * 0.5;
+void default_step(double delta_time, double program_time) {
+	//audio_play_stream(stream);
+	//Pa_Sleep(1000*1);
+	//audio_stop_stream(stream);
+	//audio_play_callback_async(2);
+	double x = cos(program_time*3.14) * 0.5;
+	double y = sin(program_time*3.14) * 0.5;
 	matrix[3][1] = x;
 	matrix[3][0] = y;
 }
 
 // Draw event for drawing stuff :3
-void default_draw(double deltatime) {
+void default_draw(double delta_time, double program_time) {
 
 	draw_set_mode(GL_TRIANGLES);
 	draw_clear(0.5f, 0.5f, 0.5f, 1.0f);

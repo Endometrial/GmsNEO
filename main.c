@@ -7,18 +7,17 @@ int main() {
 
 	default_create();
 
-	double programtime = glfwGetTime();
+	double program_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
-		double deltatime = programtime - glfwGetTime();
-		programtime = glfwGetTime();
+		double delta_time = program_time - glfwGetTime();
+		program_time = glfwGetTime();
 
-		default_step(deltatime);
+		default_step(delta_time,program_time);
 
-		default_draw(deltatime);
+		default_draw(delta_time,program_time);
 	
 		default_clean();
 		
-
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

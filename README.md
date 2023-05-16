@@ -6,6 +6,7 @@ GLFW
 glad
 libpng
 cglm
+portaudio
 
 Issues:
 Improve styling & predicatability of function names 

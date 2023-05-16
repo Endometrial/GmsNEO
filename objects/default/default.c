@@ -1,9 +1,9 @@
 #include <engine/object.h>
 
 mat4 matrix = GLM_MAT4_IDENTITY;
-static char* vsh_filepath = "shaders/engine/transform.vsh";
-static char* fsh_filepath = "shaders/engine/texture.fsh";
-static char* tex_filepath = "assets/images/pineapple.png";
+static char* vsh_filepath = "assets/shaders/engine/transform.vsh";
+static char* fsh_filepath = "assets/shaders/engine/texture.fsh";
+static char* tex_filepath = "assets/images/nature-images.png";
 
 Mesh mesh;
 Sprite sprite;
@@ -17,7 +17,6 @@ void default_create() {
 }
 
 void default_step(double delta_time, double program_time) {
-
 	double x = tan(program_time*3.14) * 0.5;
 	double y = sin(program_time*3.14) * 0.5;
 	matrix[3][1] = x;
@@ -25,7 +24,6 @@ void default_step(double delta_time, double program_time) {
 }
 
 void default_draw(double delta_time, double program_time) {
-
 	draw_set_mode(GL_TRIANGLES);
 	//draw_clear(0.5f, 0.5f, 0.5f, 1.0f);
 

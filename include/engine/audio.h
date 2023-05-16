@@ -23,7 +23,7 @@ void audio_close_stream(PaStream*);
 void audio_play_stream(PaStream* stream);
 void audio_stop_stream(PaStream* stream);
 void audio_play_callback();
-static int audio_callback(  const void *buffer_in, void *buffer_out, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags status_flags, void* user_data);
+static int audio_callback_square(  const void *buffer_in, void *buffer_out, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags status_flags, void* user_data);
 void audio_initialize();
 void audio_terminate();
 

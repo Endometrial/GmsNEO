@@ -5,7 +5,7 @@ Sound audio_play_callback_async(long secs) {
 	// Struct must be allocated on heap
 	sound = malloc(sizeof(*sound));
 	sound->seconds = secs;
-	sound->callback = &audio_callback;
+	sound->callback = &audio_callback_square;
 	pthread_t thread_id;
 	pthread_create(&thread_id, NULL, audio_play_callback, sound);
 	sound->id = thread_id;

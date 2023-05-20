@@ -5,9 +5,9 @@ Shader shader_create(char* vsh_filepath, char* fsh_filepath) {
 	char infoLog[512];
 	int success;
 	Shader shader;
-
+	
 	shader.shader = malloc(sizeof(unsigned int) * SHADER_NUM);
-
+	
 	shader.shader[VERTEX_SHADER] = (!vsh_filepath) ? -1 : shader_build_type(vsh_filepath, GL_VERTEX_SHADER);
 	shader.shader[FRAGMENT_SHADER] = (!fsh_filepath) ? -1 : shader_build_type(fsh_filepath, GL_FRAGMENT_SHADER);
 
@@ -38,7 +38,7 @@ unsigned int shader_build_type(char* filepath, int type) {
 	GLchar* shaderSource;
 	int success;
 	char infoLog[512];
-
+	
 	// Load the shader into a buffer
 	shaderSource = file_load_string(filepath);
 

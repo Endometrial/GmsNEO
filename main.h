@@ -11,6 +11,7 @@
 #include <engine/input.h>
 #include <engine/object.h>
 #include <engine/graphics.h>
+#include <engine/audio.h>
 #include <engine/asset.h>
 
 #define DEFAULT_FRAGMENT_SHADER "";

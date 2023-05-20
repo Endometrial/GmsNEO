@@ -7,15 +7,15 @@ char* file_load_string(char* filepath) {
 
 	// Open the file
 	if (!(fptr = fopen(filepath, "r"))) {
-		printf("Cannot open file!");
-		return NULL;
+		printf("Cannot open %s!\n", filepath);
+		exit(-1);
 	}
 	
 	//Seek towards the end
 	if (fseek(fptr,0L,SEEK_END) != 0) {
-		printf("File could not be read!");
+		printf("Could not seek %s!\n", filepath);
 		fclose(fptr);
-		return NULL;
+		exit(-1);
 	}
 	
 	// Report the length and reset the position of the file pointer
@@ -31,9 +31,9 @@ char* file_load_string(char* filepath) {
 	
 	// Check if the process worked
 	if (ferror(fptr)) {
-		printf("Failed to read file!");
+		printf("Failed to read %s!\n", filepath);
 		fclose(fptr);
-		return NULL;
+		exit(-1);
 	}
 
 	// Cleanup

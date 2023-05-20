@@ -7,8 +7,8 @@
 typedef struct {
 	void* handle;
 	void (*create)();
-	void (*step)();
-	void (*draw)();
+	void (*step)(double program_time, double delta_time);
+	void (*draw)(double program_time, double delta_time);
 	void (*cleanup)();
 	void (*destroy)();
 } Object;

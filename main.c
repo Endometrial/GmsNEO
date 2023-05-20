@@ -3,7 +3,6 @@
 int main() {
 	GLFWwindow* window;
 
-
 	audio_initialize();
 	window = window_initialize(800,600,"Tile");
 	//shader = shader_create(vsh_filepath, fsh_filepath);
@@ -21,12 +20,12 @@ int main() {
 		double delta_time = program_time - glfwGetTime();
 		program_time = glfwGetTime();
 
-		nya.step();
-		uwu.step();
-		nya.draw();
-		uwu.draw();
-		nya.cleanup();
-		uwu.cleanup();
+		draw_clear(0.0f, 0.0f, 0.0f, 1.0f);
+
+		nya.step(program_time, delta_time);
+		uwu.step(program_time, delta_time);
+		nya.draw(program_time, delta_time);
+		uwu.draw(program_time, delta_time);
 		//default_step(delta_time,program_time);
 
 		//default_draw(delta_time,program_time);
@@ -36,6 +35,8 @@ int main() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+	nya.cleanup();
+	uwu.cleanup();
 	nya.destroy();
 	uwu.destroy();
 

@@ -7,21 +7,29 @@ VERSION = 0.0
 NAME = executable
 
 # Includes and Libs
-INCS = -Iinclude 
-LIBS = -lglfw -lGL -lm -lcglm -lpng -lportaudio -lpthread
+INCS = -Iinclude -I/usr/local/include
+LIBS = -L/usr/local/lib -lglfw -lGL -lm -lcglm -lpng -ldl -lportaudio -lpthread
 
 # Flags
-CFLAGS = ${INCS}
+CFLAGS = ${INCS} -rdynamic
+SOFLAGS = -shared -fPIC -undefined dynamic_lookup ${INCS} ${LIBS}
 LDFLAGS = ${LIBS}
 
 # Compiler
-CC = gcc
+CC = gcc-13
 
-SRC = main.c engine/glad.c engine/media.c engine/asset.c engine/audio.c engine/input.c engine/mesh.c engine/graphics.c engine/draw.c engine/shaders.c objects/default/default.c
-OBJ = main.o glad.o media.o shaders.o mesh.o draw.o asset.o audio.o input.o graphics.o default.o
-#OBJ = ${SRC:.c=.o}
+# Directiories containing various types of file
+BUILD_DIR := ./build
+SRC_DIRS := ./scripts ./engine
+SO_DIRS := ./objects
 
-all: options build
+# Files to manipulate
+SO_SRC := $(shell find $(SO_DIRS) -name '*.c')
+SO := $(SO_SRC:%=%.so)
+SRC := main.c $(shell find $(SRC_DIRS) -name '*.c')
+OBJ := $(SRC:%=$(BUILD_DIR)/%.o)
+
+all: options ${SO} build
 
 options:
 	@echo gmsNEO build options:
@@ -29,13 +37,20 @@ options:
 	@echo "LDFLAGS	= ${LDFLAGS}"
 	@echo "CC	= ${CC}"
 
-.c.o:
-	${CC} -c ${CFLAGS} ${SRC}
+# For every .c.so in ${SO} compile its .c
+${SO}: %.c.so :%.c
+	${CC} ${SOFLAGS} $< -o $@
+
+${BUILD_DIR}/%.c.o: %.c
+	mkdir -p $(dir $@)
+	${CC} ${CFLAGS} -c $< -o $@
 
 build: ${OBJ}
 	${CC} -o ${NAME} ${OBJ} ${LDFLAGS}
 
 clean:
-	rm -f ${NAME} ${OBJ}
+	rm -r ${BUILD_DIR}
+	rm -r ${SO}
+	rm ${NAME}
 
 .PHONY: all options clean

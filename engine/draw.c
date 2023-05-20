@@ -32,10 +32,10 @@ void draw_set_shader(Shader shader) {
 }
 
 void draw_sprite(Sprite sprite, float x, float y, float scale) {
-	mat4 matrix = GLM_MAT4_IDENTITY;
-	glm_mat4_scale(matrix, scale);
-	matrix[3][1] = x;
-	matrix[3][0] = y;
+	//mat4 matrix = GLM_MAT4_IDENTITY;
+	//glm_mat4_scale(matrix, scale);
+	//matrix[3][1] = x;
+	//matrix[3][0] = y;
 
 	draw_set_texture(sprite.texture);
 	//shader_set_uniform_mat4(shader_program, "transform", matrix);

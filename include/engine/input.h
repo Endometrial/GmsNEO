@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <engine/graphics.h>
 #include <ctype.h>
 
 #define VK_UNKNOWN -1
@@ -100,7 +101,7 @@
 #define VK_R_SUPER 347
 #define VK_MENU 348
 
-int key_press(GLFWwindow* window, int key);
+int key_press(int key);
 int ord(char key);
 
 #endif

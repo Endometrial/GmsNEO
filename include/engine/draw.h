@@ -15,6 +15,7 @@ void draw_indexed_mesh(Mesh mesh);
 void draw_mesh(Mesh mesh);
 void draw_set_texture(GLuint texture);
 void draw_set_shader(Shader shader);
+Shader draw_get_shader();
 
 void draw_sprite(Sprite sprite, float x, float y, float scale);
 

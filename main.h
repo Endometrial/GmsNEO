@@ -13,6 +13,7 @@
 #include <engine/graphics.h>
 #include <engine/audio.h>
 #include <engine/asset.h>
+#include <engine/room.h>
 
 #define DEFAULT_FRAGMENT_SHADER "";
 #define DEFAULT_VERTEX_SHADER "";

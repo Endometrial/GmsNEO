@@ -5,7 +5,7 @@ int main() {
 
 	audio_initialize();
 	window = window_initialize(800,600,"Tile");
-	//shader = shader_create(vsh_filepath, fsh_filepath);
+
 	Object nya, uwu;
 	nya = object_load("./objects/default/default.c.so");
 	uwu = object_load("./objects/uwu/uwu.c.so");
@@ -35,10 +35,10 @@ int main() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	nya.cleanup();
-	uwu.cleanup();
 	nya.destroy();
 	uwu.destroy();
+	nya.cleanup();
+	uwu.cleanup();
 
 	glfwTerminate();
 	audio_terminate();

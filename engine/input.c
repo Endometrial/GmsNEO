@@ -1,7 +1,8 @@
 
 #include <engine/input.h>
 
-int key_press(GLFWwindow* window, int key) {
+int key_press(int key) {
+	GLFWwindow* window = window_get_active_pointer();
 	return (glfwGetKey(window, key) == GLFW_PRESS);
 }
 

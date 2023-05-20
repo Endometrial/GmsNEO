@@ -1,8 +1,8 @@
 #include <engine/graphics.h>
 
-GLFWwindow* window_initialize(int width, int height, const char* title) {
-	GLFWwindow* window;
+GLFWwindow* window;
 
+GLFWwindow* window_initialize(int width, int height, const char* title) {
 	if (!glfwInit()) {
 		printf("Failed to initialize glfw :(");
 	}
@@ -30,6 +30,14 @@ GLFWwindow* window_initialize(int width, int height, const char* title) {
 
 	glViewport(0,0,width,height);
 
+	return window;
+}
+
+GLFWwindow* window_get_active_pointer() {
+	if (!window) {
+		printf("No active window found?");
+		exit(-1);
+	}
 	return window;
 }
 

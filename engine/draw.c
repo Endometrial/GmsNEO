@@ -1,7 +1,7 @@
 
 #include <engine/draw.h>
 
-
+Shader active_shader;
 
 void draw_clear(float r, float g, float b, float a) {
 	glClearColor(r,g,b,a);
@@ -11,7 +11,6 @@ void draw_clear(float r, float g, float b, float a) {
 void draw_set_mode(GLenum mode) {
 	glPolygonMode(GL_FRONT_AND_BACK, mode);
 }
-
 
 void draw_indexed_mesh(Mesh mesh) {
 	glBindVertexArray(mesh.vao);
@@ -28,16 +27,25 @@ void draw_set_texture(GLuint texture) {
 }
 
 void draw_set_shader(Shader shader) {
-	glUseProgram(shader.program);
+	active_shader = shader;
+	glUseProgram(active_shader.program);
+}
+
+Shader draw_get_shader() {
+	return active_shader;
 }
 
 void draw_sprite(Sprite sprite, float x, float y, float scale) {
-	//mat4 matrix = GLM_MAT4_IDENTITY;
-	//glm_mat4_scale(matrix, scale);
-	//matrix[3][1] = x;
-	//matrix[3][0] = y;
+	Shader shader;
+	mat4 matrix;
+
+	shader = draw_get_shader();
+	glm_mat4_identity(matrix);
+	glm_mat4_scale(matrix, scale);
+	matrix[3][1] = x;
+	matrix[3][0] = y;
 
 	draw_set_texture(sprite.texture);
-	//shader_set_uniform_mat4(shader_program, "transform", matrix);
+	shader_set_uniform_mat4(shader.program, "transform", matrix);
 	draw_indexed_mesh(sprite.mesh);
 }

@@ -9,10 +9,8 @@ mat4 trans_matrix = GLM_MAT4_IDENTITY;
 char* tex_filepath = "assets/images/pineapple.png";
 char* vsh_filepath = "assets/shaders/engine/transform.vsh";
 char* fsh_filepath = "assets/shaders/engine/texture.fsh";
-Mesh mesh;
 
 void create() {
-	mesh = mesh_initialize();
 	pineapple = asset_load_sprite(tex_filepath, GL_REPEAT, GL_LINEAR);
 	shader = shader_create(vsh_filepath, fsh_filepath);
 }

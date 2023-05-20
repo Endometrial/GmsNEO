@@ -9,7 +9,6 @@ portaudio
 
 Issues:
 * Improve styling & predicatability of function names 
-* Populate room.c
+* Impliment room loading code (xml b/c it look prebby. suffer)
 * Add support for loading .wav somehow
-* Integrate a coordinate system
-* Figure out how to load fn ptrs from mutiple 'objects' (libjit?)
+* Integrate local, world, & screen space transformation matricies

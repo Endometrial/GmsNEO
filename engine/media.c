@@ -127,3 +127,13 @@ GLuint image_load_texture(char* filepath, GLint texture_wrap, GLint texture_filt
 
 	return texture;
 }
+
+xmlDocPtr file_parse_xml(char* filepath) {
+	xmlDocPtr doc;
+	doc = xmlParseFile(filepath);
+	if (doc == NULL) {
+		printf("Coild not parse document\n");
+		xmlFreeDoc(doc);
+	}
+	return doc;
+}

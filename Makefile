@@ -8,7 +8,7 @@ NAME = executable
 
 # Includes and Libs
 INCS = -Iinclude -I/usr/local/include
-LIBS = -L/usr/local/lib -lglfw -lGL -lm -lcglm -lpng -ldl -lportaudio -lpthread
+LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpng -ldl -lportaudio -lpthread
 
 # Flags
 CFLAGS = ${INCS} -rdynamic

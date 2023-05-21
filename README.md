@@ -6,6 +6,7 @@ GLFW
 libpng
 cglm
 portaudio
+libxml2
 
 Issues:
 * Improve styling & predicatability of function names 

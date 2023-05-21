@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <libxml/xmlreader.h>
 #include <png.h>
 
 typedef struct Image {
@@ -17,6 +18,7 @@ typedef struct Image {
 
 
 char* file_load_string(char* filepath);
+xmlDocPtr file_parse_xml(char* filepath);
 Image image_load(char* filepath);
 GLuint image_load_texture(char* filepath, GLint texture_wrap, GLint texture_filter);
 

@@ -21,7 +21,7 @@ void step(double program_time, double delta_time) {
 void draw(double program_time, double delta_time) {
 	draw_set_shader(shader);
 	shader_set_uniform_mat4(shader.program, "transform", trans_matrix);
-	draw_sprite(pineapple, 0.0f, 0.0f, 1.0f);
+	draw_sprite(pineapple, sin(program_time * 3.14f)/2, tan(program_time * 3.14f)/2, 1.0f);
 }
 void cleanup() {
 	printf("UwU cleanup\n");

@@ -10,7 +10,7 @@ libxml2
 
 Issues:
 * Improve styling & predicatability of function names generally 
-* Add support for loading .wav via portaudio
+* Add support for loading .ogg via portaudio
 * Add support for loading backgrounds with rooms
 * Add support for loading additions to objects with rooms
 * Add support for additions to object scripts @ runtime (ex setting variables)

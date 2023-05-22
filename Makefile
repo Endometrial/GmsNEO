@@ -20,8 +20,8 @@ CC = gcc-13
 
 # Directiories containing various types of file
 BUILD_DIR := ./build
-SRC_DIRS := ./scripts ./engine
-SO_DIRS := ./objects
+SRC_DIRS := ./assets/scripts ./engine
+SO_DIRS := ./assets/objects
 
 # Files to manipulate
 SO_SRC := $(shell find $(SO_DIRS) -name '*.c')

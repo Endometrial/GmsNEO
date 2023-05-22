@@ -36,16 +36,17 @@ Shader draw_get_shader() {
 }
 
 void draw_sprite(Sprite sprite, float x, float y, float scale) {
+	mat4 local_matrix;
 	Shader shader;
-	mat4 matrix;
-
 	shader = draw_get_shader();
-	glm_mat4_identity(matrix);
-	glm_mat4_scale(matrix, scale);
-	matrix[3][1] = x;
-	matrix[3][0] = y;
+	glm_mat4_identity(local_matrix);
+	glm_mat4_scale(local_matrix, scale);
+	local_matrix[3][1] = x;
+	local_matrix[3][0] = y;
 
+	shader_set_uniform_mat4(shader.program, "local_matrix", local_matrix);
+	shader_set_uniform_mat4(shader.program, "projection_matrix", *camera_get_projection_matrix());
+	shader_set_uniform_mat4(shader.program, "view_matrix", *camera_get_view_matrix());
 	draw_set_texture(sprite.texture);
-	shader_set_uniform_mat4(shader.program, "transform", matrix);
 	draw_indexed_mesh(sprite.mesh);
 }

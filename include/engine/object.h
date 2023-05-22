@@ -3,6 +3,7 @@
 
 #include <dlfcn.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
 	void* handle;
@@ -11,6 +12,7 @@ typedef struct {
 	void (*draw)(double program_time, double delta_time);
 	void (*destroy)();
 	void (*cleanup)();
+	long id;
 } Object;
 
 Object object_load(char* library_filepath);

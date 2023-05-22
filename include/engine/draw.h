@@ -6,6 +6,7 @@
 #include <engine/mesh.h>
 #include <engine/asset.h>
 #include <engine/shader.h>
+#include <engine/camera.h>
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
 

@@ -22,6 +22,8 @@ Object object_load(char* library_filepath) {
 	object.destroy = dlsym(object.handle, "destroy");
 	object.cleanup = dlsym(object.handle, "cleanup");
 
+	object.id = 7l;
+
 	return object;
 }
 

@@ -6,6 +6,8 @@ int main() {
 	audio_initialize();
 	window = window_initialize(800,600,"Tile");
 
+	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
+
 	Object nya, uwu;
 	nya = object_load("./objects/default/default.c.so");
 	uwu = object_load("./objects/uwu/uwu.c.so");

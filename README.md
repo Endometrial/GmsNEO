@@ -9,7 +9,9 @@ portaudio
 libxml2
 
 Issues:
-* Improve styling & predicatability of function names 
-* Impliment room loading code (xml b/c it look prebby. suffer)
-* Add support for loading .wav somehow
-* Integrate local, world, & screen space transformation matricies
+* Improve styling & predicatability of function names generally 
+* Add support for loading .wav via portaudio
+* Add support for loading backgrounds with rooms
+* Add support for loading additions to objects with rooms
+* Add support for additions to object scripts @ runtime (ex setting variables)
+* Consider -- but then ultimately decide not too -- create a gui for room creation

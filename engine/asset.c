@@ -21,8 +21,11 @@ Sprite asset_load_sprite(char* image_filepath, GLint texture_wrap,
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texture_filter); // for scaling down
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texture_filter); // for scaling up
 
+	// This is pretty so im leaving it even though its useless now. fuck off ;3 <3
 	float ratio = (float)picture.height / (float)picture.width;
-	mesh = (ratio>1.0f) ? mesh_generate_rect(1.0f/ratio, 1.0f) : mesh_generate_rect(1.0f, ratio);
+	mesh = (ratio>1.0f) ? mesh_generate_rect(1.0f/ratio, 1.0f) : mesh_generate_rect(1.0f, 1.0f*ratio);
+
+	//mesh = mesh_generate_rect((float)picture.width, (float)picture.height);
 
 	sprite.mesh = mesh;
 	sprite.texture = texture;

@@ -13,7 +13,7 @@ int hspeed, vspeed;
 
 void create() {
 	camera_set_projection_perspective(3.141f/4.0f, 800.0f/600.0f, 0.1f, 100.0f);
-	//camera_set_projection_ortho(-4.0f, 4.0f, -3.0f, 3.0f, 0.001f, 10000.0f);
+	camera_set_projection_ortho(-40.0f, 40.0f, -30.0f, 30.0f, 0.001f, 10000.0f);
 	camera_set_view_lookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f);
 	pineapple = asset_load_sprite(tex_filepath, GL_REPEAT, GL_LINEAR);
 }

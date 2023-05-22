@@ -9,8 +9,8 @@ int main() {
 	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
 
 	Object nya, uwu;
-	nya = object_load("./objects/default/default.c.so");
-	uwu = object_load("./objects/uwu/uwu.c.so");
+	nya = object_load("./assets/objects/default/default.c.so");
+	uwu = object_load("./assets/objects/uwu/uwu.c.so");
 
 	//default_create();
 	nya.create();

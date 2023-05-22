@@ -5,6 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define EVENT_CREATE 0
+#define EVENT_STEP 1
+#define EVENT_DRAW 2
+#define EVENT_CLEANUP 3
+#define EVENT_DESTROY 4
+
 typedef struct {
 	void* handle;
 	void (*create)();
@@ -12,7 +18,6 @@ typedef struct {
 	void (*draw)(double program_time, double delta_time);
 	void (*destroy)();
 	void (*cleanup)();
-	long id;
 } Object;
 
 Object object_load(char* library_filepath);

@@ -8,14 +8,10 @@ int main() {
 
 	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
 
-	Object nya, uwu;
-	nya = object_load("./assets/objects/default/default.c.so");
-	uwu = object_load("./assets/objects/uwu/uwu.c.so");
+	Room rm_default = room_load("./assets/rooms/default/default.xml");
 
-	//default_create();
-	nya.create();
-	uwu.create();
-
+	room_set(rm_default);
+	room_execute_event(EVENT_CREATE);
 
 	double program_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
@@ -24,23 +20,14 @@ int main() {
 
 		draw_clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-		nya.step(program_time, delta_time);
-		uwu.step(program_time, delta_time);
-		nya.draw(program_time, delta_time);
-		uwu.draw(program_time, delta_time);
-		//default_step(delta_time,program_time);
+		room_execute_event(EVENT_STEP, program_time, delta_time);
+		room_execute_event(EVENT_DRAW, program_time, delta_time);
 
-		//default_draw(delta_time,program_time);
-	
-		//default_clean();
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	nya.destroy();
-	uwu.destroy();
-	nya.cleanup();
-	uwu.cleanup();
+	room_execute_event(EVENT_CLEANUP);
 
 	glfwTerminate();
 	audio_terminate();

@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <room>
-	<name>default</name>
 	<background>path/to/background</background>
-	<instance id="0014ca5e">
-		<object>obj_default</object> 
-		<priority>7</priority>	
-		<position x="0.0" y="0.0" z="0.0" />
-		<sprite xscale="1" yscale="1">path/to/image</sprite>	
+	<instance>
+		<object>./assets/objects/default/default.c.so</object> 
+		<location x="0.0" y="0.0" z="0.0" />	
 		<script>-1</script>
 	</instance>
-	<instance id="87089a1f">
-		<object>obj_default</object> 
-		<priority>3</priority>	
-		<position x="0.0" y="0.0" z="0.0" />
-		<sprite>-1</sprite>	
+	<instance>
+		<object>./assets/objects/uwu/uwu.c.so</object> 
+		<location x="0.0" y="0.0" z="0.0" />
 		<script>path/to/script</script>
 	</instance>
-	<instance id="7d969ce1">
-		<object>obj_other</object>
-		<priority>0</priority>
-		<position x="1.2" y="3.0" z="1.1" />
-		<sprite>-1</sprite>
-		<script>-1</script>
-	</instance>	
 </room>

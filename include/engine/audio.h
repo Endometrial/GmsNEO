@@ -1,10 +1,11 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include "portaudio.h"
+#include <portaudio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <ogg/ogg.h>
 
 typedef struct {
 	float left_phase;

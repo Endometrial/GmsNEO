@@ -18,9 +18,8 @@ typedef struct Image {
 
 
 char* file_load_string(char* filepath);
-xmlDocPtr file_parse_xml(char* filepath);
 Image image_load(char* filepath);
-GLuint image_load_texture(char* filepath, GLint texture_wrap, GLint texture_filter);
+GLuint texture_load(char* filepath, GLint texture_wrap, GLint texture_filter);
 
 
 

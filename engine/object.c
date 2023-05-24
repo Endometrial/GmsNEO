@@ -3,12 +3,6 @@
 
 Object object_load(char* library_filepath) {
 	Object object;
-	object.handle = NULL;
-	object.create = NULL;
-	object.step = NULL;
-	object.draw = NULL;
-	object.cleanup = NULL;
-	object.destroy = NULL;
 
 	object.handle = dlopen(library_filepath, RTLD_NOW | RTLD_GLOBAL);
 

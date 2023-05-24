@@ -42,6 +42,8 @@ char* file_load_string(char* filepath) {
 	return string;
 }
 
+
+
 Image image_load(char* filepath) {
 	Image image;
 	FILE* img_fp;
@@ -107,7 +109,7 @@ Image image_load(char* filepath) {
 	return image;
 }
 
-GLuint image_load_texture(char* filepath, GLint texture_wrap, GLint texture_filter) {
+GLuint texture_load(char* filepath, GLint texture_wrap, GLint texture_filter) {
 	Image picture;
 	GLuint texture;
 	GLenum format;
@@ -126,14 +128,4 @@ GLuint image_load_texture(char* filepath, GLint texture_wrap, GLint texture_filt
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texture_filter); // for scaling up
 
 	return texture;
-}
-
-xmlDocPtr file_parse_xml(char* filepath) {
-	xmlDocPtr doc;
-	doc = xmlParseFile(filepath);
-	if (doc == NULL) {
-		printf("Coild not parse document\n");
-		xmlFreeDoc(doc);
-	}
-	return doc;
 }

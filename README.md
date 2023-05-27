@@ -23,7 +23,6 @@ ex audio_play_chip(long freq, int msecs, int type);
 with a potential note_get_freq(char* note); 
 where note is "D" "A#"... and type is CHIP_SQUARE or similar
 * Add support for loading backgrounds with rooms
-* Add support for loading additions to objects with rooms
 * Add support for additions to object scripts @ runtime (ex setting x,y,z variables for room purposes) 
 perhaps arguments could be added to the create event??? like create(int x, int y, int z, ...);
 maybe a struct or similar containing everything from the room xml could be passed?

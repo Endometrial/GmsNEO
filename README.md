@@ -6,7 +6,7 @@
 		<h3>A simple C game engine with features heavily informed by GMS2</h3>
 	</div>
 	<h2>Depends:</h2>
-	<ol>
+	<ul>
 		<li>GLFW</li>
 		<li>cglm</li>
 		<li>portaudio</li>
@@ -14,10 +14,10 @@
 		<li>libpng</li>
 		<li>libogg</li>
 		<li>libvorbis</li>
-	</ol>
+	</ul>
 	<body>
 		<h2>Objectives:</h2>
-		<ol>
+		<ul>
 			<li>Set defaults in some sort of config file or simply main.h</li>
 			<li>Port to Linux, Win64, & BSD</li>
 			<li>Improve styling & predicatability of function names generally </li>
@@ -36,6 +36,6 @@
 					if all else fails rely on dlfcn.h
 					additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
 			<li>Consider creating a gui for project management</li>
-		</ol>
+		</ul>
 	</body>
 </html>

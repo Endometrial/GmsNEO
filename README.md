@@ -26,15 +26,15 @@
 			<li>Consider using a different image format than png ex bitmap </li>
 			<li>Add support for loading & playing .ogg (vorbis) via portaudio</li>
 			<li>Consider support for playing arbitrary audio callbacks or a set of custom callbacks </li>
-				<p>ex audio_play_chip(long freq, int msecs, int type); 
-with a potential note_get_freq(char* note); 
-where note is "D" "A#"... and type is CHIP_SQUARE or similar</p>
+				<p>	ex audio_play_chip(long freq, int msecs, int type); 
+					with a potential note_get_freq(char* note); 
+					where note is "D" "A#"... and type is CHIP_SQUARE or similar</p>
 			<li>Add support for loading backgrounds with rooms</li>
 			<li>Add support for additions to object scripts @ runtime (ex setting x,y,z variables for room purposes) </li>
-				<p>perhaps arguments could be added to the create event??? like create(int x, int y, int z, ...);
-maybe a struct or similar containing everything from the room xml could be passed?
-if all else fails rely on dlfcn.h
-additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
+				<p>	perhaps arguments could be added to the create event??? like create(int x, int y, int z, ...);
+					maybe a struct or similar containing everything from the room xml could be passed?
+					if all else fails rely on dlfcn.h
+					additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
 			<li>Consider creating a gui for project management</li>
 		</ol>
 	</body>

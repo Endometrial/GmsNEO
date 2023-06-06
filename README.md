@@ -1,4 +1,4 @@
-<img style="float: left;" src="https://github.com/Endometrial/baphomet/blob/main/assets/images/baphomet.png">
+<img style="float: right;" src="https://github.com/Endometrial/baphomet/blob/main/assets/images/baphomet.png">
 # Baphomet
 A simple C game engine with features heavily informed by GMS2
 

@@ -1,6 +1,6 @@
 #include <engine/media.h>
 
-char* file_load_string(char* filepath) {
+char* file_load(char* filepath) {
 	FILE* fptr;
 	char* string;
 	long size;
@@ -39,10 +39,7 @@ char* file_load_string(char* filepath) {
 	// Cleanup
 	fclose(fptr);
 
-	return string;
-}
-
-
+	return string;}
 
 Image image_load(char* filepath) {
 	Image image;
@@ -106,8 +103,7 @@ Image image_load(char* filepath) {
 	png_destroy_read_struct(&png_ptr, &info_ptr, &info_ptr);
 	fclose(img_fp);
 
-	return image;
-}
+	return image;}
 
 GLuint texture_load(char* filepath, GLint texture_wrap, GLint texture_filter) {
 	Image picture;
@@ -127,5 +123,5 @@ GLuint texture_load(char* filepath, GLint texture_wrap, GLint texture_filter) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texture_filter); // for scaling down
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texture_filter); // for scaling up
 
-	return texture;
-}
+	return texture;}
+

@@ -17,7 +17,7 @@ typedef struct Image {
 } Image;
 
 
-char* file_load_string(char* filepath);
+char* file_load(char* filepath);
 Image image_load(char* filepath);
 GLuint texture_load(char* filepath, GLint texture_wrap, GLint texture_filter);
 

@@ -24,7 +24,7 @@
 			<li>Optimize typing generally</li>
 			<li>Add support for converting types to the ones used ex .exr to .png</li>
 			<li>Consider using a different image format than png ex bitmap </li>
-			<li>Add support for loading & playing .ogg (vorbis) via portaudio</li>
+			<li>Add support for playing pcm data via portaudio</li>
 			<li>Consider support for playing arbitrary audio callbacks or a set of custom callbacks </li>
 				<p>	ex audio_play_chip(long freq, int msecs, int type); 
 					with a potential note_get_freq(char* note); 
@@ -36,6 +36,7 @@
 					if all else fails rely on dlfcn.h
 					additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
 			<li>Consider creating a gui for project management</li>
+			<li>Split media.c into multiple files with [filename]_functions</li>
 		</ul>
 	</body>
 </html>

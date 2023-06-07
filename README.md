@@ -22,14 +22,13 @@
 			<li>Port to Linux, Win64, & BSD</li>
 			<li>Improve styling & predicatability of function names generally </li>
 			<li>Optimize typing generally</li>
-			<li>Add support for converting types to the ones used ex .exr to .png</li>
-			<li>Consider using a different image format than png ex bitmap </li>
+			<li>Add support for other file types</li>
 			<li>Add support for playing pcm data via portaudio</li>
 			<li>Consider support for playing arbitrary audio callbacks or a set of custom callbacks </li>
 				<p>	ex audio_play_chip(long freq, int msecs, int type); 
 					with a potential note_get_freq(char* note); 
 					where note is "D" "A#"... and type is CHIP_SQUARE or similar</p>
-			<li>Add support for loading backgrounds with rooms</li>
+			<li>Add support extended room features</li>
 			<li>Add support for additions to object scripts @ runtime (ex setting x,y,z variables for room purposes) </li>
 				<p>	perhaps arguments could be added to the create event??? like create(int x, int y, int z, ...);
 					maybe a struct or similar containing everything from the room xml could be passed?

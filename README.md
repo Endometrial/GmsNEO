@@ -36,6 +36,7 @@
 					additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
 			<li>Consider creating a gui for project management</li>
 			<li>Split media.c into multiple files with [filename]_functions</li>
+			<li>Remove or ignore video and other non vorbis streams in ogg files</li>
 		</ul>
 	</body>
 </html>

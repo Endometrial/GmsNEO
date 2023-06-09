@@ -9,7 +9,7 @@ OggDecoder ogg_decoder_open(char* filepath) {
 	// Load the file
 	decoder.filepointer = fopen(filepath, "rb");
 	if (!decoder.filepointer) {
-		fprintf(stderr,"Ogg/Vorbis Decoder: cannot open %s ;-;", filepath);
+		fprintf(stderr,"Ogg/Vorbis Decoder: cannot open %s ;-;\n", filepath);
 		exit(-1);
 	}
 
@@ -17,12 +17,12 @@ OggDecoder ogg_decoder_open(char* filepath) {
 	ogg_sync_init(&decoder.sync_state);
 	audio_buffer = ogg_sync_buffer(&decoder.sync_state, 4096l);
 	bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder.filepointer);
-	(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!") : 1;
+	(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!\n") : 1;
 
 	// Submit data and get the first page
 	ogg_sync_wrote(&decoder.sync_state, bytes_read);
 	if (ogg_sync_pageout(&decoder.sync_state, &decoder.page) != 1) {
-		fprintf(stderr, "Ogg/Vorbis Decoder: Bitstream not found! :(");
+		fprintf(stderr, "Ogg/Vorbis Decoder: Bitstream not found! :(\n");
 		exit(-1);
 	}
 
@@ -35,7 +35,7 @@ OggDecoder ogg_decoder_open(char* filepath) {
 	ogg_stream_pagein(&decoder.stream_state, &decoder.page);
 	ogg_stream_packetout(&decoder.stream_state, &decoder.packet);
 	if (vorbis_synthesis_headerin(&decoder.info, &decoder.comments, &decoder.packet) < 0) {
-		fprintf(stderr, "Ogg/Vorbis Decoder: %s not vorbis! >:3", filepath);
+		fprintf(stderr, "Ogg/Vorbis Decoder: %s not vorbis! >:3\n", filepath);
 		exit(-1);
 	}
 
@@ -47,14 +47,14 @@ OggDecoder ogg_decoder_open(char* filepath) {
 			ogg_stream_pagein(&decoder.stream_state, &decoder.page);
 			ogg_stream_packetout(&decoder.stream_state, &decoder.packet);
 			if (vorbis_synthesis_headerin(&decoder.info, &decoder.comments, &decoder.packet)) {
-				fprintf(stderr, "Ogg/Vorbis Decoder: Error in header #%i ",headers);
+				fprintf(stderr, "Ogg/Vorbis Decoder: Error in header #%i \n",headers);
 			}
 			headers++;
 		}
 		// Read data in :3
 		audio_buffer = ogg_sync_buffer(&decoder.sync_state, 4096l);
 		bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder.filepointer);	
-		(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!") : 1;
+		(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!\n") : 1;
 		ogg_sync_wrote(&decoder.sync_state, bytes_read);
 	}
 
@@ -97,7 +97,7 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample) {
 			} else {
 				load_buffer = ogg_sync_buffer(&decoder->sync_state, 4096l);
 				bytes_read = fread(load_buffer, sizeof(char), 4096, decoder->filepointer);
-				(bytes_read < 4096) ? fprintf(stderr,"EOF!, EOS imminent") : 1;
+				(bytes_read < 4096) ? fprintf(stderr,"EOF!, EOS imminent\n") : 1;
 				ogg_sync_wrote(&decoder->sync_state, bytes_read);
 			}
 		}

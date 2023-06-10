@@ -37,6 +37,7 @@
 			<li>Consider creating a gui for project management</li>
 			<li>Split media.c into multiple files with [filename]_functions</li>
 			<li>Remove or ignore video and other non vorbis streams in ogg files</li>
+			<li>Consider a bulkier method of creating OggDecoders ie more mallocs instead of one malloc OggDecoder*</li>
 		</ul>
 	</body>
 </html>

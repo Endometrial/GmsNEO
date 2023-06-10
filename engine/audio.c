@@ -9,8 +9,7 @@ Sound audio_play_callback_async(long secs) {
 	pthread_t thread_id;
 	pthread_create(&thread_id, NULL, audio_play_callback, sound);
 	sound->id = thread_id;
-	return *sound;
-}
+	return *sound;}
 
 void audio_play_callback(Sound* sound) {
 	PaStream* stream;
@@ -18,8 +17,7 @@ void audio_play_callback(Sound* sound) {
 	audio_play_stream(stream);
 	Pa_Sleep(1000 * sound->seconds);
 	audio_stop_stream(stream);
-	audio_close_stream(stream);
-}
+	audio_close_stream(stream);}
 
 PaStream* audio_open_stream(int num_inputs, int num_outputs, double sample_rate, PaStreamCallback* callback) {
 	PaStream* stream;
@@ -31,33 +29,42 @@ PaStream* audio_open_stream(int num_inputs, int num_outputs, double sample_rate,
 		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
 	}
 
-	return stream;
-}
+	return stream;}
 
 void audio_close_stream(PaStream* stream) {
 	PaError err;
 	err = Pa_CloseStream(stream);
 	if (err != paNoError) {
 		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
-	}
-}
+	}}
 
 void audio_play_stream(PaStream* stream) {
 	PaError err;
 	err = Pa_StartStream(stream);
 	if (err != paNoError) {
 		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
-	}
-}
+	}}
 
 void audio_stop_stream(PaStream* stream) {
 	PaError err;
 	err = Pa_StopStream(stream);
 	if (err != paNoError) {
 		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
-	}
-}
+	}}
 
+void audio_initialize() {
+	PaError err = Pa_Initialize();
+	if (err != paNoError) {
+		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
+
+	}}
+
+void audio_terminate() {
+	PaError err = Pa_Terminate();
+	if (err != paNoError) {
+		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
+
+	}}
 
 static int audio_callback_square(  const void *buffer_in, 
 							void *buffer_out, 
@@ -78,20 +85,4 @@ static int audio_callback_square(  const void *buffer_in,
 		if (data->right_phase >= 1.0f) data->right_phase -=2.0f;
 	}
 	return 0;
-}
-
-void audio_initialize() {
-	PaError err = Pa_Initialize();
-	if (err != paNoError) {
-		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
-
-	}
-}
-
-void audio_terminate() {
-	PaError err = Pa_Terminate();
-	if (err != paNoError) {
-		printf("PortAudio error: %s\n", Pa_GetErrorText(err));
-
-	}
 }

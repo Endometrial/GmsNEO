@@ -1,7 +1,19 @@
 #include "main.h"
 
+char* snd_filepath = "/Users/user/Desktop/ogg/yume-nikki.ogg";
+
 int main() {
 	GLFWwindow* window;
+	OggDecoder* decoder;
+	Samplei16 sample;
+	int eos = 0;
+
+	decoder = ogg_decoder_open(snd_filepath);
+
+	ogg_sample_initialize_i16(&sample);
+	while((ogg_decoder_get_pcm_i16(decoder, &sample)) != 1) {}
+
+	ogg_decoder_close(decoder);
 
 	audio_initialize();
 	window = window_initialize(800,600,"Tile");

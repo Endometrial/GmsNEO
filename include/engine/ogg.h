@@ -25,7 +25,7 @@ typedef struct {
 	int16_t* samples;
 } Samplei16;
 
-OggDecoder ogg_decoder_open(char* filepath);
+OggDecoder* ogg_decoder_open(char* filepath);
 void ogg_decoder_close(OggDecoder* decoder);
 int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample);
 int ogg_decoder_get_channels(OggDecoder* decoder);

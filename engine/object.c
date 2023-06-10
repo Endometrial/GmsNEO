@@ -4,7 +4,7 @@
 Object object_load(char* library_filepath) {
 	Object object;
 
-	object.handle = dlopen(library_filepath, RTLD_NOW | RTLD_GLOBAL);
+	object.handle = dlopen(library_filepath, RTLD_NOW);
 
 	if (object.handle == NULL) {
 		printf("Unable to open object: %s\n", dlerror());

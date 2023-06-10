@@ -1,40 +1,42 @@
 #include <engine/ogg.h>
 
-OggDecoder ogg_decoder_open(char* filepath) {
-	OggDecoder decoder;
-
+OggDecoder* ogg_decoder_open(char* filepath) {
+	OggDecoder* decoder;
 	char* audio_buffer;
 	int bytes_read;
 
+	// Allocate data for the decoder
+	decoder = malloc(sizeof(OggDecoder));
+
 	// Load the file
-	decoder.filepointer = fopen(filepath, "rb");
-	if (!decoder.filepointer) {
+	decoder->filepointer = fopen(filepath, "rb");
+	if (!decoder->filepointer) {
 		fprintf(stderr,"Ogg/Vorbis Decoder: cannot open %s ;-;\n", filepath);
 		exit(-1);
 	}
 
 	// Initialize libogg & read in some bytes
-	ogg_sync_init(&decoder.sync_state);
-	audio_buffer = ogg_sync_buffer(&decoder.sync_state, 4096l);
-	bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder.filepointer);
+	ogg_sync_init(&decoder->sync_state);
+	audio_buffer = ogg_sync_buffer(&decoder->sync_state, 4096l);
+	bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder->filepointer);
 	(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!\n") : 1;
 
 	// Submit data and get the first page
-	ogg_sync_wrote(&decoder.sync_state, bytes_read);
-	if (ogg_sync_pageout(&decoder.sync_state, &decoder.page) != 1) {
+	ogg_sync_wrote(&decoder->sync_state, bytes_read);
+	if (ogg_sync_pageout(&decoder->sync_state, &decoder->page) != 1) {
 		fprintf(stderr, "Ogg/Vorbis Decoder: Bitstream not found! :(\n");
 		exit(-1);
 	}
 
 	// Initialize stream and data types
-	ogg_stream_init(&decoder.stream_state, ogg_page_serialno(&decoder.page));
-	vorbis_info_init(&decoder.info);
-	vorbis_comment_init(&decoder.comments);
+	ogg_stream_init(&decoder->stream_state, ogg_page_serialno(&decoder->page));
+	vorbis_info_init(&decoder->info);
+	vorbis_comment_init(&decoder->comments);
 
 	// Read and interpret first header packet
-	ogg_stream_pagein(&decoder.stream_state, &decoder.page);
-	ogg_stream_packetout(&decoder.stream_state, &decoder.packet);
-	if (vorbis_synthesis_headerin(&decoder.info, &decoder.comments, &decoder.packet) < 0) {
+	ogg_stream_pagein(&decoder->stream_state, &decoder->page);
+	ogg_stream_packetout(&decoder->stream_state, &decoder->packet);
+	if (vorbis_synthesis_headerin(&decoder->info, &decoder->comments, &decoder->packet) < 0) {
 		fprintf(stderr, "Ogg/Vorbis Decoder: %s not vorbis! >:3\n", filepath);
 		exit(-1);
 	}
@@ -43,37 +45,28 @@ OggDecoder ogg_decoder_open(char* filepath) {
 	int headers = 0;
 	while (headers<2) {
 		// Get a page out :3
-		if (ogg_sync_pageout(&decoder.sync_state, &decoder.page) == 1) {
-			ogg_stream_pagein(&decoder.stream_state, &decoder.page);
-			ogg_stream_packetout(&decoder.stream_state, &decoder.packet);
-			if (vorbis_synthesis_headerin(&decoder.info, &decoder.comments, &decoder.packet)) {
+		if (ogg_sync_pageout(&decoder->sync_state, &decoder->page) == 1) {
+			ogg_stream_pagein(&decoder->stream_state, &decoder->page);
+			ogg_stream_packetout(&decoder->stream_state, &decoder->packet);
+			if (vorbis_synthesis_headerin(&decoder->info, &decoder->comments, &decoder->packet)) {
 				fprintf(stderr, "Ogg/Vorbis Decoder: Error in header #%i \n",headers);
 			}
 			headers++;
 		}
 		// Read data in :3
-		audio_buffer = ogg_sync_buffer(&decoder.sync_state, 4096l);
-		bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder.filepointer);	
+		audio_buffer = ogg_sync_buffer(&decoder->sync_state, 4096l);
+		bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder->filepointer);	
 		(bytes_read < 4096) ? fprintf(stderr, "Ogg/Vorbis Decoder: EOF!\n") : 1;
-		ogg_sync_wrote(&decoder.sync_state, bytes_read);
+		ogg_sync_wrote(&decoder->sync_state, bytes_read);
 	}
 
 	// Initialize vorbis data types
-	vorbis_synthesis_init(&decoder.state, &decoder.info);
-	vorbis_block_init(&decoder.state, &decoder.block);
+	vorbis_synthesis_init(&decoder->state, &decoder->info);
+	vorbis_block_init(&decoder->state, &decoder->block);
 
 	return decoder;}
 
-void ogg_decoder_close(OggDecoder* decoder) {
-	vorbis_block_clear(&decoder->block);
-	vorbis_dsp_clear(&decoder->state);
-	ogg_stream_clear(&decoder->stream_state);
-	vorbis_comment_clear(&decoder->comments);
-	vorbis_info_clear(&decoder->info);
-	ogg_sync_clear(&decoder->sync_state);
-	fclose(decoder->filepointer);}
-
-// Loads int16_ts into a buffer and returns 0 (done) 1 (more data can be gathered)
+// Loads int16_ts into buffer and returns 0 (done) 1 (more data can be gathered)
 int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample) {
 	int channels, samples, bytes_read, len, sample_data;
 	char* load_buffer = (char*)0;
@@ -106,7 +99,6 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample) {
 	}
 
 	// Allocate the buffer (or reallocate if it already exists)
-
 	sample->samples = realloc(sample->samples, channels * samples * sizeof(int16_t));
 	sample->length = samples;
 
@@ -130,12 +122,22 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample) {
 	vorbis_synthesis_read(&decoder->state, samples);
 	return eos;}
 
+void ogg_decoder_close(OggDecoder* decoder) {
+	vorbis_block_clear(&decoder->block);
+	vorbis_dsp_clear(&decoder->state);
+	ogg_stream_clear(&decoder->stream_state);
+	vorbis_comment_clear(&decoder->comments);
+	vorbis_info_clear(&decoder->info);
+	ogg_sync_clear(&decoder->sync_state);
+	fclose(decoder->filepointer);
+	free(decoder);}
+
 int ogg_decoder_get_channels(OggDecoder* decoder) {
 	return decoder->info.channels;}
 
 int ogg_decoder_get_rate(OggDecoder* decoder) {
 	return decoder->info.rate;}
 
-void ogg_sample_initialize(Samplei16* sample) {
+void ogg_sample_initialize_i16(Samplei16* sample) {
 	sample->samples = malloc(0);
 	sample->length = 0;}

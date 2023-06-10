@@ -15,6 +15,7 @@
 #include <engine/asset.h>
 #include <engine/room.h>
 #include <engine/camera.h>
+#include <engine/ogg.h>
 
 #define DEFAULT_FRAGMENT_SHADER (char*)"assets/shaders/engine/texture.fsh"
 #define DEFAULT_VERTEX_SHADER (char*)"assets/shaders/engine/transform.vsh"

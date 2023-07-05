@@ -5,27 +5,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <engine/ogg.h>
 #include <ogg/ogg.h>
+#include <vorbis/codec.h>
+
+#define SND_TYPE_UNKNOWN	0
+#define SND_TYPE_VORBISFILE	1
+#define SND_TYPE_SQUARE		2
+
+#define FRAME_LENGTH 4096
+
+#define SND_CALLBACK_VORBISFILE &_callback_oggvorbis_i16
 
 typedef struct {
-	float left_phase;
-	float right_phase;
-} paTestData;
-
-typedef struct {
-	PaStreamCallback* callback;
-	long seconds;
-	pthread_t id;
+	int					type;
+	int					rate;
+	void*				user_data;
+	PaStreamCallback*	callback;
+	PaStream*			stream;
 } Sound;
 
-Sound audio_play_callback_async(long secs);
-PaStream* audio_open_stream(int num_inputs, int num_outputs, double sample_rate, PaStreamCallback callback);
-void audio_close_stream(PaStream*);
-void audio_play_stream(PaStream* stream);
-void audio_stop_stream(PaStream* stream);
-void audio_play_callback();
-static int audio_callback_square(  const void *buffer_in, void *buffer_out, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags status_flags, void* user_data);
 void audio_initialize();
 void audio_terminate();
+Sound audio_create_sound(int type, int rate, void* user_data);
+PaStreamParameters audio_get_input_parameters();
+PaStreamParameters audio_get_output_parameters();
+void audio_set_input_device(int device_index);
+void audio_set_output_device(int device_index);
+char** audio_get_devices_list();
+const PaDeviceInfo* audio_get_device_info(int device_index);
+void audio_sound_play(Sound sound);
+void audio_sound_pause(Sound sound);
+
+static int _callback_oggvorbis_i16(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData);
 
 #endif

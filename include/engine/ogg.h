@@ -8,6 +8,13 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define MAX_OGG_SAMPLE_FRAMES 1024
+
+typedef struct {
+	long frames;
+	int16_t* buffer;
+} PcmRemainder;
+
 typedef struct {
 	FILE* 				filepointer;
 	ogg_stream_state 	stream_state;
@@ -18,19 +25,16 @@ typedef struct {
 	vorbis_comment 		comments;
 	vorbis_info 		info;
 	vorbis_dsp_state 	state;
-}	OggDecoder;
-
-typedef struct {
-	int length;
-	int16_t* samples;
-} Samplei16;
+	PcmRemainder		remainder;
+	int 				eos;
+} OggDecoder;
 
 OggDecoder* ogg_decoder_open(char* filepath);
+int ogg_decoder_is_vorbis(char* filepath);
 void ogg_decoder_close(OggDecoder* decoder);
-int ogg_decoder_get_pcm_i16(OggDecoder* decoder, Samplei16* sample);
+int ogg_decoder_get_pcm_i16(OggDecoder* decoder, int16_t** buffer, int frames);
 int ogg_decoder_get_channels(OggDecoder* decoder);
 int ogg_decoder_get_rate(OggDecoder* decoder);
-
-void ogg_sample_initialize_i16(Samplei16* sample);
+int ogg_decoder_get_eos(OggDecoder* decoder);
 
 #endif

@@ -9,9 +9,10 @@
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 
-#define SND_TYPE_UNKNOWN	0
-#define SND_TYPE_VORBISFILE	1
-#define SND_TYPE_SQUARE		2
+#define SND_TYPE_UNKNOWN	0x0
+#define SND_TYPE_VORBISFILE	0x1
+#define SND_TYPE_SQUARE		0x2 // To be developed
+#define SND_TYPE_CUSTOM		0xF // To be developed
 
 #define FRAME_LENGTH 4096
 
@@ -27,7 +28,7 @@ typedef struct {
 
 void audio_initialize();
 void audio_terminate();
-Sound audio_create_sound(int type, int rate, void* user_data);
+Sound audio_create_sound(int type, int rate, void* user_data); // Subject to change
 PaStreamParameters audio_get_input_parameters();
 PaStreamParameters audio_get_output_parameters();
 void audio_set_input_device(int device_index);

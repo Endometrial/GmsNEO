@@ -1,5 +1,5 @@
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef BAPHOMET_INPUT_H
+#define BAPHOMET_INPUT_H
 
 #include <stdio.h>
 #include <glad/glad.h>

@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <engine/media.h>
 #include <engine/shader.h>
 #include <engine/mesh.h>
 #include <engine/draw.h>
@@ -16,6 +15,9 @@
 #include <engine/room.h>
 #include <engine/camera.h>
 #include <engine/ogg.h>
+#include <engine/png.h>
+#include <engine/sprite.h>
+#include <engine/file.h>
 
 #define DEFAULT_FRAGMENT_SHADER (char*)"assets/shaders/engine/texture.fsh"
 #define DEFAULT_VERTEX_SHADER (char*)"assets/shaders/engine/transform.vsh"

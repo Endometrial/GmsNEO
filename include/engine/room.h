@@ -1,5 +1,5 @@
-#ifndef ROOM_H
-#define ROOM_H
+#ifndef BAPHOMET_ROOM_H
+#define BAPHOMET_ROOM_H
 
 #include <stdlib.h>
 #include <engine/object.h>

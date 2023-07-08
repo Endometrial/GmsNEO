@@ -1,5 +1,5 @@
-#ifndef OGG_H
-#define OGG_H
+#ifndef BAPHOMET_OGGDECODER_H
+#define BAPHOMET_OGGDECODER_H
 
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>

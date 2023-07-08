@@ -21,7 +21,7 @@ void step(double program_time, double delta_time) {
 	y = sin(program_time * 3.14f)/2;
 }
 void draw(double program_time, double delta_time) {
-	//draw_set_shader(shader);
+	draw_set_shader(shader);
 	draw_sprite(pineapple, x, y, 1.0f);
 }
 void cleanup() {

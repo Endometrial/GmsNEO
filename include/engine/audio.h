@@ -1,13 +1,13 @@
-#ifndef AUDIO_H
-#define AUDIO_H
+#ifndef BAPHOMET_AUDIO_H
+#define BAPHOMET_AUDIO_H
 
 #include <portaudio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <engine/ogg.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
+#include <engine/ogg.h>
 
 #define SND_TYPE_UNKNOWN	0x0
 #define SND_TYPE_VORBISFILE	0x1

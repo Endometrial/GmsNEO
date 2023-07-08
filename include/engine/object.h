@@ -1,5 +1,5 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef BAPHOMET_OBJECT_H
+#define BAPHOMET_OBJECT_H
 
 #include <dlfcn.h>
 #include <stdio.h>

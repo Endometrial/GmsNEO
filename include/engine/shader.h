@@ -1,11 +1,11 @@
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef BAPHOMET_SHADER_H
+#define BAPHOMET_SHADER_H
 
-#include <engine/media.h>
 #include <stdarg.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <cglm/mat4.h>
+#include <engine/file.h>
 
 #define VERTEX_SHADER 0
 #define FRAGMENT_SHADER 1

@@ -2,12 +2,12 @@
 <room>
 	<background>path/to/background</background>
 	<instance>
-		<object>./assets/objects/default/default.c.so</object> 
+		<object>./assets/objects/default.c.so</object> 
 		<location x="0.0" y="0.0" z="0.0" />	
 		<script>-1</script>
 	</instance>
 	<instance>
-		<object>./assets/objects/uwu/uwu.c.so</object> 
+		<object>./assets/objects/uwu.c.so</object> 
 		<location x="0.0" y="0.0" z="0.0" />
 		<script>path/to/script</script>
 	</instance>

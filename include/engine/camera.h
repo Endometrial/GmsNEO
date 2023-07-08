@@ -1,5 +1,5 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef BAPHOMET_CAMERA_H
+#define BAPHOMET_CAMERA_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

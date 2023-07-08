@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef BAPHOMET_GRAPHICS_H
+#define BAPHOMET_GRAPHICS_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

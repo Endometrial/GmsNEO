@@ -1,5 +1,5 @@
-#ifndef DRAW_H
-#define DRAW_H
+#ifndef BAPHOMET_DRAW_H
+#define BAPHOMET_DRAW_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,6 +9,7 @@
 #include <engine/camera.h>
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
+
 
 void draw_clear(float r, float g, float b, float a);
 void draw_set_mode(GLenum mode);

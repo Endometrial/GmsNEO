@@ -46,9 +46,6 @@ Sound audio_create_sound(int type, int rate, void* user_data) {
 			break;
 	}
 
-	fprintf(stderr, "Decoder ptr : %x\n", user_data);
-	fprintf(stderr,"Decoder remainder length : %i\n",((OggDecoder*)user_data)->remainder.frames);
-
 	err = Pa_OpenStream(&sound.stream, &input_params, &output_params, sound.rate, FRAME_LENGTH, paNoFlag, sound.callback, sound.user_data);
 	if (err != paNoError) {
 		fprintf(stderr, "audio_create_sound(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
@@ -58,6 +55,7 @@ Sound audio_create_sound(int type, int rate, void* user_data) {
 	return sound;
 }
 
+// Seg fault will be given on nonexistant device
 void audio_set_input_device(int device_index) {
 	const PaDeviceInfo* device_info = Pa_GetDeviceInfo(device_index);
 	input_params.suggestedLatency = device_info->defaultHighInputLatency;
@@ -65,6 +63,7 @@ void audio_set_input_device(int device_index) {
 	input_params.device = device_index;
 }
 
+// Seg fault will be given on nonexistant device
 void audio_set_output_device(int device_index) {
 	const PaDeviceInfo* device_info = Pa_GetDeviceInfo(device_index);
 	output_params.suggestedLatency = device_info->defaultHighOutputLatency;
@@ -108,9 +107,7 @@ void audio_sound_pause(Sound sound) {
 static int _callback_oggvorbis_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
 	OggDecoder* decoder = (OggDecoder*)user_data;
 	int16_t* out = (int16_t*)output_buffer;
-	fprintf(stderr, "Decoder ptr : %x\n", decoder);
-	fprintf(stderr,"Decoder remainder length : %i\n",((OggDecoder*)decoder)->remainder.frames);
-
+	
 	// Read pcm into the buffer :3
 	ogg_decoder_get_pcm_i16(decoder, &out, buffer_frames);
 	return 0;

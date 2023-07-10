@@ -29,6 +29,7 @@
 					if all else fails rely on dlfcn.h
 					additionally an initial event could be set up by the program and appended to whatever script is used however most options feel like a bandaid to a larger issue</p>
 			<li>Consider creating a gui for project management</li>
+			<li>Assure the final packet of ogg files is actually used b/c it currently isnt ;w;</li>
 			<li>Figure out how too ignore video and other non vorbis streams in ogg files</li>
 		</ul>
 	</body>

@@ -3,15 +3,17 @@
 Mesh mesh_generate_rect(float width, float height) {
 	Mesh mesh;
 	float vertices[20] = {
-		-width/2, height/2, 0.0f, 0.0f, 1.0f,
-		width/2, height/2, 0.0f, 1.0f, 1.0f,
-		width/2, -height/2, 0.0f, 1.0f, 0.0f,
+		-width/2,  height/2, 0.0f, 0.0f, 1.0f,
+		 width/2,  height/2, 0.0f, 1.0f, 1.0f,
+		 width/2, -height/2, 0.0f, 1.0f, 0.0f,
 		-width/2, -height/2, 0.0f, 0.0f, 0.0f};
-	int indices[6] = {
-		3, 0, 1,
-		1, 2, 3};
-	mesh = mesh_start(DEFAULT_VERTEX_FORMAT);
-	mesh = mesh_add_vertices(mesh, GL_STATIC_DRAW, vertices,  20, indices, 6);
+	int indices[6] = {3, 0, 1, 1, 2, 3};
+	return mesh_generate_vertices(GL_STATIC_DRAW, DEFAULT_VERTEX_FORMAT, vertices, 20, indices, 6);
+}
+
+Mesh mesh_generate_vertices(GLenum mode, int format, float* vertices, int vnum, int* indices, int inum) {
+	Mesh mesh = mesh_start(format);
+	mesh = mesh_add_vertices(mesh, mode, vertices, vnum, indices, inum);
 	mesh_finish(mesh);
 	return mesh;
 }

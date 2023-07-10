@@ -22,7 +22,7 @@ typedef struct Mesh {
 Mesh mesh_generate_rect(float width, float height);
 //Mesh mesh_generate_circle(float radius, float subdivisions;
 //Mesh mesh_generate_tri(float x1, float y1, float x2, float y2, float x3, float y3);
-Mesh mesh_generate_verticies(GLenum mode, float* vertices, size_t velements, int* indices, size_t ielements, int format);
+Mesh mesh_generate_vertices(GLenum mode, int format, float* vertices, int vnum, int* indices, int inum);
 
 int mesh_format_elements(int format);
 void mesh_format_enable(int format);

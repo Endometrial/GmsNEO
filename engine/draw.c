@@ -35,6 +35,11 @@ Shader draw_get_shader() {
 	return active_shader;
 }
 
+void draw_set_blendmode(GLenum sfactor, GLenum dfactor) {
+	glBlendFunc(sfactor, dfactor);
+	glEnable(GL_BLEND);
+}
+
 void draw_sprite(Sprite sprite, float x, float y, float scale) {
 	mat4 local_matrix;
 	Shader shader;

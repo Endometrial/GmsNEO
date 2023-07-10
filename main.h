@@ -22,6 +22,9 @@
 #define DEFAULT_FRAGMENT_SHADER (char*)"assets/shaders/engine/texture.fsh"
 #define DEFAULT_VERTEX_SHADER (char*)"assets/shaders/engine/transform.vsh"
 
+#define DEFAULT_SFACTOR_BLENDMODE GL_SRC_ALPHA
+#define DEFAULT_DFACTOR_BLENDMODE GL_ONE_MINUS_SRC_ALPHA
+
 #define GLFW_VERSION_MAJOR 3
 #define GLFW_VERSION_MINOR 3
 #define GLFW_PROFILE GLFW_OPENGL_CORE_PROFILE

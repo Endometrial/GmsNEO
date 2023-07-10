@@ -46,7 +46,7 @@ Sprite asset_load_sprite(char* filepath, GLint texture_wrap,
 	// This is pretty so im leaving it even though its useless now. fuck off ;3 <3
 	float ratio = (float)height / (float)width;
 	sprite.mesh = (ratio>1.0f) ? mesh_generate_rect(1.0f/ratio, 1.0f) : mesh_generate_rect(1.0f, 1.0f*ratio);
-	//sprite.mesh = mesh_generate_rect((float)picture.width, (float)picture.height);
+	//sprite.mesh = mesh_generate_rect(0.0f,0.0f,(float)width, (float)height, 0.0f);
 
 	// Free data plz ;w;
 	return sprite;}

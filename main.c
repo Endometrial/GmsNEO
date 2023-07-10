@@ -9,6 +9,7 @@ int main() {
 	window = window_initialize(800,600,"Tile");
 
 	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
+	draw_set_blendmode(DEFAULT_SFACTOR_BLENDMODE, DEFAULT_DFACTOR_BLENDMODE);
 
 	Room rm_default = room_load("./assets/rooms/default/default.xml");
 
@@ -20,7 +21,7 @@ int main() {
 		double delta_time = program_time - glfwGetTime();
 		program_time = glfwGetTime();
 
-		draw_clear(0.0f, 0.0f, 0.0f, 1.0f);
+		draw_clear(sin(program_time), sin(program_time+2.f), sin(program_time+4.f), 1.0f);
 
 		room_execute_event(EVENT_STEP, program_time, delta_time);
 		room_execute_event(EVENT_DRAW, program_time, delta_time);

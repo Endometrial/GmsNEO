@@ -18,10 +18,7 @@
 	<body>
 		<h2>Objectives:</h2>
 		<ul>
-			<li>Consider support for playing arbitrary audio callbacks or a set of custom callbacks </li>
-				<p>	ex audio_play_chip(long freq, int msecs, int type); 
-					with a potential note_get_freq(char* note); 
-					where note is "D" "A#"... and type is CHIP_SQUARE or similar</p>
+			<li>Impliment a basic synth for sound effects and things</li>
 			<li>Add support extended room features</li>
 			<li>Add support for additions to object scripts @ runtime (ex setting x,y,z variables for room purposes) </li>
 				<p>	perhaps arguments could be added to the create event??? like create(int x, int y, int z, ...);

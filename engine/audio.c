@@ -30,15 +30,51 @@ void audio_terminate() {
 	Pa_Terminate();
 }
 
-Sound audio_create_sound(int type, int rate, void* user_data) {
-	Sound sound;
+Sound audio_create_chip(int type, long frequency) {
+	SynthData* data;
+	PaStreamCallback* callback;
+
+	data->type = type;
+	switch(data->type) {
+		case SND_TYPE_SQUARE:
+			callback = SND_CALLBACK_SQUARE;
+			break;
+		default:
+			fprintf(stderr, "Type either does not exist or is not compatible with audio_create_chip\n");
+			fprintf(stderr, "Compatible types include: SQUARE, SINE, & SAW\n");
+			exit(-1);
+			break;
+	}
+
+	data->rate = DEFAULT_SAMPLE_RATE;
+	data->frequency = frequency;
+	return audio_open_stream(callback, data->type, data->rate, DEFAULT_FRAME_LENGTH, paNoFlag, data);
+}
+
+
+Sound audio_create_from_custom_callback(PaStreamCallback* callback, int rate, int frames, PaStreamCallbackFlags flags, void* user_data) {
+	/*Sound sound;
 	PaError err;
 	sound.user_data = user_data;
 	sound.rate = rate;
+	sound.type = SND_TYPE_CUSTOM;
+	err = Pa_OpenStream(&sound.stream, &input_params, &output_params, sound.rate, frames, flags, callback, sound.user_data);
+	if (err != paNoError) {
+		fprintf(stderr, "audio_create_from_callback(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
+	}*/
+	return audio_open_stream(callback, SND_TYPE_CUSTOM, rate, frames, flags, user_data);
+}
 
+Sound audio_create_from_decoder(int type, int rate, void* user_data) {
+	/*Sound sound;
+	PaError err;
+	sound.user_data = user_data;
+	sound.rate = rate;*/
+
+	PaStreamCallback* callback;
 	switch(type) {
 		case SND_TYPE_VORBISFILE:
-			sound.callback = SND_CALLBACK_VORBISFILE;
+			callback = SND_CALLBACK_VORBISFILE;
 			break;
 		default:
 			fprintf(stderr, "audio_create_sound(): Type not found!\n");
@@ -46,12 +82,28 @@ Sound audio_create_sound(int type, int rate, void* user_data) {
 			break;
 	}
 
+	return audio_open_stream(callback, type, rate, DEFAULT_FRAME_LENGTH, paNoFlag, user_data);
+
+	/*
 	err = Pa_OpenStream(&sound.stream, &input_params, &output_params, sound.rate, FRAME_LENGTH, paNoFlag, sound.callback, sound.user_data);
 	if (err != paNoError) {
 		fprintf(stderr, "audio_create_sound(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
 		exit(-1);
 	}
 
+	return sound;*/
+}
+
+Sound audio_open_stream(PaStreamCallback* callback, int type, int rate, int frames, PaStreamCallbackFlags flags, void* user_data) {
+	Sound sound;
+	PaError err;
+	sound.user_data = user_data;
+	sound.rate = rate;
+	sound.type = type;
+	err = Pa_OpenStream(&sound.stream, &input_params, &output_params, sound.rate, frames, flags, callback, sound.user_data);
+	if (err != paNoError) {
+		fprintf(stderr, "audio_create_callback(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
+	}
 	return sound;
 }
 
@@ -110,5 +162,20 @@ static int _callback_oggvorbis_i16(const void *input_buffer, void *output_buffer
 	
 	// Read pcm into the buffer :3
 	ogg_decoder_get_pcm_i16(decoder, &out, buffer_frames);
+	return 0;
+}
+
+static int _callback_chip_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
+	SynthData* data = (SynthData*)data;
+	int16_t* out = (int16_t*)output_buffer;
+	
+	switch(data->type) {
+		case SND_TYPE_SQUARE:
+			// Code for synth
+			break;
+		default:
+			break;
+	}
+
 	return 0;
 }

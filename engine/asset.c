@@ -82,7 +82,7 @@ Sound asset_load_sound(char* filepath) {
 	switch(filetype) {
 		case SND_TYPE_VORBISFILE:
 			OggDecoder* decoder = ogg_decoder_open(filepath);
-			sound = audio_create_sound(filetype, ogg_decoder_get_rate(decoder), (void*)decoder);
+			sound = audio_create_from_decoder(filetype, ogg_decoder_get_rate(decoder), (void*)decoder);
 			break;
 		default:
 			// Report that no filetype could be matched & exit

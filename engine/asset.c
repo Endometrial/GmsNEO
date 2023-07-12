@@ -1,23 +1,24 @@
 #include <engine/asset.h>
 
-Sprite asset_load_sprite(char* filepath, GLint texture_wrap, 
+Texture asset_load_texture(char* filepath, GLint texture_wrap, 
 	GLint texture_filter) {
 	int format, height, width;
 	unsigned char* data;
-	Sprite sprite;
+	Texture texture;
 
 	// Check the file type
 	//sprite.type = (png_decoder_is_png(filepath)) ? IMG_TYPE_PNG : IMG_TYPE_UNKNOWN;
-	sprite.type = IMG_TYPE_PNG;
+	texture.type = IMG_TYPE_PNG;
 
 	// Generate a texture
-	glGenTextures(1, &sprite.texture);
-	glBindTexture(GL_TEXTURE_2D, sprite.texture);
+	glGenTextures(1, &texture.texture);
+	glBindTexture(GL_TEXTURE_2D, texture.texture);
 
 	// Switch over the filetype to extract data
-	switch(sprite.type) {
+	switch(texture.type) {
 		case IMG_TYPE_PNG:
 			PngDecoder* decoder = png_decoder_open(filepath);
+			texture.user_data = decoder;
 			data = png_decoder_get_data(decoder);
 			width = png_decoder_get_width(decoder);
 			height = png_decoder_get_height(decoder);
@@ -44,24 +45,24 @@ Sprite asset_load_sprite(char* filepath, GLint texture_wrap,
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texture_filter); // for scaling up
 
 	// This is pretty so im leaving it even though its useless now. fuck off ;3 <3
-	float ratio = (float)height / (float)width;
-	sprite.mesh = (ratio>1.0f) ? mesh_generate_rect(1.0f/ratio, 1.0f) : mesh_generate_rect(1.0f, 1.0f*ratio);
+	//float ratio = (float)height / (float)width;
+	//sprite.mesh = (ratio>1.0f) ? mesh_generate_rect(1.0f/ratio, 1.0f) : mesh_generate_rect(1.0f, 1.0f*ratio);
 	//sprite.mesh = mesh_generate_rect(0.0f,0.0f,(float)width, (float)height, 0.0f);
 
 	// Free data plz ;w;
-	return sprite;}
+	return texture;}
 
-void asset_unload_sprite(Sprite* sprite) {
+void asset_unload_texture(Texture* texture) {
 
 	// Delete textures
-	glDeleteTextures(1, &sprite->texture);
+	glDeleteTextures(1, &texture->texture);
 	
 	// Delete the mesh
 
 	// Delete whatever is contained within user data
-	switch(sprite->type) {
+	switch(texture->type) {
 		case IMG_TYPE_PNG:
-			png_decoder_close(sprite->user_data);
+			png_decoder_close(texture->user_data);
 			break;
 		default:
 			fprintf(stderr, "asset_unload_sprite(): Unknown filetype!\n");

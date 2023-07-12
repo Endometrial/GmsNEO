@@ -6,7 +6,7 @@ int main() {
 	GLFWwindow* window;
 
 	audio_initialize();
-	window = window_initialize(800,600,"Tile");
+	window = window_initialize(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
 	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
 	draw_set_blendmode(DEFAULT_SFACTOR_BLENDMODE, DEFAULT_DFACTOR_BLENDMODE);

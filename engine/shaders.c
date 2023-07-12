@@ -61,26 +61,26 @@ unsigned int shader_build_type(char* filepath, int type) {
 	return shader;
 }
 
-void shader_set_uniform_vec4(unsigned int program, char* name, float x, float y, float z, float w) {
+void shader_set_uniform_vec4(Shader shader, char* name, float x, float y, float z, float w) {
 	int location;
-	location = glGetUniformLocation(program, name);
+	location = glGetUniformLocation(shader.program, name);
 	glUniform4f(location, x, y, z, w);
 }
 
-void shader_set_uniform_float(unsigned int program, char* name, float val) {
+void shader_set_uniform_float(Shader shader, char* name, float val) {
 	int location;
-	location = glGetUniformLocation(program, name);
+	location = glGetUniformLocation(shader.program, name);
 	glUniform1f(location, val);
 }
 
-void shader_set_uniform_int(unsigned int program, char* name, int val) {
+void shader_set_uniform_int(Shader shader, char* name, int val) {
 	int location;
-	location = glGetUniformLocation(program, name);
+	location = glGetUniformLocation(shader.program, name);
 	glUniform1i(location, val);
 }
 
-void shader_set_uniform_mat4(unsigned int program, char* name, mat4 matrix) {
+void shader_set_uniform_mat4(Shader shader, char* name, mat4 matrix) {
 	int location;
-	location = glGetUniformLocation(program, name);
+	location = glGetUniformLocation(shader.program, name);
 	glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 }

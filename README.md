@@ -18,6 +18,7 @@
 	<body>
 		<h2>Objectives:</h2>
 		<ul>
+			<li>Make everything less of a mess</li>
 			<li>Impliment a basic synth for sound effects and things</li>
 			<li>Add support extended room features</li>
 			<li>Add support for additions to object scripts @ runtime (ex setting x,y,z variables for room purposes) </li>

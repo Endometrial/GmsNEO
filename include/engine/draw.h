@@ -13,13 +13,13 @@
 
 void draw_clear(float r, float g, float b, float a);
 void draw_set_mode(GLenum mode);
-void draw_indexed_mesh(Mesh mesh);
-void draw_mesh(Mesh mesh);
-void draw_set_texture(GLuint texture);
-void draw_set_sehader(Shader shader);
+//void draw_indexed_mesh(Mesh mesh);
+void draw_mesh(Mesh mesh, float x, float y, float scale);
+void draw_set_texture(Texture texture);
+void draw_set_shader(Shader shader);
 void draw_set_blendmode(GLenum sfactor, GLenum dfactor);
 Shader draw_get_shader();
 
-void draw_sprite(Sprite sprite, float x, float y, float scale);
+//void draw_sprite(Sprite sprite, float x, float y, float scale);
 
 #endif

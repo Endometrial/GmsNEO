@@ -1,10 +1,10 @@
-# GmsNEO
+# Baphomet
 
 # Version
 VERSION = 0.0
 
 # Project Name
-NAME = executable
+NAME = baphomet
 
 # Includes and Libs
 INCS = -Iinclude -I/usr/local/include

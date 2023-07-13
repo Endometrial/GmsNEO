@@ -156,7 +156,7 @@ void audio_sound_pause(Sound sound) {
 	(err != paNoError) ? fprintf(stderr, "audio_sound_pause(): %s\n", Pa_GetErrorText(err)) : 1;
 }
 
-static int _callback_oggvorbis_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
+static int _audio_callback_oggvorbis_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
 	OggDecoder* decoder = (OggDecoder*)user_data;
 	int16_t* out = (int16_t*)output_buffer;
 	
@@ -165,7 +165,7 @@ static int _callback_oggvorbis_i16(const void *input_buffer, void *output_buffer
 	return 0;
 }
 
-static int _callback_chip_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
+static int _audio_callback_chip_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
 	SynthData* data = (SynthData*)data;
 	int16_t* out = (int16_t*)output_buffer;
 	

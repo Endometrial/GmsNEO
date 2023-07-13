@@ -45,6 +45,6 @@ GLFWwindow* window_get_active_pointer() {
 	return window;
 }
 
-void window_framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void _framebuffer_callback_direct_scale(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }

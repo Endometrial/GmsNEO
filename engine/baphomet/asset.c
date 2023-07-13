@@ -103,7 +103,7 @@ void asset_unload_sound(Sound* sound) {
 		case SND_TYPE_VORBISFILE:
 			ogg_decoder_close(sound->user_data);
 		default:
-			fprintf(stderr, "asset_unload_sound(): sound type does not exist! why did you do this... well I hope youre doing something interesting. best of luck <3");
+			fprintf(stderr, "asset_unload_sound(): sound type does not exist!\n");
 			break;
 	}
 
@@ -144,7 +144,7 @@ Room asset_load_room(char* filepath) {
 									room.instance_list = realloc(room.instance_list, room.num_instances*sizeof(Object));
 
 									// Load an object
-									room.instance_list[room.num_instances-1] = object_load(xml_node_get_content(instance_node));
+									room.instance_list[room.num_instances-1] = asset_load_object(xml_node_get_content(instance_node));
 									break;
 								case 'l':
 									fprintf(stderr, "asset_load_room(): Object Locations are not yet supported\n");
@@ -174,3 +174,24 @@ Room asset_load_room(char* filepath) {
 
 void asset_unload_room(Room* room) {
 	free(room->instance_list);}
+
+Object asset_load_object(char* filepath) {
+	Object object;
+
+	object.handle = dlopen(filepath, RTLD_NOW);
+	(object.handle == NULL) ? fprintf(stderr, "asset_load_object(): %s\n", dlerror()) : 1;
+
+	object.create = dlsym(object.handle, "create");
+	object.step = dlsym(object.handle, "step");
+	object.draw = dlsym(object.handle, "draw");
+	object.destroy = dlsym(object.handle, "destroy");
+	object.cleanup = dlsym(object.handle, "cleanup");
+
+	return object;
+}
+
+void asset_unload_object(Object* object) {
+	object->cleanup();
+	object->destroy();
+	(dlclose(object->handle)) ? fprintf(stderr, "asset_unload_object(): %s\n", dlerror()) : 1;
+}

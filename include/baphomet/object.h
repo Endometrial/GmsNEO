@@ -20,6 +20,4 @@ typedef struct {
 	void (*cleanup)();
 } Object;
 
-Object object_load(char* library_filepath);
-
 #endif

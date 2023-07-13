@@ -23,5 +23,7 @@ Sound asset_load_sound(char* filepath);
 void asset_unload_sound(Sound* sound);
 Room asset_load_room(char* filepath);
 void asset_unload_room(Room* room);
+Object asset_load_object(char* filepath);
+void asset_unload_object(Object* object);
 
 #endif

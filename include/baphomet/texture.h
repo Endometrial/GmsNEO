@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <engine/mesh.h>
-#include <engine/png.h>
+
+#include <decoder/png.h>
+
+#include <baphomet/mesh.h>
 
 #define DEFAULT_TEXTURE_WRAP 0x0
 #define DEFAULT_TEXTURE_FILTER 0x0

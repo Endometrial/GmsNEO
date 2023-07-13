@@ -1,5 +1,5 @@
 
-#include <engine/object.h>
+#include <baphomet/object.h>
 
 Object object_load(char* library_filepath) {
 	Object object;

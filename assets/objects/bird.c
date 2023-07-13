@@ -1,12 +1,10 @@
 #include <stdio.h>
-#include <engine/asset.h>
-#include <engine/shader.h>
-#include <engine/draw.h>
-#include <engine/input.h>
-#include <engine/camera.h>
-#include <engine/room.h>
-#include <engine/ogg.h>
-#include <engine/ogg.h>
+#include <baphomet/asset.h>
+#include <baphomet/shader.h>
+#include <baphomet/draw.h>
+#include <baphomet/input.h>
+#include <baphomet/camera.h>
+#include <baphomet/room.h>
 
 static char* texfp_bird = "assets/images/baphomet.png";
 static char* sndfp_jump = "assets/audio/the-legendary-hero.ogg";

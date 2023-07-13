@@ -3,8 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <png.h>
 #include <pngconf.h>
 #include <pnglibconf.h>

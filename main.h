@@ -4,20 +4,23 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <engine/shader.h>
-#include <engine/mesh.h>
-#include <engine/draw.h>
-#include <engine/input.h>
-#include <engine/object.h>
-#include <engine/graphics.h>
-#include <engine/audio.h>
-#include <engine/asset.h>
-#include <engine/room.h>
-#include <engine/camera.h>
-#include <engine/ogg.h>
-#include <engine/png.h>
-#include <engine/texture.h>./
-#include <engine/file.h>
+#include <decoder/ogg.h>
+#include <decoder/png.h>
+#include <decoder/xml.h>
+
+#include <baphomet/shader.h>
+#include <baphomet/mesh.h>
+#include <baphomet/draw.h>
+#include <baphomet/input.h>
+#include <baphomet/object.h>
+#include <baphomet/window.h>
+#include <baphomet/audio.h>
+#include <baphomet/asset.h>
+#include <baphomet/room.h>
+#include <baphomet/camera.h>
+#include <baphomet/texture.h>
+#include <baphomet/file.h>
+
 
 #define DEFAULT_FRAGMENT_SHADER (char*)"assets/shaders/texture.fsh"
 #define DEFAULT_VERTEX_SHADER (char*)"assets/shaders/transform.vsh"

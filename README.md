@@ -29,6 +29,7 @@
 			<li>Consider creating a gui for project management</li>
 			<li>Assure the final packet of ogg files is actually used b/c it currently isnt ;w;</li>
 			<li>Figure out how too ignore video and other non vorbis streams in ogg files</li>
+			surface_suspend()
 		</ul>
 	</body>
 </html>

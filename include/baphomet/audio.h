@@ -7,7 +7,8 @@
 #include <pthread.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
-#include <engine/ogg.h>
+
+#include <decoder/ogg.h>
 
 #define SND_TYPE_UNKNOWN	0x0
 #define SND_TYPE_VORBISFILE	0x1

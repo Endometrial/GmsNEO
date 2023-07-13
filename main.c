@@ -11,7 +11,7 @@ int main() {
 	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
 	draw_set_blendmode(DEFAULT_SFACTOR_BLENDMODE, DEFAULT_DFACTOR_BLENDMODE);
 
-	Room rm_default = room_load("./assets/rooms/default/default.xml");
+	Room rm_default = asset_load_room("./assets/rooms/default/default.xml");
 
 	room_set(rm_default);
 	room_execute_event(EVENT_CREATE);

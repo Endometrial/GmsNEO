@@ -1,4 +1,4 @@
-#include <engine/mesh.h>
+#include <baphomet/mesh.h>
 
 Mesh mesh_generate_rect(float width, float height) {
 	Mesh mesh;

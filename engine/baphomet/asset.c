@@ -1,4 +1,4 @@
-#include <engine/asset.h>
+#include <baphomet/asset.h>
 
 Texture asset_load_texture(char* filepath, GLint texture_wrap, 
 	GLint texture_filter) {
@@ -67,8 +67,7 @@ void asset_unload_texture(Texture* texture) {
 		default:
 			fprintf(stderr, "asset_unload_sprite(): Unknown filetype!\n");
 			break;
-	}
-}
+	}}
 
 Sound asset_load_sound(char* filepath) {
 	PaStreamParameters in, out;
@@ -113,3 +112,65 @@ void asset_unload_sound(Sound* sound) {
 		fprintf(stderr, "asset_unload_sound(): Unable to close stream -> %s\n", Pa_GetErrorText(err));
 		exit(-1);
 	}}
+
+Room asset_load_room(char* filepath) {
+	Room room;
+	XmlDecoder* decoder; // There is only one kind of room
+	xmlNode* current_node;
+
+	// Allocate space for the room instance list
+	room.instance_list = malloc(0);
+	room.num_instances = 0;
+
+	// Load the xml
+	decoder = xml_decoder_open(filepath);
+
+	// Loading <background> <instance>
+	current_node = xml_node_get_children(xml_decoder_get_root_node(decoder));
+	while (current_node != NULL) {
+		if (xml_node_is_element_node(current_node)) {
+			switch(xml_node_get_name(current_node)[0]) {
+				case 'b': // <background>
+					fprintf(stderr, "asset_load_room(): Backgrounds are not yet supported\n");
+					break;
+				case 'i': // <instance>
+					xmlNode* instance_node = xml_node_get_children(current_node);
+					for (1; instance_node!=NULL; instance_node=instance_node->next) {
+						if (xml_node_is_element_node(instance_node)) {
+							switch(xml_node_get_name(instance_node)[0]) {
+								case 'o':
+									// Reallocate & update room data
+									room.num_instances++;
+									room.instance_list = realloc(room.instance_list, room.num_instances*sizeof(Object));
+
+									// Load an object
+									room.instance_list[room.num_instances-1] = object_load(xml_node_get_content(instance_node));
+									break;
+								case 'l':
+									fprintf(stderr, "asset_load_room(): Object Locations are not yet supported\n");
+									break;
+								case 's':
+									fprintf(stderr, "asset_load_room(): Scripts are not yet supported\n");
+									break;
+								default:
+									fprintf(stderr, "asset_load_room(): XML contains illegal node [%s]\n", xml_node_get_name(instance_node));
+									break;
+							}
+						}
+					}
+
+					break;
+				default:
+					fprintf(stderr, "asset_load_room(): XML contains illegal node [%s]\n", xml_node_get_name(current_node));
+					break;
+			}
+		}
+		current_node = current_node->next; // Advance the node
+	}
+
+	// Free data and return the room :)
+	xml_decoder_close(decoder);
+	return room;}
+
+void asset_unload_room(Room* room) {
+	free(room->instance_list);}

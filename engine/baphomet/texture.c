@@ -1,4 +1,4 @@
-#include <engine/texture.h>
+#include <baphomet/texture.h>
 /*
 int texture_get_bit_depth(Texture* texture) {
 	void* user_data = texture->user_data;

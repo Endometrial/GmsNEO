@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <engine/graphics.h>
 #include <ctype.h>
+
+#include <baphomet/window.h>
 
 #define VK_UNKNOWN -1
 #define VK_SPACE 32

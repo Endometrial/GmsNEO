@@ -1,5 +1,4 @@
-
-#include <engine/input.h>
+#include <baphomet/input.h>
 
 int key_press(int key) {
 	GLFWwindow* window = window_get_active_pointer();

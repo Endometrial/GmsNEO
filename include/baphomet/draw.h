@@ -3,12 +3,13 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <engine/mesh.h>
-#include <engine/asset.h>
-#include <engine/shader.h>
-#include <engine/camera.h>
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
+
+#include <baphomet/mesh.h>
+#include <baphomet/asset.h>
+#include <baphomet/shader.h>
+#include <baphomet/camera.h>
 
 
 void draw_clear(float r, float g, float b, float a);

@@ -1,5 +1,5 @@
-#ifndef BAPHOMET_GRAPHICS_H
-#define BAPHOMET_GRAPHICS_H
+#ifndef BAPHOMET_WINDOW_H
+#define BAPHOMET_WINDOW_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

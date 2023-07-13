@@ -1,12 +1,13 @@
 #ifndef BAPHOMET_OGGDECODER_H
 #define BAPHOMET_OGGDECODER_H
 
-#include <ogg/ogg.h>
-#include <vorbis/codec.h>
-#include <portaudio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include <ogg/ogg.h>
+#include <vorbis/codec.h>
+#include <portaudio.h>
 
 #define MAX_OGG_SAMPLE_FRAMES 1024
 

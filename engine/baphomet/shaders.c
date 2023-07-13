@@ -1,5 +1,4 @@
-
-#include <engine/shader.h>
+#include <baphomet/shader.h>
 
 Shader shader_create(char* vsh_filepath, char* fsh_filepath) {
 	char infoLog[512];

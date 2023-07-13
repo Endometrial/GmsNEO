@@ -20,7 +20,7 @@ GLFWwindow* window_initialize(int width, int height, const char* title) {
 	}
 
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, window_framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(window, DEFAULT_FBUF_CALLBACK);
 
 	// TODO: what in the goddamn fuck is this notation
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {

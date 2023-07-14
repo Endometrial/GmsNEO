@@ -1,8 +1,6 @@
 #ifndef BAPHOMET_CAMERA_H
 #define BAPHOMET_CAMERA_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
 #include <cglm/vec3.h>

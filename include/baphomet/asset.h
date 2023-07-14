@@ -1,18 +1,10 @@
 #ifndef BAPHOMET_ASSET_H
 #define BAPHOMET_ASSET_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <png.h>
-
-#include <decoder/png.h>
-#include <decoder/ogg.h>
-#include <decoder/xml.h>
-
-#include <baphomet/mesh.h>
 #include <baphomet/audio.h>
 #include <baphomet/texture.h>
 #include <baphomet/room.h>
+#include <baphomet/object.h>
 
 static char* supported_image_filetypes[] = {"png\0", NULL};
 static char* supported_audio_filetypes[] = {"ogg(vorbis)\0", NULL};

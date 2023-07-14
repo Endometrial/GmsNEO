@@ -3,12 +3,10 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <cglm/cglm.h>
-#include <cglm/mat4.h>
 
-#include <baphomet/mesh.h>
-#include <baphomet/asset.h>
 #include <baphomet/shader.h>
+#include <baphomet/mesh.h>
+#include <baphomet/texture.h>
 #include <baphomet/camera.h>
 
 

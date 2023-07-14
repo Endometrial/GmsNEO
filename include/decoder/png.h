@@ -3,13 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <png.h>
-#include <pngconf.h>
-#include <pnglibconf.h>
+
 
 #define PNG_8BYTE_HEADER 0x89504E470D0A1A0A
 

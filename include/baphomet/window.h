@@ -1,10 +1,10 @@
 #ifndef BAPHOMET_WINDOW_H
 #define BAPHOMET_WINDOW_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #define FBUF_CALLBACK_DIRECT_SCALE &_framebuffer_callback_direct_scale
 

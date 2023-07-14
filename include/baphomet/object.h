@@ -1,9 +1,9 @@
 #ifndef BAPHOMET_OBJECT_H
 #define BAPHOMET_OBJECT_H
 
-#include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 
 #define EVENT_CREATE 0
 #define EVENT_STEP 1

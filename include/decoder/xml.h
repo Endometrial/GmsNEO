@@ -1,6 +1,7 @@
 #ifndef BAPHOMET_XML_H
 #define BAPHOMET_XML_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <libxml/parser.h>
 

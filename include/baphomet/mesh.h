@@ -1,9 +1,9 @@
 #ifndef BAPHOMET_MESH_H
 #define BAPHOMET_MESH_H
 
+#include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stdio.h>
 
 // 								  		xyzuvrgba
 #define VERTEX_FORMAT_UV 	0x3 << 4 // 000110000

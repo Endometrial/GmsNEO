@@ -1,9 +1,7 @@
 #ifndef BAPHOMET_ROOM_H
 #define BAPHOMET_ROOM_H
 
-#include <stdlib.h>
-#include <libxml/parser.h>
-
+#include <decoder/xml.h>
 #include <baphomet/object.h>
 
 typedef struct {

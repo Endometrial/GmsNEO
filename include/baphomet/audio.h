@@ -2,11 +2,6 @@
 #define BAPHOMET_AUDIO_H
 
 #include <portaudio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <ogg/ogg.h>
-#include <vorbis/codec.h>
 
 #include <decoder/ogg.h>
 

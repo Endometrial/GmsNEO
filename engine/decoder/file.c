@@ -51,9 +51,9 @@ char** file_get_directory_files(char* filepath) {
 	struct dirent* current_directory;
 	DIR* dptr;
 
-	// Allocate space for the directory list
-	directory_list = malloc(0);
-	chars = 0;
+	// Allocate space for the directory list (with extra space for the postpended NULL)
+	directory_list = malloc(sizeof(char*));
+	chars = sizeof(char*) / sizeof(char);
 
 	// Recurse through the directory into directory_list
 	_file_get_directory_files_recurse(filepath, &directory_list, &chars);
@@ -63,14 +63,19 @@ char** file_get_directory_files(char* filepath) {
 	for (int i=0; i==chars; i++) {
 		if ((*directory_list)[i] == '\0') {
 			directory_list[m] = (*directory_list) + chars+1; // The char after \0
+			m++;
 		}
 	}
+	directory_list[m+1] = (char*)NULL;
 
 	return directory_list;
 }
 void _file_get_directory_files_recurse(char* filepath, char*** directory_list, long int* chars) {
 	struct dirent* current_directory;
+	char* directory_path;
 	DIR* dptr;
+
+	//fprintf(stderr, "%s\n", filepath);
 
 	dptr = opendir(filepath);
 	if (dptr == NULL) {
@@ -81,14 +86,25 @@ void _file_get_directory_files_recurse(char* filepath, char*** directory_list, l
 	while (current_directory = readdir(dptr)) {
 		switch(current_directory->d_type) {
 			case DT_DIR:
-				_file_get_directory_files_recurse(current_directory->d_name, directory_list, chars);
+				// Eliminate . & .. as they are useless, annoying, and actively harmful 
+				if (!strcmp(current_directory->d_name, (char*)".\0") || !strcmp(current_directory->d_name, (char*)"..\0")) {
+					continue;}
+
+				// Allocate space for a new directory path and then use it to recurse
+				directory_path = malloc((strlen(filepath)+strlen(current_directory->d_name)+1) * sizeof(char));
+				strcpy(directory_path, filepath);
+				strcat(directory_path, "/");
+				strcat(directory_path,current_directory->d_name);
+				_file_get_directory_files_recurse(directory_path, directory_list, chars);
+				free(directory_path);
 				break;
 			case DT_REG:
+				fprintf(stderr, "%s\n", current_directory->d_name); // Fix please ;w;
 				// Allocate more space for the list and copy in the string :3
-				int len = strlen(current_directory->d_name);
+				/*int len = strlen(current_directory->d_name);
 				(*directory_list) = realloc(directory_list, (*chars + len)*sizeof(char));
 				strcpy(current_directory->d_name, (**directory_list) + (*chars)*sizeof(char)); // look at
-				(*chars) += len;
+				(*chars) += len;*/
 				break;
 		}
 	}

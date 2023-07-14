@@ -5,6 +5,7 @@
 #include <baphomet/input.h>
 #include <baphomet/camera.h>
 #include <baphomet/room.h>
+#include <decoder/file.h>
 
 static int floor_height = 8.f;
 static int floor_width = 80.f;
@@ -35,6 +36,12 @@ void create() {
 
 	shd_default = draw_get_shader();
 	shd_loop = shader_create(vshfp_loop, fshfp_loop);
+
+	char** list = file_get_directory_files("assets");
+	for (int i=0; (list[i]!=NULL); i++) {
+		fprintf(stderr, "->%s\n", list[i]);
+	}
+
 }
 
 void step(double program_time, double delta_time) {}

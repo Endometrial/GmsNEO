@@ -25,12 +25,14 @@ int main() {
 
 		room_execute_event(EVENT_STEP, program_time, delta_time);
 		room_execute_event(EVENT_DRAW, program_time, delta_time);
-
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 	room_execute_event(EVENT_CLEANUP);
+	room_execute_event(EVENT_DESTROY);
+
+	asset_unload_room(room_get());
 
 	window_terminate();
 	audio_terminate();

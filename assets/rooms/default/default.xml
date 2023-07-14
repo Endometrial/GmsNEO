@@ -3,17 +3,17 @@
 	<background>path/to/background</background>
 	<instance>
 		<object>./assets/objects/game.c.so</object>
-		<location x="0.0" y="0.0" z="0.0" />	
+		<location x="0.0" y="0.0" z="0.0"/>	
 		<script>-1</script>
 	</instance>
 	<instance>
 		<object>./assets/objects/background.c.so</object>
-		<location x="0.0" y="0.0" z="0.0" />	
+		<location x="0.0" y="0.0" z="0.0"/>	
 		<script>-1</script>
 	</instance>
 	<instance>
 		<object>./assets/objects/bird.c.so</object>
-		<location x="0.0" y="0.0" z="0.0" />	
+		<location x="0.0" y="0.0" z="0.0"/>	
 		<script>-1</script>
 	</instance>
 </room>

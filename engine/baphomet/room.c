@@ -2,8 +2,8 @@
 
 Room current_room;
 
-Room room_get() {
-	return current_room;
+Room* room_get() {
+	return &current_room;
 }
 
 void room_set(Room room) {

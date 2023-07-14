@@ -39,7 +39,7 @@ unsigned int shader_build_type(char* filepath, int type) {
 	char infoLog[512];
 	
 	// Load the shader into a buffer
-	shaderSource = file_load(filepath);
+	shaderSource = file_get_string(filepath);
 
 	// Create and compile the shader
 	shader = glCreateShader(type);

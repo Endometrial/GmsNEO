@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 #include <cglm/mat4.h>
 
-#include <baphomet/file.h>
+#include <decoder/file.h>
 
 #define VERTEX_SHADER 0
 #define FRAGMENT_SHADER 1

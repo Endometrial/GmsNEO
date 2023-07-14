@@ -7,6 +7,7 @@
 #include <decoder/ogg.h>
 #include <decoder/png.h>
 #include <decoder/xml.h>
+#include <decoder/file.h>
 
 #include <baphomet/shader.h>
 #include <baphomet/mesh.h>
@@ -19,7 +20,6 @@
 #include <baphomet/room.h>
 #include <baphomet/camera.h>
 #include <baphomet/texture.h>
-#include <baphomet/file.h>
 
 
 #define DEFAULT_FRAGMENT_SHADER (char*)"assets/shaders/texture.fsh"

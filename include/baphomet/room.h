@@ -9,7 +9,7 @@ typedef struct {
 	int num_instances;
 } Room;
 
-Room room_get();
+Room* room_get();
 void room_set();
 void room_execute_event(int event, ...);
 

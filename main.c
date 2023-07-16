@@ -7,7 +7,6 @@ int main() {
 	Window* window;
 
 	// Parse project xml
-	fprintf(stderr, "1\n");
 	project_open_xml(project_filepath);
 
 	// Get project data NOTE: If defined as char* win_name, room_fp etc.. not enough data is statically allocated

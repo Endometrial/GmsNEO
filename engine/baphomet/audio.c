@@ -144,7 +144,7 @@ PaStreamParameters audio_get_input_parameters() {
 PaStreamParameters audio_get_output_parameters() {
 	return output_params;}
 
-void audio_sound_play(Sound sound) {
+void audio_sound_play(Sound sound, int loop) {
 	PaError err;
 	err = Pa_StartStream(sound.stream);
 	(err != paNoError) ? fprintf(stderr, "audio_sound_play(): %s\n", Pa_GetErrorText(err)) : 1;

@@ -27,6 +27,7 @@
 			<li>Assure the final packet of ogg files is actually used b/c it currently isnt ;w;</li>
 			<li>Add surfaces (consider a surface_suspend() function)</li>
 			<li>Add text rendering and parsing</li>
+			<li>Add looping for audio files</li>
 		</ul>
 	</body>
 </html>

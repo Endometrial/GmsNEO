@@ -50,7 +50,7 @@ void audio_set_input_device(int device_index);
 void audio_set_output_device(int device_index);
 char** audio_get_devices_list();
 const PaDeviceInfo* audio_get_device_info(int device_index);
-void audio_sound_play(Sound sound);
+void audio_sound_play(Sound sound, int loop);
 void audio_sound_pause(Sound sound);
 
 static int _audio_callback_oggvorbis_i16(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData);

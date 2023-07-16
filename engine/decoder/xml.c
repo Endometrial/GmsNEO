@@ -55,7 +55,7 @@ char* xml_node_get_content(xmlNode* node) {
 }
 
 char* xml_node_get_name(xmlNode* node) {
-	return node->name;
+	return (char*)node->name;
 }
 
 int xml_node_is_element_node(xmlNode* node) {
@@ -74,7 +74,7 @@ char* xml_node_get_attribute_name(XmlNode* node, int index) {
 	xmlAttr* current_attribute = node->properties;
 	for (int i=0; i<xml_node_get_num_attributes(node); i++) {
 		if (i == index) {
-			return current_attribute->name;}
+			return (char*)current_attribute->name;}
 		current_attribute = current_attribute->next;
 	}
 	return (char*)NULL;

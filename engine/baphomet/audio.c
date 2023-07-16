@@ -129,7 +129,7 @@ char** audio_get_devices_list() {
 	for (int i=0; i<devices; i++) {
 		const PaDeviceInfo* device_info;
 		device_info = Pa_GetDeviceInfo(i);
-		device_list[i] = device_info->name;
+		device_list[i] = (char*)device_info->name;
 	}
 	return device_list;
 }

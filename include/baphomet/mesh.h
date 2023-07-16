@@ -25,7 +25,7 @@ Mesh mesh_generate_rect(float width, float height);
 Mesh mesh_generate_vertices(GLenum mode, int format, float* vertices, int vnum, int* indices, int inum);
 
 int mesh_format_elements(int format);
-void mesh_format_enable(int format);
+void mesh_set_attribute_array(int format);
 
 Mesh mesh_start(int format);
 Mesh mesh_add_vertices(Mesh mesh, GLenum mode, float* vertices, size_t velements, int* indices, size_t ielements);

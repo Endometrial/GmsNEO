@@ -43,7 +43,7 @@ unsigned int shader_build_type(char* filepath, int type) {
 
 	// Create and compile the shader
 	shader = glCreateShader(type);
-	glShaderSource(shader, 1, &shaderSource, NULL);
+	glShaderSource(shader, 1, (const char**)&shaderSource, NULL);
 	glCompileShader(shader);
 
 	// Free the buffer
@@ -81,5 +81,5 @@ void shader_set_uniform_int(Shader shader, char* name, int val) {
 void shader_set_uniform_mat4(Shader shader, char* name, mat4 matrix) {
 	int location;
 	location = glGetUniformLocation(shader.program, name);
-	glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
+	glUniformMatrix4fv(location, 1, GL_FALSE, (const float*)matrix);
 }

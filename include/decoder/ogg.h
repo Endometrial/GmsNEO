@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h> // pow() is used
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 

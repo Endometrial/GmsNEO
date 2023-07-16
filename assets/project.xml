@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 	<name>Example</name>
-	<room>assets/rooms/default/default.xml</room> <!-- will be made as just default using the below directories -->
+	<room>assets/rooms/default.xml</room> <!-- will be made as just default using the below directories -->
 	<directory>
 		<object>objects</object>
 		<room>rooms</room>

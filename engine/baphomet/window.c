@@ -1,8 +1,8 @@
 #include <baphomet/window.h>
 
-GLFWwindow* window;
+Window* window;
 
-GLFWwindow* window_initialize(int width, int height, const char* title) {
+Window* window_initialize(int width, int height, const char* title) {
 	if (!glfwInit()) {
 		printf("Failed to initialize glfw :(");
 	}
@@ -27,7 +27,6 @@ GLFWwindow* window_initialize(int width, int height, const char* title) {
 		printf("Failed to initialize glad :(");
 	}
 
-
 	glViewport(0,0,width,height);
 
 	return window;
@@ -37,7 +36,7 @@ void window_terminate() {
 	glfwTerminate();
 }
 
-GLFWwindow* window_get_active_pointer() {
+Window* window_get_active() {
 	if (!window) {
 		printf("No active window found?");
 		exit(-1);

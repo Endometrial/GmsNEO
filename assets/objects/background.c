@@ -37,10 +37,10 @@ void create() {
 	shd_default = draw_get_shader();
 	shd_loop = shader_create(vshfp_loop, fshfp_loop);
 
-	char** list = file_get_directory_files("assets");
+	/*char** list = file_get_directory_files("assets");
 	for (int i=0; (list[i]!=NULL); i++) {
 		fprintf(stderr, "->%s\n", list[i]);
-	}
+	}*/
 
 }
 

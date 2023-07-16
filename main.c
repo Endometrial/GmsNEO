@@ -1,41 +1,63 @@
 #include "main.h"
 
-char* snd_filepath = "/Users/user/Desktop/ogg/yume-nikki.ogg";
+char* project_filepath = "assets/project.xml";
 
 int main() {
-	GLFWwindow* window;
+	Room rm_default;
+	Window* window;
 
+	// Parse project xml
+	fprintf(stderr, "1\n");
+	project_open_xml(project_filepath);
+
+	// Get project data NOTE: If defined as char* win_name, room_fp etc.. not enough data is statically allocated
+	char* win_name = project_get_default_window_name();
+	char* room_fp = project_get_default_room_filepath();
+	char* vsh_fp = project_get_default_vertex_shader_filepath();
+	char* fsh_fp = project_get_default_fragment_shader_filepath();
+	char* obj_dir = project_get_default_object_directory();
+	char* rm_dir = project_get_default_room_directory();
+	int width = project_get_default_window_width();
+	int height = project_get_default_window_height();
+	int fbuf = project_get_default_framebuffer_callback();
+	int dfac = project_get_default_dfactor_blendmode();
+	int sfac = project_get_default_sfactor_blendmode();
+
+	// Initialize systems
+	window = window_initialize(width, height, win_name);
 	audio_initialize();
-	window = window_initialize(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
-	draw_set_shader(shader_create(DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER));
-	draw_set_blendmode(DEFAULT_SFACTOR_BLENDMODE, DEFAULT_DFACTOR_BLENDMODE);
-
-	Room rm_default = asset_load_room("./assets/rooms/default/default.xml");
-
+	// Set defaults
+	draw_set_shader(shader_create(vsh_fp, fsh_fp));
+	draw_set_blendmode(sfac, dfac);
+	rm_default = asset_load_room(room_fp);
 	room_set(rm_default);
-	room_execute_event(EVENT_CREATE);
 
+	// Begin game loop & execute events
+	room_execute_event(EVENT_CREATE);
 	double program_time = glfwGetTime();
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window_get_active())) {
 		double delta_time = program_time - glfwGetTime();
 		program_time = glfwGetTime();
-
-		draw_clear(sin(program_time), sin(program_time+2.f), sin(program_time+4.f), 1.0f);
 
 		room_execute_event(EVENT_STEP, program_time, delta_time);
 		room_execute_event(EVENT_DRAW, program_time, delta_time);
 		
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(window_get_active());
 		glfwPollEvents();
 	}
 	room_execute_event(EVENT_CLEANUP);
 	room_execute_event(EVENT_DESTROY);
 
+	// Unload current room
 	asset_unload_room(room_get());
 
+	// Terminate systems
 	window_terminate();
 	audio_terminate();
+
+	// Free unneeded project data
+	project_close();
 
 	return 0;
 }

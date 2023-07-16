@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 	<name>Example</name>
-	<room>default</room>
-	<window>
-		<name>Example Game</name>name>
-		<size width="800" height="600"/>
-		<callback>DIRECT SCALE</callback>
-		<vsh>shaders/transform.vsh</vsh>
-		<fsh>shaders/texture.fsh</fsh>
-		<sfactor>SRC_ALPHA</sfactor>
-		<dfactor>ONE_MINUS_SRC_ALPHA</dfactor>
-	</window>
+	<room>assets/rooms/default/default.xml</room> <!-- will be made as just default using the below directories -->
 	<directory>
 		<object>objects</object>
 		<room>rooms</room>
 	</directory>
+	<window>
+		<name>Example Game</name>
+		<size width="800" height="600"/>
+		<callback callback="1"/> <!-- As of yet not implimented -->
+		<vsh>assets/shaders/transform.vsh</vsh>
+		<fsh>assets/shaders/texture.fsh</fsh>
+		<blend sfactor="302" dfactor="303"/>
+	</window>
 </project>

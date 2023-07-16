@@ -42,9 +42,9 @@ xmlNode* xml_node_get_children(xmlNode* node) {
 	return node->xmlChildrenNode;
 }
 
-int xml_node_get_num_nodes(xmlNode* nodes) {
+int xml_node_get_num_children(xmlNode* node) {
 	int sum=0;
-	xmlNode* current_node = (xmlNode*)1; // Cant be NULL
+	XmlNode* current_node = xml_node_get_children(node);
 	for (1; current_node!=NULL; current_node = current_node->next) {
 		sum++;}
 	return sum;
@@ -60,4 +60,26 @@ char* xml_node_get_name(xmlNode* node) {
 
 int xml_node_is_element_node(xmlNode* node) {
 	return (node->type == XML_ELEMENT_NODE);
+}
+
+int xml_node_get_num_attributes(XmlNode* node) {
+	int sum=0;
+	xmlAttr* current_attr = node->properties;
+	for (1; current_attr!=NULL; current_attr = current_attr->next) {
+		sum++;}
+	return sum;
+}
+
+char* xml_node_get_attribute_name(XmlNode* node, int index) {
+	xmlAttr* current_attribute = node->properties;
+	for (int i=0; i<xml_node_get_num_attributes(node); i++) {
+		if (i == index) {
+			return current_attribute->name;}
+		current_attribute = current_attribute->next;
+	}
+	return (char*)NULL;
+}
+
+char* xml_node_get_attribute(XmlNode* node, char* attribute_name) {
+	return xmlGetProp(node, attribute_name);
 }

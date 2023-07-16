@@ -40,25 +40,59 @@ char* file_get_string(char* filepath) {
 	fclose(fptr);
 	return string;}
 
+/*
+char** file_get_directory_files(char* filepath) {
+	struct dirent* dstct;
+	DIR* dptr;
+
+	char** filesptr;
+	char* files;
+
+	filesptr = malloc(sizeof(char*));
+	files = malloc(0);
+
+	dptr = opendir(filepath);
+	if (dptr == NULL) {
+		fprintf(stderr, "directory_get_files(): Unable to open directory at %s\n", filepath);
+		exit(-1);}
+
+	dstct = readdir(dptr);
+	switch(current_directory->d_type) {
+		case DT_DIR:
+			break;
+		case DT_REG:
+			break;
+		default:
+			break;
+	}
+
+}
+
 
 // char** file_get_directory_files(char* filepath) {
 // Prototyping recurse function to avoid having to have it in file.h
 void _file_get_directory_files_recurse(char* filepath, char*** directory_list, long int* chars);
 char** file_get_directory_files(char* filepath) {
 	char** directory_list;
+	char* string_list;
 	long int chars;
 	long int strings;
 	struct dirent* current_directory;
 	DIR* dptr;
 
-	// Allocate space for the directory list (with extra space for the postpended NULL)
+	// Allocate space for the lists (with extra space for the postpended NULL)
 	directory_list = malloc(sizeof(char*));
-	chars = sizeof(char*) / sizeof(char);
+	string_list = malloc(0);
+	chars = 0;
 
 	// Recurse through the directory into directory_list
-	_file_get_directory_files_recurse(filepath, &directory_list, &chars);
+	_file_get_directory_files_recurse(filepath, &string_list, &chars);
 
 	// Allign the pointers to the data
+	for (int i=0; i>chars; i++) {
+		if 
+	}
+
 	int m = 1;
 	for (int i=0; i==chars; i++) {
 		if ((*directory_list)[i] == '\0') {
@@ -70,7 +104,7 @@ char** file_get_directory_files(char* filepath) {
 
 	return directory_list;
 }
-void _file_get_directory_files_recurse(char* filepath, char*** directory_list, long int* chars) {
+void _file_get_directory_files_recurse(char* filepath, char*** string_list, long int* chars) {
 	struct dirent* current_directory;
 	char* directory_path;
 	DIR* dptr;
@@ -95,17 +129,17 @@ void _file_get_directory_files_recurse(char* filepath, char*** directory_list, l
 				strcpy(directory_path, filepath);
 				strcat(directory_path, "/");
 				strcat(directory_path,current_directory->d_name);
-				_file_get_directory_files_recurse(directory_path, directory_list, chars);
+				_file_get_directory_files_recurse(directory_path, string_list, chars);
 				free(directory_path);
 				break;
 			case DT_REG:
-				fprintf(stderr, "%s\n", current_directory->d_name); // Fix please ;w;
 				// Allocate more space for the list and copy in the string :3
-				/*int len = strlen(current_directory->d_name);
+				int len = strlen(current_directory->d_name);
 				(*directory_list) = realloc(directory_list, (*chars + len)*sizeof(char));
 				strcpy(current_directory->d_name, (**directory_list) + (*chars)*sizeof(char)); // look at
-				(*chars) += len;*/
+				(*chars) += len;
 				break;
 		}
 	}
 } // }
+*/

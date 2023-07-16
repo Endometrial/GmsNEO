@@ -1,7 +1,7 @@
 #include <baphomet/input.h>
 
 int key_press(int key) {
-	GLFWwindow* window = window_get_active_pointer();
+	GLFWwindow* window = window_get_active();
 	return (glfwGetKey(window, key) == GLFW_PRESS);
 }
 

@@ -161,7 +161,7 @@ static int _audio_callback_oggvorbis_i16(const void *input_buffer, void *output_
 	int16_t* out = (int16_t*)output_buffer;
 	
 	// Read pcm into the buffer :3
-	ogg_decoder_get_pcm_i16(decoder, &out, buffer_frames);
+	(ogg_decoder_get_pcm_i16(decoder, &out, buffer_frames)) ? ogg_decoder_rewind(decoder) : 1;
 	return 0;
 }
 

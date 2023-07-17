@@ -31,6 +31,7 @@ typedef struct {
 OggDecoder* ogg_decoder_open(char* filepath);
 int ogg_decoder_is_vorbis(char* filepath);
 void ogg_decoder_close(OggDecoder* decoder);
+void ogg_decoder_rewind(OggDecoder* decoder);
 int ogg_decoder_get_pcm_i16(OggDecoder* decoder, int16_t** buffer, int frames);
 int ogg_decoder_get_channels(OggDecoder* decoder);
 int ogg_decoder_get_rate(OggDecoder* decoder);

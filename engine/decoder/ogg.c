@@ -212,6 +212,10 @@ void ogg_decoder_close(OggDecoder* decoder) {
 	free(decoder->remainder.buffer);
 	free(decoder);}
 
+void ogg_decoder_rewind(OggDecoder* decoder) {
+	fseek(decoder->filepointer, 0L, SEEK_SET);
+}
+
 int ogg_decoder_is_vorbis(char* filepath) {
 	OggDecoder decoder;
 	char* audio_buffer;

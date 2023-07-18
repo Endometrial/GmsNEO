@@ -48,6 +48,8 @@ PaStreamParameters audio_get_input_parameters();
 PaStreamParameters audio_get_output_parameters();
 void audio_set_input_device(int device_index);
 void audio_set_output_device(int device_index);
+int audio_get_default_input_device();
+int audio_get_default_output_device();
 char** audio_get_devices_list();
 const PaDeviceInfo* audio_get_device_info(int device_index);
 void audio_sound_play(Sound sound, int loop);

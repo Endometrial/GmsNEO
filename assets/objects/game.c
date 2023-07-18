@@ -10,8 +10,8 @@ static char* sndfp_background = "assets/audio/the-legendary-hero.ogg";
 Sound snd_background;
 
 void create() {
-	audio_set_input_device(2); // Built-in Microphone
-	audio_set_output_device(1); // JBL TUNE750BTNC
+	audio_set_input_device(audio_get_default_input_device());
+	audio_set_output_device(audio_get_default_output_device());
 
 	camera_set_projection_ortho(-40.0f, 40.0f, -30.0f, 30.0f, 0.001f, 10000.0f);
 	camera_set_view_lookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f);

@@ -107,6 +107,14 @@ Sound audio_open_stream(PaStreamCallback* callback, int type, int rate, int fram
 	return sound;
 }
 
+int audio_get_default_input_device() {
+	return Pa_GetDefaultInputDevice();
+}
+
+int audio_get_default_output_device() {
+	return Pa_GetDefaultOutputDevice();
+}
+
 // Seg fault will be given on nonexistant device
 void audio_set_input_device(int device_index) {
 	const PaDeviceInfo* device_info = Pa_GetDeviceInfo(device_index);

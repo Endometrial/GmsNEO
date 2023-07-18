@@ -35,6 +35,9 @@ void room_execute_event(int event, ...) {
 			case EVENT_CLEANUP:
 				current_room.instance_list[i].cleanup();
 				break;
+			case EVENT_DESTROY:
+				current_room.instance_list[i].destroy();
+				break;
 			default:
 				printf("Invalid event! Ao says room.c! x3");
 				exit(-1);

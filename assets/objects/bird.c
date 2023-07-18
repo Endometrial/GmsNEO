@@ -25,7 +25,7 @@ float x, y, vspeed;
 int pressed;
 
 void create() {
-	snd_jump = asset_load_sound(sndfp_jump);
+	//snd_jump = asset_load_sound(sndfp_jump);
 	tex_bird = asset_load_texture(texfp_bird, GL_REPEAT, GL_LINEAR);
 	msh_bird = mesh_generate_rect(5.0f, 5.0f);
 
@@ -71,7 +71,7 @@ void draw(float program_time, float delta_time) {
 }
 
 void cleanup() {
-	asset_unload_sound(&snd_jump);
+	//asset_unload_sound(&snd_jump);
 	asset_unload_texture(&tex_bird);
 }
 

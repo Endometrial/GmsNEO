@@ -99,18 +99,19 @@ Sound asset_load_sound(char* filepath) {
 void asset_unload_sound(Sound* sound) {
 	PaError err;
 
-	switch(sound->type) {
-		case SND_TYPE_VORBISFILE:
-			ogg_decoder_close(sound->user_data);
-		default:
-			fprintf(stderr, "asset_unload_sound(): sound type does not exist!\n");
-			break;
-	}
-
 	err = Pa_CloseStream(sound->stream);
 	if (err != paNoError) {
 		fprintf(stderr, "asset_unload_sound(): Unable to close stream -> %s\n", Pa_GetErrorText(err));
 		exit(-1);
+	}
+
+	switch(sound->type) {
+		case SND_TYPE_VORBISFILE:
+			ogg_decoder_close(sound->user_data);
+			break;
+		default:
+			fprintf(stderr, "asset_unload_sound(): sound type does not exist!\n");
+			break;
 	}}
 
 Room asset_load_room(char* filepath) {

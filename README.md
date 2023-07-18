@@ -28,6 +28,7 @@
 			<li>Add surfaces (consider a surface_suspend() function)</li>
 			<li>Add text rendering and parsing</li>
 			<li>Add looping for audio files</li>
+			<li>Expand window creation functionality & sep glfwTerminate/x from window termination</li>
 		</ul>
 	</body>
 </html>

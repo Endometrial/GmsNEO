@@ -150,9 +150,6 @@ Room asset_load_room(char* filepath) {
 								case 'l':
 									fprintf(stderr, "asset_load_room(): Object Locations are not yet supported\n");
 									break;
-								case 's':
-									fprintf(stderr, "asset_load_room(): Scripts are not yet supported\n");
-									break;
 								default:
 									fprintf(stderr, "asset_load_room(): XML contains illegal node [%s]\n", xml_node_get_name(instance_node));
 									break;

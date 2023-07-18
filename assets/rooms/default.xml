@@ -3,7 +3,7 @@
 	<background>path/to/background</background>
 	<instance>
 		<object>./assets/objects/game.c.so</object>
-		<location x="0.0" y="0.0" z="0.0"/>	
+		<location x="0.0" y="5.3243" z="0.0"/>	
 	</instance>
 	<instance>
 		<object>./assets/objects/background.c.so</object>
@@ -11,6 +11,6 @@
 	</instance>
 	<instance>
 		<object>./assets/objects/bird.c.so</object>
-		<location x="0.0" y="0.0" z="0.0"/>	
+		<location x="1.0" y="2.0" z="3.0"/>	
 	</instance>
 </room>

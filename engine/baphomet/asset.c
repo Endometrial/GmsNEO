@@ -148,7 +148,11 @@ Room asset_load_room(char* filepath) {
 									room.instance_list[room.num_instances-1] = asset_load_object(xml_node_get_content(instance_node));
 									break;
 								case 'l':
-									fprintf(stderr, "asset_load_room(): Object Locations are not yet supported\n");
+									double x,y,z;
+									x = atof((const char*)xml_node_get_attribute(instance_node, "x"));
+									y = atof((const char*)xml_node_get_attribute(instance_node, "y"));
+									z = atof((const char*)xml_node_get_attribute(instance_node, "z"));
+									fprintf(stderr, "asset_load_room(): Object Locations [%f,%f,%f] are not yet supported\n",x,y,z);
 									break;
 								default:
 									fprintf(stderr, "asset_load_room(): XML contains illegal node [%s]\n", xml_node_get_name(instance_node));

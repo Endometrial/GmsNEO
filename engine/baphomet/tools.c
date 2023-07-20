@@ -31,6 +31,9 @@ char* regex_get_substring(char* regex, char* string) {
 	}
 
 	err = pcre_exec(pcre, NULL, string, strlen(string), 0, 0, byte_list, 2);
+	if (err) {
+		return NULL;
+	}
 
 	offset = byte_list[0];
 	length = byte_list[1] - offset;

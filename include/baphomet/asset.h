@@ -28,7 +28,7 @@ static char* hexedecimal_pointer_textformat_regex	= "(?<=^0p)[0-9a-fA-F]+$";
 static char* hexedecimal_int_textformat_regex		= "(?<=^0x)[0-9a-fA-F]+$";
 static char* binary_int_textformat_regex			= "(?<=^0b)[0-1]+$";
 static char* double_float_textformat_regex			= "^-?(([0-9])+\\.([0-9]?)+)|(([0-9]?)+\\.([0-9])+)((?=f$)|$)";
-static char* long_int_textformat_regex				= "^-?[0-9]+";
+static char* long_int_textformat_regex				= "^-?[0-9]+((?=i|d|u)|$)";
 
 Texture asset_load_texture(char* filepath, GLint texture_wrap, GLint texture_filter);
 void asset_unload_texture(Texture* texture);

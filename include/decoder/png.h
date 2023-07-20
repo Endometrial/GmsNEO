@@ -1,6 +1,14 @@
 #ifndef BAPHOMET_PNGDECODER_H
 #define BAPHOMET_PNGDECODER_H
 
+/*
+	Png.h
+	Created: xxxx-xx-xx
+	Description:
+		Png.h decodes png files into data
+		more generally it wraps libpng
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <png.h>

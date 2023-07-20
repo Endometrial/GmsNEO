@@ -1,6 +1,16 @@
 #ifndef BAPHOMET_WINDOW_H
 #define BAPHOMET_WINDOW_H
 
+/*
+	Window.h
+	Created: xxxx-xx-xx
+	Description:
+		Window.h is a going through something of
+		a mid-life crisis as i decide whether it should
+		wrap window functionality only or project initialization
+		functionality as well.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <glad/glad.h>

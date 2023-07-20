@@ -8,7 +8,7 @@ NAME = baphomet
 
 # Includes and Libs
 INCS = -Iinclude -I/usr/local/include
-LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpng -ldl -logg -lvorbis -lportaudio -lpthread
+LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpcre -lpng -ldl -logg -lvorbis -lportaudio -lpthread
 
 # Flags
 CFLAGS = ${INCS} -rdynamic

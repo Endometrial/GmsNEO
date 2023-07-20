@@ -1,6 +1,14 @@
 #ifndef BAPHOMET_DRAW_H
 #define BAPHOMET_DRAW_H
 
+/*
+	Draw.h
+	Created: xxxx-xx-xx
+	Description:
+		Draw.h is a catchall for drawing
+*/
+
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

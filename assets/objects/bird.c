@@ -6,6 +6,10 @@
 #include <baphomet/camera.h>
 #include <baphomet/room.h>
 
+// Variables which are set at room load time
+Object* id;
+double x,y,z;
+
 static char* texfp_bird = "assets/images/baphomet.png";
 static char* sndfp_jump = "assets/audio/the-legendary-hero.ogg";
 
@@ -21,7 +25,7 @@ static float terminal_v = 10.0f;
 static float init_y = 0.0f;
 static float init_x = -25.0f;
 
-float x, y, vspeed;
+float vspeed;
 int pressed;
 
 void create() {

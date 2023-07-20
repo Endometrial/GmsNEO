@@ -10,6 +10,7 @@
 		<li>GLFW</li>
 		<li>cglm</li>
 		<li>portaudio</li>
+		<li>libpcre</li>
 		<li>libxml2</li>
 		<li>libpng</li>
 		<li>libogg</li>
@@ -22,13 +23,13 @@
 			<li>Impliment a basic synth for sound effects and things</li>
 			<li>Add support for extended room features</li>
 			<li>Search room & object directories for object and room names instead of requiring directories</li>
-			<li>Add support for additions to object scripts @ runtime (ex setting x,y,&z) </li>
 			<li>Create a gui for project management</li>
 			<li>Assure the final packet of ogg files is actually used b/c it currently isnt ;w;</li>
 			<li>Add surfaces (consider a surface_suspend() function)</li>
 			<li>Add text rendering and parsing</li>
 			<li>Add looping for audio files</li>
 			<li>Expand window creation functionality & sep glfwTerminate/x from window termination</li>
+			<li>Move asset_load/unload functions into their respective .h/.c files</li>
 		</ul>
 	</body>
 </html>

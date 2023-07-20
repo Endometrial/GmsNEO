@@ -10,6 +10,8 @@
 static int floor_height = 8.f;
 static int floor_width = 80.f;
 
+double x,y,z;
+
 int indi_floor[6] = {3, 0, 1, 1, 2, 3};
 
 static char* texfp_background = "assets/images/baphomet.png";

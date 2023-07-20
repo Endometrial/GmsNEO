@@ -1,6 +1,14 @@
 #ifndef BAPHOMET_INPUT_H
 #define BAPHOMET_INPUT_H
 
+/*
+	Input.h
+	Created: xxxx-xx-xx
+	Description:
+		Input.h is a catchall for input grabbing
+*/
+
+
 #include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

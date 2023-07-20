@@ -1,6 +1,16 @@
 #ifndef BAPHOMET_OGGDECODER_H
 #define BAPHOMET_OGGDECODER_H
 
+/*
+	Ogg.h
+	Created: xxxx-xx-xx
+	Description:
+		Ogg.h decodes ogg/vorbis files into nice pcm 
+		packets which are then fed into an
+		audio callback courtesy of portaudio
+		(also just wraps libogg & libvorbis)
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h> // pow() is used

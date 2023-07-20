@@ -1,6 +1,15 @@
 #ifndef BAPHOMET_XML_H
 #define BAPHOMET_XML_H
 
+/*
+	Xml.h
+	Created: xxxx-xx-xx
+	Description:
+		Xml.h decodes xml files :)
+		this is done by wrapping libxml2
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <libxml/parser.h>

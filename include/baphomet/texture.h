@@ -1,12 +1,21 @@
 #ifndef BAPHOMET_TEXTURE_H
 #define BAPHOMET_TEXTURE_H
 
+/*
+	Texture.h
+	Created: xxxx-xx-xx
+	Description:
+		Texture.h is a severly neglected (for now)
+		set of scripts for texture manipulation
+		will come to include sampling and other
+		nice things
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <decoder/png.h>
-
 
 #define DEFAULT_TEXTURE_WRAP 0x0
 #define DEFAULT_TEXTURE_FILTER 0x0

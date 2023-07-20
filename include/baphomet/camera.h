@@ -1,6 +1,16 @@
 #ifndef BAPHOMET_CAMERA_H
 #define BAPHOMET_CAMERA_H
 
+/*
+	Camera.h
+	Created: xxxx-xx-xx
+	Description:
+		Camera.h houses functions which generally:
+			* Wrap projection code w/in cglm
+			* Control camera positioning & variables
+*/
+
+
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
 #include <cglm/vec3.h>

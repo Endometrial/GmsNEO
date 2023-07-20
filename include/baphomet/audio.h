@@ -1,6 +1,17 @@
 #ifndef BAPHOMET_AUDIO_H
 #define BAPHOMET_AUDIO_H
 
+/*
+	Audio.h
+	Created: xxxx-xx-xx
+	Description:
+		Audio.h is intened to house scripts which:
+			* Load/unload portaudio systems
+			* Wrap portaudio functionality
+			* Allow the playing of sounds & audio
+*/
+
+
 #include <portaudio.h>
 
 #include <decoder/ogg.h>

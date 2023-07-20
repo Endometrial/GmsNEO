@@ -1,6 +1,15 @@
 #ifndef BAPHOMET_PROJECT_H
 #define BAPHOMET_PROJECT_H
 
+/*
+	Project.h
+	Created: xxxx-xx-xx
+	Description:
+		Project.h is a bulky catchall for project
+		manipulation and may soon come to help
+		window.h with their midlife crisis
+*/
+
 #include <stdio.h>
 #include <inttypes.h>
 #include <baphomet/draw.h> // For blend modes

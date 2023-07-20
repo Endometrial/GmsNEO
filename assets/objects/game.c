@@ -9,6 +9,9 @@
 static char* sndfp_background = "assets/audio/the-legendary-hero.ogg";
 Sound snd_background;
 
+Object* id;
+double x,y,z;
+
 void create() {
 	audio_set_input_device(audio_get_default_input_device());
 	audio_set_output_device(audio_get_default_output_device());

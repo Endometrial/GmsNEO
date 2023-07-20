@@ -1,6 +1,16 @@
 #ifndef BAPHOMET_MESH_H
 #define BAPHOMET_MESH_H
 
+/*
+	Mesh.h
+	Created: xxxx-xx-xx
+	Description:
+		Mesh.h is a catchall for mesh:
+			* Generation
+			* Manipulation
+			* To some extend loading
+*/
+
 #include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

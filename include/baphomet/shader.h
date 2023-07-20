@@ -1,6 +1,15 @@
 #ifndef BAPHOMET_SHADER_H
 #define BAPHOMET_SHADER_H
 
+/*
+	Shader.h
+	Created: xxxx-xx-xx
+	Description:
+		Shader.h is a poorly coded set of scripts for
+		shader creation and manipulation (but not
+		application??... thanks draw.h)
+*/
+
 #include <stdarg.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

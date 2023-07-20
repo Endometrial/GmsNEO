@@ -1,6 +1,14 @@
 #ifndef BAPHOMET_FILE_H
 #define BAPHOMET_FILE_H
 
+/*
+	File.h
+	Created: xxxx-xx-xx
+	Description:
+		File.h is a catchall for filesystem manipulation
+		and text file manipulation
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

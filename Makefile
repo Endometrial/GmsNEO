@@ -15,8 +15,10 @@ CFLAGS = ${INCS} -rdynamic
 SOFLAGS = -shared -fPIC -undefined dynamic_lookup ${INCS} ${LIBS}
 LDFLAGS = ${LIBS}
 
-# Compiler
+# Compiler & Platform/Architecture
 CC = gcc-13
+PLATFORM = $(shell uname -s)
+ARCHITECTURE = $(shell uname -m)
 
 # Directiories containing various types of file
 BUILD_DIR := ./build
@@ -36,6 +38,8 @@ options:
 	@echo "CFLAGS	= ${CFLAGS}"
 	@echo "LDFLAGS	= ${LDFLAGS}"
 	@echo "CC	= ${CC}"
+	@echo "PLATFORM = ${PLATFORM}"
+	@echo "ARCHITECTURE = ${ARCHITECTURE}"
 
 # For every .c.so in ${SO} compile its .c
 ${SO}: %.c.so :%.c

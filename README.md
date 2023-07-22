@@ -30,6 +30,7 @@
 			<li>Add looping for audio files</li>
 			<li>Expand window creation functionality & sep glfwTerminate/x from window termination</li>
 			<li>Move asset_load/unload functions into their respective .h/.c files</li>
+			<li>Impliment math functions used from cglm in assembly</li>
 		</ul>
 	</body>
 </html>

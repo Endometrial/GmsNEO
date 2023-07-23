@@ -17,7 +17,6 @@
 #include <baphomet/object.h>
 #include <baphomet/window.h>
 #include <baphomet/audio.h>
-#include <baphomet/asset.h>
 #include <baphomet/room.h>
 #include <baphomet/camera.h>
 #include <baphomet/texture.h>

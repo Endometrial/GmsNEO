@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <baphomet/asset.h>
+#include <baphomet/audio.h>
 #include <baphomet/shader.h>
 #include <baphomet/draw.h>
 #include <baphomet/input.h>

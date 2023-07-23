@@ -19,7 +19,6 @@
 	<body>
 		<h2>Objectives:</h2>
 		<ul>
-			<li>Impliment a basic synth for sound effects and things</li>
 			<li>Add support for extended room features</li>
 			<li>Search room & object directories for object and room names instead of requiring directories</li>
 			<li>Create a gui for project management</li>

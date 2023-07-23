@@ -2,6 +2,23 @@
 
 Shader active_shader;
 
+void draw_initialize() {
+	if (!glfwInit()) {
+		printf("draw_initialize(): Failed to initialize glfw :(");
+	}
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GLFW_VERSION_MAJOR);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GLFW_VERSION_MINOR);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	#ifdef __APPLE__
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	#endif
+}
+
+void draw_terminate() {
+	glfwTerminate();
+}
+
 void draw_clear(float r, float g, float b, float a) {
 	glClearColor(r,g,b,a);
 	glClear(GL_COLOR_BUFFER_BIT);

@@ -6,6 +6,10 @@ int main() {
 	Room rm_default;
 	Window* window;
 
+	// Initialize systems
+	draw_initialize();
+	audio_initialize();
+
 	// Parse project xml
 	project_open_xml(project_filepath);
 
@@ -52,7 +56,7 @@ int main() {
 	asset_unload_room(room_get());
 
 	// Terminate systems
-	window_terminate();
+	draw_terminate();
 	audio_terminate();
 
 	// Free unneeded project data

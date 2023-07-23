@@ -30,8 +30,8 @@ void create() {
 		 floor_width/2, -floor_height/2, 0.0f, floor_width/floor_height, 0.0f,
 		-floor_width/2, -floor_height/2, 0.0f, 0.0f,                     0.0f };
 
-	tex_background = asset_load_texture(texfp_background, GL_REPEAT, GL_LINEAR);
-	tex_floor = asset_load_texture(texfp_floor, GL_REPEAT, GL_LINEAR);
+	tex_background = asset_load_texture(texfp_background);
+	tex_floor = asset_load_texture(texfp_floor);
 
 	msh_background = mesh_generate_rect(80.0f, 60.0f);
 	msh_floor = mesh_generate_vertices(GL_STATIC_DRAW, DEFAULT_VERTEX_FORMAT, vert_floor, 20, indi_floor, 6);

@@ -29,6 +29,9 @@ typedef struct {
 	void (*cleanup)();
 } Object;
 
+Object asset_load_object(char* filepath);
+void asset_unload_object(Object* object);
+
 void* object_get_uniform(Object* object, char* symbol_name);
 void object_set_uniform_double(Object* object, char* symbol_name, double value);
 void object_set_uniform_object_id(Object* object, char* symbol_name);

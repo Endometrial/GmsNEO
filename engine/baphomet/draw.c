@@ -39,6 +39,16 @@ void draw_set_texture(Texture texture) {
 	glBindTexture(GL_TEXTURE_2D, texture.texture);
 }
 
+void draw_set_texture_ext(Texture texture, GLint tex_wrap, GLint tex_filter) {
+	glBindTexture(GL_TEXTURE_2D, texture.texture);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex_wrap);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex_wrap);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, tex_filter); // for scaling down
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex_filter); // for scaling up
+}
+
 void draw_set_shader(Shader shader) {
 	active_shader = shader;
 	glUseProgram(active_shader.program);

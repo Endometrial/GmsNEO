@@ -107,6 +107,53 @@ PaStreamParameters audio_get_input_parameters() {
 PaStreamParameters audio_get_output_parameters() {
 	return output_params;}
 
+Sound asset_load_sound(char* filepath) {
+	PaStreamParameters in, out;
+	int filetype;
+	Sound sound;
+	PaError err;
+
+	// Check the filetype
+	filetype = (ogg_decoder_is_vorbis(filepath)) ? SND_TYPE_VORBISFILE : SND_TYPE_UNKNOWN;
+
+	// Switch over the possible filetypes & populate struct
+	switch(filetype) {
+		case SND_TYPE_VORBISFILE:
+			OggDecoder* decoder = ogg_decoder_open(filepath);
+			sound = audio_create_from_decoder(filetype, ogg_decoder_get_rate(decoder), (void*)decoder);
+			break;
+		default:
+			// Report that no filetype could be matched & exit
+			fprintf(stderr, "asset_load_sound(): file provided was not of a supported type!\n");
+			fprintf(stderr, "	supported types include : ");
+			for (int i=0; supported_audio_filetypes[i] != NULL; i++) {
+				fprintf(stderr, "%s ", supported_audio_filetypes[i]);}
+			fprintf(stderr, "\n");
+			exit(-1);
+	}
+
+	return sound;
+}
+
+void asset_unload_sound(Sound* sound) {
+	PaError err;
+
+	err = Pa_CloseStream(sound->stream);
+	if (err != paNoError) {
+		fprintf(stderr, "asset_unload_sound(): Unable to close stream -> %s\n", Pa_GetErrorText(err));
+		exit(-1);
+	}
+
+	switch(sound->type) {
+		case SND_TYPE_VORBISFILE:
+			ogg_decoder_close(sound->user_data);
+			break;
+		default:
+			fprintf(stderr, "asset_unload_sound(): sound type does not exist!\n");
+			break;
+	}
+}
+
 void audio_sound_play(Sound sound, int loop) {
 	PaError err;
 	err = Pa_StartStream(sound.stream);

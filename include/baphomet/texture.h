@@ -17,11 +17,13 @@
 #include <GLFW/glfw3.h>
 #include <decoder/png.h>
 
-#define DEFAULT_TEXTURE_WRAP 0x0
-#define DEFAULT_TEXTURE_FILTER 0x0
+#define DEFAULT_TEXTURE_WRAP	GL_REPEAT
+#define DEFAULT_TEXTURE_FILTER  GL_LINEAR
 
 #define IMG_TYPE_UNKNOWN 0x0
 #define IMG_TYPE_PNG	 0x1
+
+static char* supported_image_filetypes[] = {"png\0", NULL};
 
 typedef struct {
 	unsigned int texture;
@@ -29,9 +31,12 @@ typedef struct {
 	int			type;
 } Texture;
 
-//int texture_get_bit_depth(Texture* texture);
-//int texture_get_color_type(Texture texture);
-//unsigned int texture_get_width(Texture texture);
+Texture asset_load_texture(char* filepath);
+void asset_unload_texture(Texture* texture);
+
+int texture_get_bit_depth(Texture* texture);
+int texture_get_color_type(Texture texture);
+unsigned int texture_get_width(Texture texture);
 unsigned int texture_get_height(Texture texture);
 
 #endif

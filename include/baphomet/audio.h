@@ -25,6 +25,8 @@
 
 #define SND_CALLBACK_VORBISFILE &_audio_callback_oggvorbis_i16
 
+static char* supported_audio_filetypes[] = {"ogg(vorbis)\0", NULL};
+
 typedef struct {
 	int					type;
 	int					rate;
@@ -46,6 +48,9 @@ int audio_get_default_input_device();
 int audio_get_default_output_device();
 char** audio_get_devices_list();
 const PaDeviceInfo* audio_get_device_info(int device_index);
+
+Sound asset_load_sound(char* filepath);
+void asset_unload_sound(Sound* sound);
 void audio_sound_play(Sound sound, int loop);
 void audio_sound_pause(Sound sound);
 

@@ -30,7 +30,7 @@ int pressed;
 
 void create() {
 	//snd_jump = asset_load_sound(sndfp_jump);
-	tex_bird = asset_load_texture(texfp_bird, GL_REPEAT, GL_LINEAR);
+	tex_bird = asset_load_texture(texfp_bird);
 	msh_bird = mesh_generate_rect(5.0f, 5.0f);
 
 	y = init_y;

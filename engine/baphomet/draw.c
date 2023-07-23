@@ -19,6 +19,10 @@ void draw_terminate() {
 	glfwTerminate();
 }
 
+void draw_set_viewport(int width, int height) {
+	glViewport(0,0,width,height);
+}
+
 void draw_clear(float r, float g, float b, float a) {
 	glClearColor(r,g,b,a);
 	glClear(GL_COLOR_BUFFER_BIT);

@@ -7,18 +7,21 @@ void draw_clear(float r, float g, float b, float a) {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void draw_set_mode(GLenum mode) {
-	glPolygonMode(GL_FRONT_AND_BACK, mode);
-}
-
-void draw_mesh(Mesh mesh, float x, float y, float scale) {
-	mat4 local_matrix;
+// Transform generation will be given too math.h when she is ready ex math_generate_transform_euler
+void draw_mesh_ext(Mesh mesh, float x, float y, float z, float x_scale, float y_scale, float z_scale, float x_rot, float y_rot, float z_rot) {
+	int cx = cos(x_rot);
+	int sx = sin(x_rot);
+	int cy = cos(y_rot);
+	int sy = sin(y_rot);
+	int cz = cos(z_rot);
+	int sz = sin(z_rot);
+	mat4 local_matrix = {
+	{ x_scale*(cy+cz),	   		   	sz,			    -sy,			0.0f },
+	{ 			  -sz, y_scale*(cx+cz),	   		     sx,			0.0f },
+	{ 			   sy, 	 		   -sx, z_scale*(cx+cy),	 		0.0f },
+	{    		    x,    		     y,    		      z,    		1.0f }};
 	Shader shader;
 	shader = draw_get_shader();
-	glm_mat4_identity(local_matrix);
-	glm_mat4_scale(local_matrix, scale);
-	local_matrix[3][1] = y;
-	local_matrix[3][0] = x;
 
 	shader_set_uniform_mat4(shader, "local_matrix", local_matrix);
 	shader_set_uniform_mat4(shader, "projection_matrix", *camera_get_projection_matrix());
@@ -26,6 +29,10 @@ void draw_mesh(Mesh mesh, float x, float y, float scale) {
 
 	glBindVertexArray(mesh.vao);
 	glDrawElements(GL_TRIANGLES, mesh.elements, GL_UNSIGNED_INT, 0);
+}
+
+void draw_mesh_2d(Mesh mesh, float x, float y, float scale, float rot, float depth) {
+	draw_mesh_ext(mesh, x, y, depth, scale, scale, scale, 0.0f, 0.0f, rot);
 }
 
 void draw_set_texture(Texture texture) {
@@ -37,8 +44,8 @@ void draw_set_shader(Shader shader) {
 	glUseProgram(active_shader.program);
 }
 
-Shader draw_get_shader() {
-	return active_shader;
+void draw_set_mode(GLenum mode) {
+	glPolygonMode(GL_FRONT_AND_BACK, mode);
 }
 
 void draw_set_blendmode(GLenum sfactor, GLenum dfactor) {
@@ -46,3 +53,6 @@ void draw_set_blendmode(GLenum sfactor, GLenum dfactor) {
 	glEnable(GL_BLEND);
 }
 
+Shader draw_get_shader() {
+	return active_shader;
+}

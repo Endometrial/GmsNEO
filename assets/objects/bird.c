@@ -71,7 +71,7 @@ void step(float program_time, float delta_time) {
 
 void draw(float program_time, float delta_time) {
 	draw_set_texture(tex_bird);
-	draw_mesh(msh_bird, x, y, 1.0f);
+	draw_mesh_2d(msh_bird, x, y, 1.0f, 3.14159f, 1.0f);
 }
 
 void cleanup() {

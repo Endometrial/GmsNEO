@@ -52,11 +52,11 @@ void draw(double program_time, double delta_time) {
 	draw_set_shader(shd_loop);
 	shader_set_uniform_float(shd_loop, "loop_offset", program_time/40.0f);
 	draw_set_texture(tex_background);
-	draw_mesh(msh_background, 0.0f, 0.0f, 1.0f);
+	draw_mesh_2d(msh_background, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
 
 	shader_set_uniform_float(shd_loop, "loop_offset", program_time);
 	draw_set_texture(tex_floor);
-	draw_mesh(msh_floor, 0.0f, -25.0f, 1.0f);
+	draw_mesh_2d(msh_floor, 0.0f, -25.0f, 1.0f, 0.0f, 0.0f);
 	draw_set_shader(shd_default);
 }
 

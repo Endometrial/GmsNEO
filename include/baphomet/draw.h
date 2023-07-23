@@ -21,7 +21,8 @@
 void draw_clear(float r, float g, float b, float a);
 void draw_set_mode(GLenum mode);
 //void draw_indexed_mesh(Mesh mesh);
-void draw_mesh(Mesh mesh, float x, float y, float scale);
+void draw_mesh_ext(Mesh mesh, float x, float y, float z, float x_scale, float y_scale, float z_scale, float x_rot, float y_rot, float z_rot);
+void draw_mesh_2d(Mesh mesh, float x, float y, float scale, float rot, float depth);
 void draw_set_texture(Texture texture);
 void draw_set_shader(Shader shader);
 void draw_set_blendmode(GLenum sfactor, GLenum dfactor);

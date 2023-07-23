@@ -30,14 +30,15 @@ void draw_clear(float r, float g, float b, float a) {
 
 // Transform generation will be given too math.h when she is ready ex math_generate_transform_euler
 void draw_mesh_ext(Mesh mesh, float x, float y, float z, float x_scale, float y_scale, float z_scale, float x_rot, float y_rot, float z_rot) {
-	int cx = cos(x_rot);
-	int sx = sin(x_rot);
-	int cy = cos(y_rot);
-	int sy = sin(y_rot);
-	int cz = cos(z_rot);
-	int sz = sin(z_rot);
+	float cx, sx, cy, sy, cz, sz;
+	cx = cos(x_rot);
+	sx = sin(x_rot);
+	cy = cos(y_rot);
+	sy = sin(y_rot);
+	cz = cos(z_rot);
+	sz = sin(z_rot);
 	mat4 local_matrix = {
-	{ x_scale*(cy+cz),	   		   	sz,			    -sy,			0.0f },
+	{ x_scale*(cy+cz),	   	      	sz,			    -sy,			0.0f },
 	{ 			  -sz, y_scale*(cx+cz),	   		     sx,			0.0f },
 	{ 			   sy, 	 		   -sx, z_scale*(cx+cy),	 		0.0f },
 	{    		    x,    		     y,    		      z,    		1.0f }};
@@ -70,9 +71,19 @@ void draw_set_texture_ext(Texture texture, GLint tex_wrap, GLint tex_filter) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex_filter); // for scaling up
 }
 
+void draw_set_tex_offset(float u, float v) {
+	shader_set_uniform_vec2(draw_get_shader(), "tex_offset", u, v);
+}
+
+void draw_set_tex_scale(float u_scale, float v_scale) {
+	shader_set_uniform_vec2(draw_get_shader(), "tex_scale", u_scale, v_scale);
+}
+
 void draw_set_shader(Shader shader) {
 	active_shader = shader;
 	glUseProgram(active_shader.program);
+	draw_set_tex_offset(0.0f, 0.0f);
+	draw_set_tex_scale(1.0f, 1.0f);
 }
 
 void draw_set_mode(GLenum mode) {

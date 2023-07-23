@@ -10,7 +10,7 @@
 Object* id;
 double x,y,z;
 
-static char* texfp_bird = "assets/images/baphomet.png";
+static char* texfp_bird = "assets/images/nature-images.png";
 static char* sndfp_jump = "assets/audio/the-legendary-hero.ogg";
 
 Texture tex_bird;
@@ -71,7 +71,7 @@ void step(float program_time, float delta_time) {
 
 void draw(float program_time, float delta_time) {
 	draw_set_texture(tex_bird);
-	draw_mesh_2d(msh_bird, x, y, 1.0f, 3.14159f, 1.0f);
+	draw_mesh_ext(msh_bird, x, y, 1.0f, 1.0f,1.0f,1.0f, 0.0f, 0.0f, y/1.5f);
 }
 
 void cleanup() {

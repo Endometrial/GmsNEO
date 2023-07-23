@@ -66,6 +66,12 @@ void shader_set_uniform_vec4(Shader shader, char* name, float x, float y, float 
 	glUniform4f(location, x, y, z, w);
 }
 
+void shader_set_uniform_vec2(Shader shader, char* name, float x, float y) {
+	int location;
+	location = glGetUniformLocation(shader.program, name);
+	glUniform2f(location, x, y);
+}
+
 void shader_set_uniform_float(Shader shader, char* name, float val) {
 	int location;
 	location = glGetUniformLocation(shader.program, name);

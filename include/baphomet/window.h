@@ -26,11 +26,10 @@
 
 typedef GLFWwindow Window;
 
-Window* window_initialize(int width, int height, const char* title);
-void window_close_active();
-void window_close(Window* window);
-void window_terminate();
+Window* window_create(int width, int height, const char* title);
+void window_destroy(Window* window);
 Window* window_get_active();
+void window_set_active(Window* window);
 
 void _framebuffer_callback_direct_scale(GLFWwindow* window, int width, int height);
 void _window_close_callback();

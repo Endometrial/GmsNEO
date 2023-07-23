@@ -25,7 +25,7 @@ void create() {
 
 void step(double program_time, double delta_time) {
 	if (key_press(VK_ESCAPE)) {
-		window_close_active();
+		window_destroy(window_get_active());
 	}
 }
 

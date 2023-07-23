@@ -1,20 +1,9 @@
 #include <baphomet/window.h>
 
-Window* window;
+Window* active_window;
 
-Window* window_initialize(int width, int height, const char* title) {
-	if (!glfwInit()) {
-		printf("Failed to initialize glfw :(");
-	}
-
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	#ifdef __APPLE__
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	#endif
-
-	window = glfwCreateWindow(width, height, title, NULL, NULL);
+Window* window_create(int width, int height, const char* title) {
+	Window* window = glfwCreateWindow(width, height, title, NULL, NULL);
 	if (!window) {
 		printf("Failed to create window :(");
 	}
@@ -28,29 +17,21 @@ Window* window_initialize(int width, int height, const char* title) {
 		printf("Failed to initialize glad :(");
 	}
 
-	glViewport(0,0,width,height);
-
-	return window;
+	active_window = window;
+	return active_window;
 }
 
-void window_close_active() {
-	window_close(window_get_active());
-}
-
-void window_close(Window* window) {
+void window_destroy(Window* window) {
 	glfwSetWindowShouldClose(window, 1);
 }
 
-void window_terminate() {
-	glfwTerminate();
+Window* window_get_active() {
+	return active_window;
 }
 
-Window* window_get_active() {
-	if (!window) {
-		printf("No active window found?");
-		exit(-1);
-	}
-	return window;
+void window_set_active(Window* window) {
+	glfwMakeContextCurrent(window);
+	active_window = window;
 }
 
 void _window_close_callback(GLFWwindow* window) {

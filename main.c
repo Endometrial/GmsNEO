@@ -26,9 +26,9 @@ int main() {
 	int dfac = project_get_default_dfactor_blendmode();
 	int sfac = project_get_default_sfactor_blendmode();
 
-	// Initialize systems
-	window = window_initialize(width, height, win_name);
-	audio_initialize();
+	// Create window
+	window = window_create(width, height, win_name);
+	draw_set_viewport(width, height);
 
 	// Set defaults
 	draw_set_shader(shader_create(vsh_fp, fsh_fp));

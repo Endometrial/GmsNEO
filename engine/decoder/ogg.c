@@ -87,7 +87,7 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, int16_t** buffer, int frames) {
 	// Set the bits and other small variables
 	short bits = sizeof(int16_t) * 8;
 	frames_read = 0;
-	int eos = 0;
+	int page_eos = 0;
 
 	// Initialize some variables
 	channels = (int)decoder->info.channels;
@@ -106,21 +106,24 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, int16_t** buffer, int frames) {
 		frames_read += decoder->remainder.frames;
 	}
 
-	while (!eos) {
-		// Get next packet of pcm from executor vorbis
+	// Loop until either there are no more samples or we have read all we need
+	samples = !(0); // So it doesnt eval as false on first pass
+	while ((frames_read < frames) && samples) {
+		// Get next packet of pcm from executor vorbis unless another packet doesnt exist and the page is eos
 		while (((samples=vorbis_synthesis_pcmout(&decoder->state, &raw_pcm)) == 0)) {
-			while(ogg_stream_packetout(&decoder->stream_state, &decoder->packet) != 1) {
+			if (page_eos == 1) {
+				break; // If page is already eos then we know we are at eos
+			}
+			while((ogg_stream_packetout(&decoder->stream_state, &decoder->packet) == 0)) {
 				if (ogg_sync_pageout(&decoder->sync_state, &decoder->page) == 1) {
 					ogg_stream_pagein(&decoder->stream_state, &decoder->page);
-					if (ogg_page_eos(&decoder->page)) {
-					eos = 1;
-					}
 				} else {
 					load_buffer = ogg_sync_buffer(&decoder->sync_state, 4096l);
 					bytes_read = fread(load_buffer, sizeof(char), 4096, decoder->filepointer);
 					// (bytes_read < 4096) ? fprintf(stderr,"ogg_decoder_get_pcm_i16(): EOF!, EOS imminent\n") : 1;
 					ogg_sync_wrote(&decoder->sync_state, bytes_read);
 				}
+				page_eos = (ogg_page_eos(&decoder->page)) ? 1 : 0; // Set page is eos based on if its eos
 			}
 			vorbis_synthesis(&decoder->block, &decoder->packet);
 			vorbis_synthesis_blockin(&decoder->state, &decoder->block);
@@ -129,68 +132,61 @@ int ogg_decoder_get_pcm_i16(OggDecoder* decoder, int16_t** buffer, int frames) {
 		// Tell executor vorbis how many samples were read ^w^
 		vorbis_synthesis_read(&decoder->state, samples);
 
-		// If more frames have been gathered than are requested break the loop
+		// Set available samples and remainder frames
+		int available_samples = samples;
+		decoder->remainder.frames = 0l;
 		if ((frames_read + samples) >= frames) {
-			// Set ammount of remainder frames
-			decoder->remainder.frames = ((frames_read + samples)-frames);
-			break;
+			available_samples = (frames-frames_read);
+			decoder->remainder.frames = (long)(samples-available_samples);
 		}
 
 		// Read samples into the buffer
 		for (int i=0; i<channels; i++) {
 			int16_t* ptr = (*buffer) + i + frames_read*channels;
 			float* mono = raw_pcm[i];
-			for (int m=0; m<samples; m++) {
+			for (int m=0; m<available_samples; m++) {
 				int16_t val = floor(mono[m]*((float)sample_data/2.0f) + 0.5f);
       		    //val = (val > sample_data/2) ? sample_data/2 : val; // Guard against
       		    //val = (val < -sample_data/2) ? -sample_data/2 : val; // clipping
      		    *ptr=val;
      		    ptr+=channels;
-   
 			}
 		}
 
 		// Incriment frames_read by the ammount of samples
-		frames_read+=samples;
+		frames_read+=available_samples;
 	}
 
-	// Read all remaining data into its relevent location
+	// Read in the remainder
 	if (decoder->remainder.frames > 0) {
-		int m;
+		int offset = samples - decoder->remainder.frames;
 		for (int i=0; i<channels; i++) {
-			m = 0;
 			float* mono = raw_pcm[i];
-			int16_t* bptr = (*buffer) + i + frames_read*channels;
-			for (int l=0; l<frames-frames_read; l++) {
-				int16_t val = floor(mono[m]*((float)sample_data/2.0f) + 0.5f);
+			int16_t* rptr = decoder->remainder.buffer + i;
+			for (int g=0; g<decoder->remainder.frames; g++) {
+				int16_t val = floor(mono[g+offset]*((float)sample_data/2.0f) + 0.5f);
 				//val = (val > sample_data/2) ? sample_data/2 : val; // Guard against
 	   	   		//val = (val < -sample_data/2) ? -sample_data/2 : val; // clipping
-				bptr[l<<1] = val; // l * 2
-				m++;
-			}
-			int16_t* rptr = decoder->remainder.buffer + i;
-			for (int l=0; l<decoder->remainder.frames; l++) {
-				int16_t val = floor(mono[m]*((float)sample_data/2.0f) + 0.5f);
-				//val = (val > sample_data/2) ? sample_data/2 : val; // Guard against
-   		   		//val = (val < -sample_data/2) ? -sample_data/2 : val; // clipping
-				rptr[l<<1] = val; // l * 2
-				m++;
+	   	   		rptr[g<<1]=val;
 			}
 		}
 	}
 
-	// At eos read all null data into the rest of the buffer
-	if (eos) {
-		decoder->eos = eos;
-		while((frames-frames_read) > 0) {
-			for (int i=0; i<channels; i++) {
-				(*buffer)[(channels * frames_read) + i] = 0;
+	// If data remains unread in finish out the packet and return eos
+	decoder->eos = 0;
+	if ((frames-frames_read) > 0) {
+		for (int i=0; i<channels; i++) {
+			int16_t* end_ptr = (*buffer) + (channels*frames_read);
+			for (int m=0; m<(frames-frames_read); m++) {
+				*end_ptr = 0;
+				end_ptr+=channels;
 			}
-			frames_read++;
 		}
+		decoder->eos = 1;
+		return 1; // EOS
 	}
-
-	return eos;}
+	return 0; // Not EOS
+}
 
 int ogg_decoder_eos(OggDecoder* decoder) {
 	return decoder->eos;}

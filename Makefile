@@ -7,7 +7,7 @@ VERSION = 0.0
 NAME = baphomet
 
 # Includes and Libs
-INCS = -Iinclude -I/usr/local/include
+INCS = -Iinclude -I/usr/local/include -I/usr/include/libxml2
 LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpcre -lpng -ldl -logg -lvorbis -lportaudio -lpthread
 
 # Flags
@@ -16,7 +16,7 @@ SOFLAGS = -shared -fPIC -undefined dynamic_lookup ${INCS} ${LIBS}
 LDFLAGS = ${LIBS}
 
 # Compiler & Platform/Architecture
-CC = gcc-13
+CC = gcc
 PLATFORM = $(shell uname -s)
 ARCHITECTURE = $(shell uname -m)
 

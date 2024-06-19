@@ -33,7 +33,7 @@
 #define VK_7 55
 #define VK_8 56
 #define VK_9 57
-#define VK_SEMICOLON 58 
+#define VK_SEMICOLON 58
 #define VK_EQUAL 61
 #define VK_L_BRACKET 91
 #define VK_BACKSLASH 92

@@ -22,44 +22,13 @@ void audio_initialize() {
 	output_params.device = Pa_GetDefaultOutputDevice();
 	const PaDeviceInfo* output_info = Pa_GetDeviceInfo(output_params.device);
 	output_params.channelCount = output_info->maxOutputChannels;
-	output_params.sampleFormat = paInt16;
-	output_params.suggestedLatency = output_info->defaultHighOutputLatency;
-	output_params.hostApiSpecificStreamInfo = NULL;}
+	output_params.sampleFormat = paFloat32;
+	output_params.suggestedLatency = output_info->defaultLowOutputLatency; // Temporarily set to low!!!!
+	output_params.hostApiSpecificStreamInfo = NULL;
+} // CONSIDER NOT SETTING ALL THE CHANNELS HERE FOR EVERYTHING EVAR
 
 void audio_terminate() {
 	Pa_Terminate();
-}
-
-Sound audio_create_from_custom_callback(PaStreamCallback* callback, int rate, int frames, PaStreamCallbackFlags flags, void* user_data) {
-	return audio_open_stream(callback, SND_TYPE_CUSTOM, rate, frames, flags, user_data);
-}
-
-Sound audio_create_from_decoder(int type, int rate, void* user_data) {
-	PaStreamCallback* callback;
-	switch(type) {
-		case SND_TYPE_VORBISFILE:
-			callback = SND_CALLBACK_VORBISFILE;
-			break;
-		default:
-			fprintf(stderr, "audio_create_sound(): Type not found!\n");
-			exit(-1);
-			break;
-	}
-
-	return audio_open_stream(callback, type, rate, DEFAULT_FRAME_LENGTH, paNoFlag, user_data);
-}
-
-Sound audio_open_stream(PaStreamCallback* callback, int type, int rate, int frames, PaStreamCallbackFlags flags, void* user_data) {
-	Sound sound;
-	PaError err;
-	sound.user_data = user_data;
-	sound.rate = rate;
-	sound.type = type;
-	err = Pa_OpenStream(&sound.stream, &input_params, &output_params, sound.rate, frames, flags, callback, sound.user_data);
-	if (err != paNoError) {
-		fprintf(stderr, "audio_create_callback(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
-	}
-	return sound;
 }
 
 int audio_get_default_input_device() {
@@ -70,7 +39,7 @@ int audio_get_default_output_device() {
 	return Pa_GetDefaultOutputDevice();
 }
 
-// Seg fault will be given on nonexistant device
+// Seg fault will be given on nonexistant device ADD ERROR CAPTURE
 void audio_set_input_device(int device_index) {
 	const PaDeviceInfo* device_info = Pa_GetDeviceInfo(device_index);
 	input_params.suggestedLatency = device_info->defaultHighInputLatency;
@@ -107,29 +76,32 @@ PaStreamParameters audio_get_input_parameters() {
 PaStreamParameters audio_get_output_parameters() {
 	return output_params;}
 
+
 Sound asset_load_sound(char* filepath) {
-	PaStreamParameters in, out;
-	int filetype;
 	Sound sound;
 	PaError err;
+	SNDFILE* soundfile;
+	PaStreamParameters output_params;
 
-	// Check the filetype
-	filetype = (ogg_decoder_is_vorbis(filepath)) ? SND_TYPE_VORBISFILE : SND_TYPE_UNKNOWN;
+	// Load file
+	soundfile = sf_open(filepath, SFM_READ, &(sound.soundfile_info));
+	if (soundfile == NULL) {
+		fprintf(stderr, "An error occured when opening: %s\n", filepath);
+	}
 
-	// Switch over the possible filetypes & populate struct
-	switch(filetype) {
-		case SND_TYPE_VORBISFILE:
-			OggDecoder* decoder = ogg_decoder_open(filepath);
-			sound = audio_create_from_decoder(filetype, ogg_decoder_get_rate(decoder), (void*)decoder);
-			break;
-		default:
-			// Report that no filetype could be matched & exit
-			fprintf(stderr, "asset_load_sound(): file provided was not of a supported type!\n");
-			fprintf(stderr, "	supported types include : ");
-			for (int i=0; supported_audio_filetypes[i] != NULL; i++) {
-				fprintf(stderr, "%s ", supported_audio_filetypes[i]);}
-			fprintf(stderr, "\n");
-			exit(-1);
+	// Set sound variables
+	sound.user_data = (void*)soundfile;
+	sound.rate = sound.soundfile_info.samplerate;
+	output_params.device = Pa_GetDefaultOutputDevice();
+	output_params.channelCount = sound.soundfile_info.channels;
+	output_params.sampleFormat = paFloat32;
+	output_params.suggestedLatency = Pa_GetDeviceInfo( output_params.device )->defaultLowOutputLatency;
+	output_params.hostApiSpecificStreamInfo = NULL;
+
+	// Open stream
+	err = Pa_OpenStream(&(sound.stream), NULL, &output_params, sound.rate, DEFAULT_FRAME_LENGTH, paClipOff, SND_CALLBACK_SNDFILE, sound.user_data);
+	if (err != paNoError) {
+		fprintf(stderr, "audio_create_callback(): Unable to open stream -> %s\n", Pa_GetErrorText(err));
 	}
 
 	return sound;
@@ -137,7 +109,7 @@ Sound asset_load_sound(char* filepath) {
 
 void asset_unload_sound(Sound* sound) {
 	PaError err;
-
+/*
 	err = Pa_CloseStream(sound->stream);
 	if (err != paNoError) {
 		fprintf(stderr, "asset_unload_sound(): Unable to close stream -> %s\n", Pa_GetErrorText(err));
@@ -151,7 +123,7 @@ void asset_unload_sound(Sound* sound) {
 		default:
 			fprintf(stderr, "asset_unload_sound(): sound type does not exist!\n");
 			break;
-	}
+	}*/
 }
 
 void audio_sound_play(Sound sound, int loop) {
@@ -166,11 +138,14 @@ void audio_sound_pause(Sound sound) {
 	(err != paNoError) ? fprintf(stderr, "audio_sound_pause(): %s\n", Pa_GetErrorText(err)) : 1;
 }
 
-static int _audio_callback_oggvorbis_i16(const void *input_buffer, void *output_buffer, unsigned long buffer_frames, const PaStreamCallbackTimeInfo* time_info, PaStreamCallbackFlags flags, void* user_data) {
-	OggDecoder* decoder = (OggDecoder*)user_data;
-	int16_t* out = (int16_t*)output_buffer;
-	
-	// Read pcm into the buffer :3
-	(ogg_decoder_get_pcm_i16(decoder, &out, buffer_frames)) ? ogg_decoder_rewind(decoder) : 1;
-	return 0;
+static int _audio_callback_libsndfile( const void *inputBuffer, void *outputBuffer,
+                            unsigned long framesPerBuffer,
+                            const PaStreamCallbackTimeInfo* timeInfo,
+                            PaStreamCallbackFlags statusFlags,
+                            void *userData ) {
+    float *out = (float*)outputBuffer;
+
+		sf_readf_float((SNDFILE*)userData, out, framesPerBuffer);
+
+    return paContinue;
 }

@@ -9,6 +9,3 @@ int ord(char key) {
 	int val = toupper(key);
 	return (65 <= val) && (val <= 90) ? val : VK_UNKNOWN;
 }
-
-
-

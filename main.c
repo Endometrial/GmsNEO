@@ -1,14 +1,22 @@
 #include "main.h"
 
+#include <sndfile.h>
+
 char* project_filepath = "assets/project.xml";
+
+char* soundfile_path = "/home/luna/file/ogg/epic-mountain/kurzgesagt-vol-5-original-motion-picture-soundtrack/16 - dyson-sphere.mp3";
 
 int main() {
 	Room rm_default;
 	Window* window;
 
+
 	// Initialize systems
 	draw_initialize();
 	audio_initialize();
+
+	Sound kurzgesagt = asset_load_sound(soundfile_path);
+	audio_sound_play(kurzgesagt, 1);
 
 	// Parse project xml
 	project_open_xml(project_filepath);
@@ -33,27 +41,39 @@ int main() {
 	// Set defaults
 	draw_set_shader(shader_create(vsh_fp, fsh_fp));
 	draw_set_blendmode(sfac, dfac);
-	rm_default = asset_load_room(room_fp);
-	room_set(rm_default);
+	//rm_default = asset_load_room(room_fp);
+	//room_set(rm_default);
+
+	int key_pressed = 0;
 
 	// Begin game loop & execute events
-	room_execute_event(EVENT_CREATE);
+	//room_execute_event(EVENT_CREATE);
 	double program_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window_get_active())) {
 		double delta_time = program_time - glfwGetTime();
 		program_time = glfwGetTime();
 
-		room_execute_event(EVENT_STEP, program_time, delta_time);
-		room_execute_event(EVENT_DRAW, program_time, delta_time);
-		
+		// Pause audio
+		if (key_press(VK_SPACE)) {
+			audio_sound_pause(kurzgesagt);
+		}
+
+		// Play audio
+		if (key_press(VK_ENTER)) {
+			audio_sound_play(kurzgesagt, 1);
+		}
+
+		//room_execute_event(EVENT_STEP, program_time, delta_time);
+		//room_execute_event(EVENT_DRAW, program_time, delta_time);
+
 		glfwSwapBuffers(window_get_active());
 		glfwPollEvents();
 	}
-	room_execute_event(EVENT_CLEANUP);
-	room_execute_event(EVENT_DESTROY);
+	//room_execute_event(EVENT_CLEANUP);
+	//room_execute_event(EVENT_DESTROY);
 
 	// Unload current room
-	asset_unload_room(room_get());
+	//asset_unload_room(room_get());
 
 	// Terminate systems
 	draw_terminate();

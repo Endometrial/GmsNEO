@@ -55,7 +55,7 @@ OggDecoder* ogg_decoder_open(char* filepath) {
 		}
 		// Read data in :3
 		audio_buffer = ogg_sync_buffer(&decoder->sync_state, 4096l);
-		bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder->filepointer);	
+		bytes_read = fread(audio_buffer, sizeof(char), 4096, decoder->filepointer);
 		(bytes_read < 4096) ? fprintf(stderr, "ogg_decoder_open(): EOF!") : 1;
 		ogg_sync_wrote(&decoder->sync_state, bytes_read);
 	}
@@ -222,7 +222,7 @@ int ogg_decoder_is_vorbis(char* filepath) {
 	decoder.filepointer = fopen(filepath, "rb");
 	if (!decoder.filepointer) {
 		fprintf(stderr,"ogg_decoder_is_vorbis(): cannot open %s ;-;\n", filepath);
-		
+
 		fclose(decoder.filepointer); // Close file
 		exit(-1);
 	}
@@ -236,7 +236,7 @@ int ogg_decoder_is_vorbis(char* filepath) {
 	ogg_sync_wrote(&decoder.sync_state, bytes_read);
 	if (ogg_sync_pageout(&decoder.sync_state, &decoder.page) != 1) {
 		fprintf(stderr, "ogg_decoder_is_vorbis(): %s is not an ogg file\n", filepath);
-		
+
 		// Cleanup remaining data
 		ogg_sync_clear(&decoder.sync_state);
 		return 0;
@@ -254,7 +254,7 @@ int ogg_decoder_is_vorbis(char* filepath) {
 	// Check if is vorbis
 	if (vorbis_synthesis_headerin(&decoder.info, &decoder.comments, &decoder.packet) < 0 ) {
 		fprintf(stderr, "ogg_decoder_is_vorbis(): %s is not an ogg/vorbis file\n", filepath);
-		
+
 		// Cleanup remaining data
 		ogg_stream_clear(&decoder.stream_state);
 		ogg_sync_clear(&decoder.sync_state);

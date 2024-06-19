@@ -12,9 +12,9 @@
 		<li>portaudio</li>
 		<li>libpcre</li>
 		<li>libxml2</li>
-		<li>libpng</li>
-		<li>libogg</li>
-		<li>libvorbis</li>
+		<li>libpng (temporary)</li>
+		<li>libsndfile</li>
+		<li>PhysicsFS eventually?</li>
 	</ul>
 	<body>
 		<h2>Objectives:</h2>

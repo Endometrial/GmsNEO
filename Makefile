@@ -8,11 +8,10 @@ NAME = baphomet
 
 # Includes and Libs
 INCS = -Iinclude -I/usr/local/include -I/usr/include/libxml2
-LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpcre -lpng -ldl -logg -lvorbis -lportaudio -lpthread
+LIBS = -L/usr/local/lib -lxml2 -lglfw -lGL -lm -lcglm -lpcre -lpng -lsndfile -ldl -logg -lvorbis -lportaudio -lpthread
 
 # Flags
 CFLAGS = ${INCS} -rdynamic
-SOFLAGS = -shared -fPIC -undefined dynamic_lookup ${INCS} ${LIBS}
 LDFLAGS = ${LIBS}
 
 # Compiler & Platform/Architecture
@@ -23,11 +22,8 @@ ARCHITECTURE = $(shell uname -m)
 # Directiories containing various types of file
 BUILD_DIR := ./build
 SRC_DIRS := ./assets/scripts ./engine
-SO_DIRS := ./assets/objects
 
 # Files to manipulate
-SO_SRC := $(shell find $(SO_DIRS) -name '*.c')
-SO := $(SO_SRC:%=%.so)
 SRC := main.c $(shell find $(SRC_DIRS) -name '*.c')
 OBJ := $(SRC:%=$(BUILD_DIR)/%.o)
 
@@ -42,8 +38,6 @@ options:
 	@echo "ARCHITECTURE = ${ARCHITECTURE}"
 
 # For every .c.so in ${SO} compile its .c
-${SO}: %.c.so :%.c
-	${CC} ${SOFLAGS} $< -o $@
 
 ${BUILD_DIR}/%.c.o: %.c
 	mkdir -p $(dir $@)

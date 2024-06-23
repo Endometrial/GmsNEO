@@ -19,6 +19,8 @@
 
 #define SND_CALLBACK_SNDFILE &_audio_callback_libsndfile
 
+#define DEFAULT_FRAME_LENGTH 4096
+
 typedef struct {
 	int					rate;
 	void*				user_data;

@@ -15,9 +15,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-// 								  		xyzuvrgba
-#define VERTEX_FORMAT_UV 	0x3 << 4 // 000110000
-#define VERTEX_FORMAT_XY 	0x3 << 7 // 110000000
+// 								  									  xyzuvrgba
+#define VERTEX_FORMAT_UV 	0x3 << 4 //   000110000
+#define VERTEX_FORMAT_XY 	0x3 << 7 //   110000000
 #define VERTEX_FORMAT_XYZ 	0x7 << 6 // 111000000
 #define VERTEX_FORMAT_RGB   0x7 << 1 // 000001110
 #define VERTEX_FORMAT_RGBA  0xF << 0 // 000001111
@@ -30,6 +30,7 @@ typedef struct Mesh {
 } Mesh;
 
 Mesh mesh_generate_rect(float width, float height);
+Mesh mesh_generate_cube(float width, float height, float depth);
 //Mesh mesh_generate_circle(float radius, float subdivisions;
 //Mesh mesh_generate_tri(float x1, float y1, float x2, float y2, float x3, float y3);
 Mesh mesh_generate_vertices(GLenum mode, int format, float* vertices, int vnum, int* indices, int inum);

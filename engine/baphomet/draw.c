@@ -3,8 +3,9 @@
 Shader active_shader;
 
 void draw_initialize() {
+	fprintf(stderr, "\tInitializing GLFW...\n");
 	if (!glfwInit()) {
-		printf("draw_initialize(): Failed to initialize glfw :(");
+		printf("[E]\t In draw_initialize(): Failed to initialize glfw :(");
 	}
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GLFW_VERSION_MAJOR);
@@ -13,6 +14,7 @@ void draw_initialize() {
 	#ifdef __APPLE__
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	#endif
+	fprintf(stderr, "[*]\tGLFW Initialized\n");
 }
 
 void draw_terminate() {

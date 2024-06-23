@@ -1,86 +1,79 @@
 #include "main.h"
 
-#include <sndfile.h>
+struct arguments { int debug, quiet; };
+static error_t parse_opt(int key, char* arg, struct argp_state* state) {
+  struct arguments* arguments = state->input;
+  switch(key) {
+    case 'v': case 'd':
+      arguments->debug = 1;
+      break;
+    case 'q':
+      arguments->quiet = 1;
+      break;
+    case ARGP_KEY_ARG:
+      if (state->arg_num >= 2)
+        argp_usage(state);
+    case ARGP_KEY_END:
+      if (state->arg_num >= 2)
+        argp_usage(state);
+      break;
+    default:
+      return ARGP_ERR_UNKNOWN;
+  }
+  return 0;
+}
 
-char* project_filepath = "assets/project.xml";
-
-char* soundfile_path = "/home/luna/file/ogg/epic-mountain/kurzgesagt-vol-5-original-motion-picture-soundtrack/16 - dyson-sphere.mp3";
-
-int main() {
-	Room rm_default;
+struct argp argp = { argp_program_options, parse_opt, argp_program_args_desc, argp_program_desc };
+int main(int argc, char* argv[]) {
+	struct arguments cmd_args = {.debug = 0, .quiet = 0};
 	Window* window;
 
+	// Parse ARGS
+	argp_parse(&argp, argc, argv, 0, 0, &cmd_args);
+	(cmd_args.debug) ? fprintf(stderr,"\tDEBUG ENABLED:\n"):0;
 
-	// Initialize systems
+	// Initialize systems (REPLACE MOST OF THE FOLLOWING WITH SYSINIT(flags, etc...))
 	draw_initialize();
 	audio_initialize();
 
-	Sound kurzgesagt = asset_load_sound(soundfile_path);
-	audio_sound_play(kurzgesagt, 1);
-
-	// Parse project xml
-	project_open_xml(project_filepath);
-
-	// Get project data NOTE: If defined as char* win_name, room_fp etc.. not enough data is statically allocated
-	char* win_name = project_get_default_window_name();
-	char* room_fp = project_get_default_room_filepath();
-	char* vsh_fp = project_get_default_vertex_shader_filepath();
-	char* fsh_fp = project_get_default_fragment_shader_filepath();
-	char* obj_dir = project_get_default_object_directory();
-	char* rm_dir = project_get_default_room_directory();
-	int width = project_get_default_window_width();
-	int height = project_get_default_window_height();
-	int fbuf = project_get_default_framebuffer_callback();
-	int dfac = project_get_default_dfactor_blendmode();
-	int sfac = project_get_default_sfactor_blendmode();
-
 	// Create window
-	window = window_create(width, height, win_name);
-	draw_set_viewport(width, height);
+	window = window_create(window_width, window_height, window_name);
+	draw_set_viewport(window_width, window_height);
 
 	// Set defaults
-	draw_set_shader(shader_create(vsh_fp, fsh_fp));
-	draw_set_blendmode(sfac, dfac);
-	//rm_default = asset_load_room(room_fp);
-	//room_set(rm_default);
+	draw_set_shader(shader_create(default_vsh, default_fsh));
+	draw_set_blendmode(default_sfact, default_dfact);
 
-	int key_pressed = 0;
 
-	// Begin game loop & execute events
-	//room_execute_event(EVENT_CREATE);
+  queue_add_objects(cats, 2);
+  queue_add_objects(cake, 1);
+  queue_execute_event(EVENT_CREATE, -1);
+
+
 	double program_time = glfwGetTime();
 	while (!glfwWindowShouldClose(window_get_active())) {
 		double delta_time = program_time - glfwGetTime();
 		program_time = glfwGetTime();
+		draw_clear(0.5f, 0.5f, 0.5f, 1.0f);
 
-		// Pause audio
-		if (key_press(VK_SPACE)) {
-			audio_sound_pause(kurzgesagt);
-		}
-
-		// Play audio
-		if (key_press(VK_ENTER)) {
-			audio_sound_play(kurzgesagt, 1);
-		}
-
-		//room_execute_event(EVENT_STEP, program_time, delta_time);
-		//room_execute_event(EVENT_DRAW, program_time, delta_time);
+    queue_execute_event(EVENT_STEP, delta_time);
 
 		glfwSwapBuffers(window_get_active());
 		glfwPollEvents();
-	}
-	//room_execute_event(EVENT_CLEANUP);
-	//room_execute_event(EVENT_DESTROY);
 
-	// Unload current room
-	//asset_unload_room(room_get());
+    if (key_press(VK_ESCAPE)) {
+      glfwSetWindowShouldClose(window_get_active(), GL_TRUE);
+    }
+	}
+
+  // Remove objects
+  //queue_remove_object(0);
+  //queue_remove_object(1);
+  queue_cleanup();
 
 	// Terminate systems
 	draw_terminate();
 	audio_terminate();
-
-	// Free unneeded project data
-	project_close();
 
 	return 0;
 }

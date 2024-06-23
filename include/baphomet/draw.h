@@ -8,7 +8,6 @@
 		Draw.h is a catchall for drawing
 */
 
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

@@ -1,6 +1,8 @@
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <argp.h>
 #include <math.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -14,14 +16,15 @@
 #include <baphomet/mesh.h>
 #include <baphomet/draw.h>
 #include <baphomet/input.h>
-#include <baphomet/object.h>
+//#include <baphomet/object.h>
 #include <baphomet/window.h>
 #include <baphomet/audio.h>
-#include <baphomet/room.h>
+//#include <baphomet/room.h>
 #include <baphomet/camera.h>
 #include <baphomet/texture.h>
-#include <baphomet/project.h>
+//#include <baphomet/project.h>
+#include <baphomet/queue.h>
 
-#define GLFW_VERSION_MAJOR 3
-#define GLFW_VERSION_MINOR 3
-#define GLFW_PROFILE GLFW_OPENGL_CORE_PROFILE
+#include "assets/objects/objects.h"
+
+#include "config.h"

@@ -23,7 +23,7 @@ static char* vshfp_loop = "assets/shaders/transform.vsh";
 static char* fshfp_loop = "assets/shaders/loop.fsh";
 Shader shd_loop, shd_default;
 
-void create() {
+void create() {jnijjiji
 	tex_background = asset_load_texture(texfp_background);
 	tex_floor = asset_load_texture(texfp_floor);
 

@@ -4,11 +4,12 @@ PaStreamParameters input_params, output_params;
 
 void audio_initialize() {
 	PaError err;
+	fprintf(stderr, "\tInitializing PortAudio...\n");
 
 	// Initialize portaudio
 	err = Pa_Initialize();
 	if (err != paNoError) {
-		fprintf(stderr, "audio_initialize(): %s\n",Pa_GetErrorText(err));
+		fprintf(stderr, "[E]\tIn audio_initialize(): %s\n",Pa_GetErrorText(err));
 	}
 
 	// Set default stream parameters
@@ -25,6 +26,8 @@ void audio_initialize() {
 	output_params.sampleFormat = paFloat32;
 	output_params.suggestedLatency = output_info->defaultLowOutputLatency; // Temporarily set to low!!!!
 	output_params.hostApiSpecificStreamInfo = NULL;
+	fprintf(stderr, "NOTE\tAbove errors may be caused by faulty alsa configuration and can be safely ignored\n");
+	fprintf(stderr, "[*]\tPortAudio Initialized\n");
 } // CONSIDER NOT SETTING ALL THE CHANNELS HERE FOR EVERYTHING EVAR
 
 void audio_terminate() {

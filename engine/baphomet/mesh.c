@@ -11,6 +11,27 @@ Mesh mesh_generate_rect(float width, float height) {
 	return mesh_generate_vertices(GL_STATIC_DRAW, DEFAULT_VERTEX_FORMAT, vertices, 20, indices, 6);
 }
 
+Mesh mesh_generate_cube(float width, float height, float depth) {
+	Mesh mesh;
+	float vertices[5 * 8] = {
+		-width/2,  height/2,  depth/2, 0.0f, 1.0f,
+		 width/2,  height/2,  depth/2, 1.0f, 1.0f,
+		 width/2, -height/2,  depth/2, 1.0f, 0.0f,
+		-width/2, -height/2,  depth/2, 0.0f, 0.0f,
+		-width/2,  height/2, -depth/2, 0.0f, 1.0f,
+		 width/2,  height/2, -depth/2, 1.0f, 1.0f,
+		 width/2, -height/2, -depth/2, 1.0f, 0.0f,
+		-width/2, -height/2, -depth/2, 0.0f, 0.0f};
+	int indices[6 * 6] = {
+		3,0,1,1,2,3,	// FRONT
+		0,1,4,4,5,1,	// TOP
+		3,2,7,7,6,2,	// BOTTOM
+		0,4,7,7,3,0,	// LEFT
+		1,5,6,6,2,1,	// RIGHT
+		7,4,5,5,8,7}; // BACK
+	return mesh_generate_vertices(GL_STATIC_DRAW, DEFAULT_VERTEX_FORMAT, vertices, 5*8, indices, 6*6);
+}
+
 Mesh mesh_generate_vertices(GLenum mode, int format, float* vertices, int vnum, int* indices, int inum) {
 	Mesh mesh = mesh_start(format);
 	mesh = mesh_add_vertices(mesh, mode, vertices, vnum, indices, inum);

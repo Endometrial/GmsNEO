@@ -55,7 +55,7 @@ void asset_unload_texture(Texture* texture) {
 
 	// Delete textures
 	glDeleteTextures(1, &texture->texture);
-	
+
 	// Delete the mesh
 
 	// Delete whatever is contained within user data

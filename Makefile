@@ -30,7 +30,7 @@ OBJ := $(SRC:%=$(BUILD_DIR)/%.o)
 all: options ${SO} build
 
 options:
-	@echo gmsNEO build options:
+	@echo Baphomet build options:
 	@echo "CFLAGS	= ${CFLAGS}"
 	@echo "LDFLAGS	= ${LDFLAGS}"
 	@echo "CC	= ${CC}"

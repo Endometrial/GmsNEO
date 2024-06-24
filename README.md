@@ -11,21 +11,20 @@
 		<li>cglm</li>
 		<li>portaudio</li>
 		<li>libpcre</li>
-		<li>libxml2</li>
+		<li>libxml2 (temporary)</li>
 		<li>libpng (temporary)</li>
 		<li>libsndfile</li>
-		<li>PhysicsFS eventually?</li>
+		<li>PhysicsFS (eventually?)</li>
 	</ul>
 	<body>
 		<h2>Objectives:</h2>
 		<ul>
+            <li>Make the draw functions suck less</li>
+            <li>Cut down on all the files</li>
 			<li>Add text rendering and parsing</li>
 			<li>Add surfaces (consider a surface_suspend() function)</li>
 			<li>Add support for backgrounds and tile rendering</li>
-			<li>Search room & object directories for object and room names instead of requiring directories</li>
-			<li>Assure the ogg decoder is fixed as listed in its repo</li>
-			<li>Impliment math functions used from cglm in assembly</li>
-			<li>Create a gui for project management</li>
+			<li>Setup initializing 'room' objects in config</li>
 		</ul>
 	</body>
 </html>

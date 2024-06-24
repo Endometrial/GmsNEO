@@ -19,6 +19,7 @@
 	<body>
 		<h2>Objectives:</h2>
 		<ul>
+            <li>Write up the script to convert the mostly C object code into normal C</li>
             <li>Make the draw functions suck less</li>
             <li>Cut down on all the files</li>
 			<li>Add text rendering and parsing</li>
